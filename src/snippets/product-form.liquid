@@ -1,108 +1,93 @@
-<form class="product-form" 
-  action="/cart/add" 
-  method="post" 
-  enctype="multipart/form-data" 
-  onclick="_tfa.push({notify: 'event', name: 'Add_to_Bag', id: 1065515});">
+<form action="/cart/add" class="product-form" enctype="multipart/form-data" method="post" onclick="_tfa.push({notify: 'event', name: 'Add_to_Bag', id: 1065515});">
 
-  <div class="product-swatches">
-    {% unless product.has_only_default_variant %}
-      {% for option in product.options_with_values %}
+    <div class="product-swatches">
+        {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
 
-        {% if forloop.index == 2 %}
-          <h6 class="swatch__header swatch__header--flex swatch__header--tablet">
-            Size
-            <span class="swatch__header__size js--size-guide">{% include 'icons' with icon: 'ruler' %} What size am I?</span>
-          </h6>
-          <div class="swatch__size-container">
-            <div class="swatch__size-container__title" js-size-toggle="trigger">
-              <span class="swatch__size-container__title-trigger" js-swatch="size">
-                {% for value in option.values %}  
-                  {% if option.selected_value == value %}
-                    SIZE: {{value}}
-                  {% endif %}
-                {% endfor %}
-              </span>
-              <span class="swatch__size-container__title-text">SELECT SIZE</span>
-            </div>
-            <div class="swatch__size-container__content">
-        {% endif %}
-        
-        {% assign swatchShow = false %}      
-        {% if settings.show_swatches %}
+                {% if forloop.index == 2 %}
+                    <h6 class="swatch__header swatch__header--flex swatch__header--tablet">
+                        Size
+                        <span class="swatch__header__size js--size-guide">{% include 'icons' with icon: 'ruler' %}
+                            What size am I?</span>
+                    </h6>
+                    <div class="swatch__size-container">
+                        <div class="swatch__size-container__title" js-size-toggle="trigger">
+                            <span class="swatch__size-container__title-trigger" js-swatch="size">
+                                {% for value in option.values %}
+                                    {% if option.selected_value == value %}
+                                        SIZE:
+                                        {{value}}
+                                    {% endif %}
+                                {% endfor %}
+                            </span>
+                            <span class="swatch__size-container__title-text">SELECT SIZE</span>
+                        </div>
+                        <div class="swatch__size-container__content">
+                        {% endif %}
 
-          {% assign optionName = option.name | downcase | handleize  %}
-          {% assign swatchShow = true %}
+                        {% assign swatchShow = false %}
+                        {% if settings.show_swatches %}
 
-        {% endif %}
+                            {% assign optionName = option.name | downcase | handleize  %}
+                            {% assign swatchShow = true %}
 
-        <div class="selector-wrapper js selector-wrapper--{{optionName}} {% if option.values.size == 1 %} selector-wrapper--hide {% endif %}">
-          <div class="{% if swatchShow %}visually-hidden{% endif %}">
-            <label for="SingleOptionSelector-{{ forloop.index0 }}">
-              {{ option.name }}
-            </label>
-      
-            <select
-              id="SingleOptionSelector-{{ forloop.index0 }}"
-              data-single-option-selector
-              data-index="option{{ option.position }}"
-              class="">
-              {% for value in option.values %}
-                <option
-                  value="{{ value | escape }}"
-                  {% if option.selected_value == value %}selected="selected"{% endif %}>
-                    {{ value }}
+                        {% endif %}
+
+                        <div class="selector-wrapper js selector-wrapper--{{optionName}} {% if option.values.size == 1 %} selector-wrapper--hide {% endif %}">
+                            <div class="{% if swatchShow %}visually-hidden{% endif %}">
+                                <label for="SingleOptionSelector-{{ forloop.index0 }}">
+                                    {{ option.name }}
+                                </label>
+
+                                <select class="" data-index="option{{ option.position }}" data-single-option-selector id="SingleOptionSelector-{{ forloop.index0 }}">
+                                    {% for value in option.values %}
+                                        <option value="{{ value | escape }}" {% if option.selected_value == value %} selected="selected" {% endif %}>
+                                            {{ value }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+
+
+                            {% include 'swatch-product' with specialClass: 'js-main-form'  %}
+
+
+                        </div>
+
+                        {% if forloop.last %}
+                            {% unless forloop.first %}
+                            </div>
+                        </div>
+                    {% endunless %}
+                {% endif %}
+
+            {% endfor %}
+        {% endunless %}
+
+        <select class="no-js" data-product-select name="id">
+            {% for variant in product.variants %}
+                <option {% if variant == current_variant %} selected="selected" {% endif %} {% unless variant.available %} disabled="disabled" {% endunless %} data-color="{{variant.option1 }}" data-size="{{variant.option2 }}" data-width="{{variant.option3 }}" data-available="{{variant.available }}" value="{{ variant.id }}">
+                    {{ variant.title }}
                 </option>
-              {% endfor %}
-            </select>
-          </div>
+            {% endfor %}
+        </select>
+    </div>
 
-          
-          
-            {% include 'swatch-product' with specialClass: 'js-main-form'  %}
+    <button class="button button--full" type="submit" name="add" data-add-to-cart {% unless current_variant.available %} disabled="disabled" {% endunless %}>
+        <span data-add-to-cart-text>
+            {% if current_variant.available %}
+                {{ 'products.product.add_to_cart' | t }}
+            {% else %}
+                {{ 'products.product.sold_out' | t }}
+            {% endif %}
+        </span>
+    </button>
 
 
-        </div>
+    <button {% if current_variant.available %} style="display:none" {% endif %}  class="button button--full" id="BIS_trigger">Notify me when available</button>
 
-        {% if forloop.last %}
-          {% unless forloop.first %}
-            </div>
-          </div>
-          {% endunless %}
-        {% endif %}
-        
-      {% endfor %}
-    {% endunless %}
 
-    <select name="id" class="no-js" data-product-select>
-      {% for variant in product.variants %}
-        <option
-          {% if variant == current_variant %}selected="selected"{% endif %}
-          {% unless variant.available %}disabled="disabled"{% endunless %}
-          data-color="{{variant.option1 }}"
-          data-size="{{variant.option2 }}"
-          data-width="{{variant.option3 }}"
-          data-available="{{variant.available }}"
-          value="{{ variant.id }}">
-            {{ variant.title }}
-        </option>
-      {% endfor %}
-    </select>
-  </div>
-  <button class="button button--full"
-    type="submit"
-    name="add"
-    data-add-to-cart
-    {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-      <span data-add-to-cart-text>
-        {% if current_variant.available %}
-          {{ 'products.product.add_to_cart' | t }}
-        {% else %}
-          {{ 'products.product.sold_out' | t }}
-        {% endif %}
-      </span>
-  </button>
-  
-  <div class="affirm-as-low-as" data-page-type="product" data-amount="{{product.first_available_variant.price }}" data-affirm-color="black"></div>
+    <div class="affirm-as-low-as" data-page-type="product" data-amount="{{product.first_available_variant.price }}" data-affirm-color="black"></div>
 
-  <div class="error error--hide"></div>
+    <div class="error error--hide"></div>
 </form>

@@ -106,9 +106,9 @@
     }
 
     &__item:hover {
-      #{$parnet}__image {
-        background-size: auto 104%;
-      }
+      // #{$parnet}__image {
+      //   background-size: auto 104%;
+      // }
 
       .button--white {
         background-color: $COLOR_PRIMARY_LIGHT;

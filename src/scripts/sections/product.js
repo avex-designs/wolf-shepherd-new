@@ -8,8 +8,8 @@
 
 import $ from 'jquery';
 import Variants from '@shopify/theme-variants';
-import {formatMoney} from '@shopify/theme-currency';
-import {register} from '@shopify/theme-sections';
+import { formatMoney } from '@shopify/theme-currency';
+import { register } from '@shopify/theme-sections';
 
 const selectors = {
   addToCart: '[data-add-to-cart]',
@@ -170,9 +170,11 @@ register('product', {
     if (variant.available) {
       $(selectors.addToCart, this.$container).prop('disabled', false);
       $(selectors.addToCartText, this.$container).html(theme.strings.addToCart);
+      $('#BIS_trigger').css('display','none');
     } else {
       $(selectors.addToCart, this.$container).prop('disabled', true);
       $(selectors.addToCartText, this.$container).html(theme.strings.soldOut);
+      $('#BIS_trigger').css('display','block');
     }
   },
 
@@ -212,7 +214,7 @@ register('product', {
       $compareEls.addClass(cssClasses.hide);
     }
 
-    $('.affirm-as-low-as').attr('data-amount',variant.price);
+    $('.affirm-as-low-as').attr('data-amount', variant.price);
     affirm.ui.refresh();
   },
 
@@ -223,3 +225,8 @@ register('product', {
     this.$container.off(this.namespace);
   },
 });
+
+$('.sk-notify').click(function () {
+  $("#esc-oos-form").css('display', 'block');
+})
+

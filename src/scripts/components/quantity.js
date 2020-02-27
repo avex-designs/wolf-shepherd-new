@@ -13,10 +13,13 @@ theme.Quantity = (function() {
     if (increment === 'true') {
       const newVal = inputVal + 1;
       $input.val(newVal);
-    } else if (inputVal - 1 !== 0) {
+    } else {
       const newVal = inputVal - 1;
       $input.val(newVal);
     }
   });
 
 })();
+
+
+// if (inputVal - 1 !== 0)

@@ -1,0 +1,43 @@
+.sk-bg-parent {
+    overflow: hidden; 
+}
+  
+.sk-bg{
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    padding-top: 100%;
+    margin-bottom:0;
+}
+
+.search-flex {
+    display: flex;
+}
+
+.icon {
+    width: auto;
+    height: auto;
+}
+
+.search-header .search-form button[type=submit] {
+    background: #032540;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+#BIS_trigger {
+    margin-top: 8px;
+}
+
+#BISModal .modal-title {
+    color: red !important;
+}
+
+@include media-query($tablet-up) {
+.sk-bg-parent:hover .sk-bg,
+.sk-bg-parent:focus .sk-bg {
+  transform: scale(1.1);
+}
+}
