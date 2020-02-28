@@ -29,7 +29,7 @@ Video modal Section
       background: rgba($COLOR_PRIMARY, 0.6);
     }
 
-    #{$parent}__text, #{$parent}__text *, #{$parent}__title {
+    #{$parent}__text, #{$parent}__text *, #{$parent}__title, #{$parent}__copy {
       color: $COLOR_WHITE;
     }
   }

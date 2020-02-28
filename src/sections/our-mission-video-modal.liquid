@@ -1,0 +1,124 @@
+{% include 'video-modal' with type: 'section' %}
+ 
+{% schema %}
+  {
+    "name": "Our Mission video modal",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Global Settings"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable",
+        "label": "Show section"
+      },
+      {
+        "type": "select",
+        "id": "full-width",
+        "label": "Full width",
+        "default": "full-width",
+        "options": [
+          {
+            "label": "Full width",
+            "value": "full-width"
+          },
+          {
+            "label": "Within wrapper",
+            "value": "wrapper"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": "no-margin",
+        "options": [
+          {
+            "label": "Margin bottom",
+            "value": "margin"
+          },
+          {
+            "label": "No margin",
+            "value": "no-margin"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Visual Settings"
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "video-modal--black",
+        "options": [
+          {
+            "label": "Text white",
+            "value": "video-modal--white"
+          },
+          {
+            "label": "Text black",
+            "value": "video-modal--black"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image overlay",
+        "info": "Advised size:"
+      },
+      {
+        "type": "text",
+        "id": "mp4",
+        "label": "Auto play mp4",
+        "info": "Advised size:"
+      },
+      {
+        "type": "text",
+        "id": "ogg",
+        "label": "Auto play ogg",
+        "info": "Advised size:"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "textarea",
+        "id": "copy",
+        "label": "Copy"
+      },
+      {
+        "type": "text",
+        "id": "button_1",
+        "label": "Button text one"
+      },
+      {
+        "type": "url",
+        "id": "button_link_1",
+        "label": "Button link one"
+      },
+      {
+        "type": "text",
+        "id": "play_text",
+        "label": "Play button text",
+        "default": "Watch Video"
+      },
+      {
+        "type": "header",
+        "content": "Modal Settings"
+      },
+      {
+        "type": "text",
+        "id": "vimeo_link",
+        "label": "Vimeo Link"
+      }
+    ]
+  }
+{% endschema %}

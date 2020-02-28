@@ -41,3 +41,26 @@
   transform: scale(1.1);
 }
 }
+
+
+
+
+/*****************************
+
+OUR MISSION
+
+******************************/
+section#About_Page_links {
+    display: flex;
+    height: 2.625rem;
+    background: #F5F5F5;
+    align-items: center;
+    
+
+    nav.site-header__nav {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+}

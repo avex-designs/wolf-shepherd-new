@@ -1,0 +1,41 @@
+<section id="About_Page_links" class="{{ section.settings.margin_bottom }}">
+	<nav class="site-header__nav" role="navigation" aria-label="About Sub Pages Navigation">
+		<ul class="about_links">
+			<li>
+				<a href="/pages/our-mission" title="Our Mission Page">Our Mission</a>
+			</li>
+			<li>
+				<a href="/pages/performance-1" title="Performance Shoe Page">Performance Shoe</a>
+			</li>
+			<li>
+				<a href="/pages/timeline" title="Timeline Page">Timeline</a>
+			</li>
+		</ul>
+	</nav>	
+</section>
+
+
+{% schema %}
+  {
+    "name": "Sub Pages Nav",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "select",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": "no-margin",
+        "options": [
+          {
+            "label": "Margin bottom",
+            "value": "section-margin-bottom"
+          },
+          {
+            "label": "No margin",
+            "value": "no-margin"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

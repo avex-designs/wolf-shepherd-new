@@ -1,0 +1,78 @@
+{% include 'header' with 
+  sectionID: section.id
+  marginBottom: section.settings.margin_bottom,
+  width: 'full-width'
+  align: section.settings.alignment,
+  maxWidth: section.settings.max_width,
+  title: section.settings.title, 
+  text: section.settings.text,
+  button_label: section.settings.button_label,
+  button_link: section.settings.button_link,
+  specialClass: 'header--small-text'
+%}
+
+{% schema %}
+  {
+    "name": "Our Mission copy",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "select",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": "no-margin",
+        "options": [
+          {
+            "label": "Margin bottom",
+            "value": "section-margin-bottom"
+          },
+          {
+            "label": "No margin",
+            "value": "no-margin"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "alignment",
+        "label": "Text alignment",
+        "default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "max_width",
+        "min": 300,
+        "max": 1400,
+        "step": 50,
+        "label": "Desktop max width px",
+        "default": 800
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text overlay"
+      },      
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+      }
+    ]
+  }
+{% endschema %}
