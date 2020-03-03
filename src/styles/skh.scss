@@ -64,3 +64,139 @@ section#About_Page_links {
     }
 
 }
+
+
+
+/*****************************
+
+PERFORMANCE
+
+******************************/
+
+#performance-two-col-section {
+
+    .responsive-image__wrapper {
+        max-width: 100% !important;
+    }
+
+    .row_wrapper {
+        position: relative;
+    } /* row_wrapper */
+
+    .text-wrap{
+        max-width: 520px;
+
+        ul {
+            font-size: 12px;
+            padding-left: 1rem;
+        }
+    }
+
+    .img_to_edge {
+
+        .row {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+
+            .column.text-wrap {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .responsive-image__wrapper {
+            display: inline-block;
+            max-width: 50% !important;
+        }
+    } /* img_to_edge */
+
+    .column {
+        flex: 1 1 100%;
+    } /* column */
+
+    .row {
+        display: flex;
+
+        .column {
+            &:first-child {
+                margin-right: 20px;
+            }
+
+            &:nth-child(2) {
+                margin-left: 20px; 
+            }
+        }
+
+    } /* row */
+
+    .image-with-text--right {
+
+        .text-wrap {
+            margin-left: auto;
+        }
+
+        .column {
+            &:first-child {
+                margin-right: 0px;
+                margin-left: 20px;
+            }
+
+            &:nth-child(2) {
+                margin-left: 0px;
+                margin-right: 20px; 
+            }
+        }
+
+    } /* image-with-text--right */
+
+}
+
+
+@media screen and (min-width: 1680px) {
+
+
+#performance-two-col-section {
+
+    .page-width {
+        padding: 0;
+    }
+
+}
+
+}
+
+
+
+
+
+/*****************************
+
+TIMELINE
+
+******************************/
+
+section#timeline-content {
+    display: flex;
+    align-items: center;
+
+    .wrapper {
+        width: 100%;
+        padding: 0 80px;
+    }
+
+    .responsive-image__wrapper {
+        display: inline-block;
+    }
+
+
+
+}
+
+
+
+
+
