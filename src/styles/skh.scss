@@ -63,6 +63,58 @@ section#About_Page_links {
         text-align: center;
     }
 
+    .site-header__nav a,
+    .site-header__nav .secret-a {
+        font-family: "SackersGothicStd-Medium", sans-serif;
+        font-size: 0.625em;
+        letter-spacing: 0.25px;
+        padding: 20px;
+        text-transform: uppercase;
+    }
+
+    .site-header__nav ul {
+        margin: 0 0 0 -20px;
+        padding: 0;
+    }
+
+    .site-header__nav li {
+        display: inline-block;
+    }
+
+}
+
+@media screen and (max-width: 767px ) {
+
+
+#shopify-section-our-mission-video-modal .video-modal__text-area {
+    display: none;
+}
+
+section#About_Page_links {
+
+    .site-header__nav ul {
+        margin: 0;
+    }
+
+    .site-header__nav a,
+    .site-header__nav .secret-a {
+        font-family: "SackersGothicStd-Medium", sans-serif;
+        font-size: 0.625em;
+        letter-spacing: 0.25px;
+        padding: 13px;
+        text-transform: uppercase;
+    }
+
+    .site-header__nav li:first-child a {
+        padding-left: 0;
+    }
+
+    .site-header__nav li:last-child a {
+        padding-right: 0;
+    }
+
+}
+
 }
 
 
@@ -154,6 +206,137 @@ PERFORMANCE
     } /* image-with-text--right */
 
 }
+
+
+
+/***********************************
+Performance page background images
+***********************************/
+#performance-two-col-section {
+
+    .row_wrapper {
+
+        &:first-child {
+             &:before {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Group_13.png?v=1583362939);
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 450px;
+                width: 100%;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                z-index: -1;
+            }
+            &:after {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Graphics_1.png?v=1583356267);
+                background-repeat: no-repeat;
+                background-position: right;
+                height: 693px;
+                width: 100%;
+                max-width: 693px;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                top: -36px;
+                z-index: -1;
+            }
+        }
+
+        &:nth-child(3) {
+            &:before {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Path_3_Copy_2.png?v=1583356678);
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 450px;
+                width: 100%;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                z-index: -1;
+            }
+        }
+
+        &:nth-child(2) {
+            &:before {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Oval_Copy.png?v=1583356678);
+                background-repeat: no-repeat;
+                background-position: left;
+                height: 583px;
+                width: 100%;
+                max-width: 693px;
+                background-size: contain;
+                position: absolute;
+                left: 0;
+                top: 110px;
+                z-index: -1;
+            }
+            &:after {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Graphics_2.png?v=1583356267);
+                background-repeat: no-repeat;
+                background-position: right;
+                height: 335px;
+                width: 100%;
+                max-width: 693px;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                bottom: -20%;
+                z-index: -1;
+            }
+        }    
+
+
+        &:nth-child(4) {
+            &:before {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Path_3_Copy_2.png?v=1583356678);
+                background-repeat: no-repeat;
+                background-position: center;
+                height: 450px;
+                width: 100%;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                z-index: -1;
+            }
+            &:after {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/graphics_for_4.png?v=1583356267);
+                background-repeat: no-repeat;
+                background-position: right;
+                height: 335px;
+                width: 100%;
+                max-width: 693px;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                bottom: -10%;
+                z-index: -1;
+            }
+        }
+
+
+    }
+}
+
+
+
 
 
 @media screen and (min-width: 1680px) {
