@@ -127,8 +127,10 @@ PERFORMANCE
 
 #performance-two-col-section {
 
-    .responsive-image__wrapper {
-        max-width: 100% !important;
+    @media screen and (min-width: 1024px) {
+        .responsive-image__wrapper {
+            max-width: 100% !important;
+        }
     }
 
     .row_wrapper {
@@ -163,6 +165,11 @@ PERFORMANCE
         .responsive-image__wrapper {
             display: inline-block;
             max-width: 50% !important;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
         }
     } /* img_to_edge */
 
@@ -210,7 +217,7 @@ PERFORMANCE
 
 
 /***********************************
-Performance page background images
+Performance page background images and alignments
 ***********************************/
 #performance-two-col-section {
 
@@ -222,14 +229,13 @@ Performance page background images
                 display: inline-block;
                 background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Group_13.png?v=1583362939);
                 background-repeat: no-repeat;
-                background-position: center;
-                height: 450px;
+                background-position: 79% 0%;
+                height: 460px;
                 width: 100%;
                 background-size: contain;
                 position: absolute;
                 right: 0;
-                top: 50%;
-                z-index: -1;
+                top: 58%;
             }
             &:after {
                 content: '';
@@ -248,24 +254,15 @@ Performance page background images
             }
         }
 
-        &:nth-child(3) {
-            &:before {
-                content: '';
-                display: inline-block;
-                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Path_3_Copy_2.png?v=1583356678);
-                background-repeat: no-repeat;
-                background-position: center;
-                height: 450px;
-                width: 100%;
-                background-size: contain;
-                position: absolute;
-                right: 0;
-                top: 50%;
-                z-index: -1;
-            }
-        }
-
         &:nth-child(2) {
+            margin-bottom: 200px !important;
+
+            .text-wrap {
+                display: flex;
+                align-items: center;
+            }
+
+
             &:before {
                 content: '';
                 display: inline-block;
@@ -274,7 +271,6 @@ Performance page background images
                 background-position: left;
                 height: 583px;
                 width: 100%;
-                max-width: 693px;
                 background-size: contain;
                 position: absolute;
                 left: 0;
@@ -289,29 +285,68 @@ Performance page background images
                 background-position: right;
                 height: 335px;
                 width: 100%;
-                max-width: 693px;
                 background-size: contain;
                 position: absolute;
                 right: 0;
-                bottom: -20%;
+                bottom: -33%;
                 z-index: -1;
             }
         }    
 
+        &:nth-child(3) {
 
-        &:nth-child(4) {
+            .row {
+                margin-bottom: 120px !important;
+            }
+
             &:before {
                 content: '';
                 display: inline-block;
-                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Path_3_Copy_2.png?v=1583356678);
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Group_13_5f99a974-a36c-48a8-85c2-50103ea70d41.png?v=1583441392);
                 background-repeat: no-repeat;
                 background-position: center;
-                height: 450px;
+                height: 280px;
                 width: 100%;
                 background-size: contain;
                 position: absolute;
                 right: 0;
-                top: 50%;
+                top: -40%;
+                z-index: 1;
+            }
+
+            &:after {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Group_5_Copy_6.png?v=1583356678);
+                background-repeat: no-repeat;
+                background-position: 40% 50%;
+                height: 280px;
+                width: 100%;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                bottom: -32%;
+                z-index: 1;
+            }
+        }
+
+
+        &:nth-child(4) {
+            margin-bottom: 180px !important;
+
+
+            &:before {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Group_9.png?v=1583437552);
+                background-repeat: no-repeat;
+                background-position: 45% 50%;
+                height: 280px;
+                width: 100%;
+                background-size: auto;
+                position: absolute;
+                right: 0;
+                top: 87%;
                 z-index: -1;
             }
             &:after {
@@ -326,7 +361,7 @@ Performance page background images
                 background-size: contain;
                 position: absolute;
                 right: 0;
-                bottom: -10%;
+                bottom: -33%;
                 z-index: -1;
             }
         }
@@ -348,12 +383,115 @@ Performance page background images
         padding: 0;
     }
 
-}
+    .responsive-image__wrapper img {
+        display: block;
+        width: 100%;
+        left: auto;
+        right: 0;
+    }
+
+    .image-with-text--right img {
+        left: 0;
+        right: auto;
+    }
 
 }
 
 
+#performance-two-col-section {
 
+    .row_wrapper {
+
+        &:first-child {
+
+            &:after {
+                background-position: 119% 50%;
+                height: 980px;
+                top: -215px;
+            }
+
+        }
+
+        &:nth-child(2) {
+
+            &:before {
+                top: 230px;
+            }
+
+            &:after {
+                background-position: 85% 50%;
+                bottom: -20%;
+            }
+
+        }    
+
+        &:nth-child(3) {
+
+            &:before {
+                content: '';
+                display: inline-block;
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Group_13_5f99a974-a36c-48a8-85c2-50103ea70d41.png?v=1583441392);
+                background-repeat: no-repeat;
+                background-position: 40% 50%;
+                height: 280px;
+                width: 100%;
+                background-size: contain;
+                position: absolute;
+                right: 0;
+                top: -40%;
+                z-index: 1;
+            }
+
+        }
+
+
+        &:nth-child(4) {
+
+            &:after {
+                background-position: 50% 32%;
+                right: 60px;
+                bottom: -20%;
+            }
+
+        }
+
+
+    }
+}
+
+
+
+
+}
+
+
+@media screen and (max-width: 1023px) {
+
+    #performance-two-col-section {
+
+
+        .row {
+            display: flex;
+            flex-direction: column;
+
+            .column {
+                &:first-child,
+                &:nth-child(2) {
+                    margin-right: 0px !important;
+                    margin-left: 0px !important
+                }
+
+                &.text-wrap {
+                    margin-right: auto !important;
+                    margin-left: auto !important;
+                }
+            }
+
+        } /* row */
+
+    }
+
+}
 
 
 /*****************************
