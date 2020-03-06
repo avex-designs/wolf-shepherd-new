@@ -1,4 +1,17 @@
 <section data-section-id="{{ section.id }}" id="timeline-content">
+
+  <div class="timeline_sidebar_sections">
+    <ul class="years">
+      <li>
+        <span class="linezor"> </span>
+        <a href="#2014" class="h3">2014</a>
+      </li>
+      <li><span class="linezor"> </span><a href="#2015" class="h3">2015</a></li>
+      <li><span class="linezor"> </span><a href="#2018" class="h3">2018</a></li>
+      <li><span class="linezor"> </span><a href="#2019" class="h3">2019</a></li>
+    </ul>
+  </div>
+
   <div class="wrapper">
     
     {% assign count = 0 %}
@@ -21,43 +34,56 @@
           {% endif %}
       {% endcapture %}
 
-      <div class="row_wrapper">
+      <div id="{{ block.settings.year }}" class="row_wrapper">
 
         <div class="row row-border-left page-width-timeline">
-
-          <div js-video-modal="trigger" js-video-target="#modal-{{ count }}" class="img-wrap play_text">
 
             <div class="text-wrap">
                 <h2>{{ block.settings.year }}</h2>
                 <h5> {{ block.settings.caption }} </h5>
             </div>
 
+            <div class="video_wrap">
             {% unless  block.settings.image_position == true %}
               {% if sectionImage != blank %}
-              
+              <div js-video-modal="trigger" js-video-target="#modal-{{ count }}" class="img-wrap play_text">
                 {{ image_layout }}
-              
+              </div>
               {% endif %}
             {% endunless %}
-
           </div>
+          
 
         </div> <!-- row -->
 
-      </div><!-- row_wrapper -->
 
       {% if videoSectionUrlReady != blank %}
       {% assign videoSectionUrlReady = videoSectionUrlReady | split: "https://vimeo.com/" %}
       <div id="modal-{{ count }}" class="modal">
-        <div class="modal__video" >
-          <iframe id="modal-video" src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
         
+          
+        <div class="modal__video" >
+          <h4>{{ block.settings.video_eyebrow }}</h4>
+          <h2>{{ block.settings.video_title }}</h2>
+
+          <div class="modal_video-wrap">
+          <iframe id="modal-video" src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+          </div>
+
           <div class="modal__close modal__close--white" js-video-modal="close" js-video-target="#modal-{{sectionID}}">
             {% include 'icons' with icon: 'close' %}
           </div>
+
+          <div class="video-modal-copy">{{ block.settings.video_copy }}</div>
+          <a href="{{ block.settings.button_text }}" class="button button--black">{{ block.settings.button_link }}</a>
+
         </div>
+        
+       
       </div>
-    {% endif %}
+      {% endif %}
+
+      </div><!-- row_wrapper -->
 
     {% endfor %}
 
@@ -114,12 +140,12 @@
           {
             "id": "button_link",
             "type": "text",
-            "label": "Button Link"
+            "label": "Button Text"
           },
           {
             "id": "button_text",
             "type": "url",
-            "label": "Button Text"
+            "label": "Button Link"
           }
         ]
       }
