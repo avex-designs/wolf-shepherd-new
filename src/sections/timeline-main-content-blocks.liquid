@@ -1,16 +1,31 @@
+<script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  crossorigin="anonymous"></script>
+
 <section data-section-id="{{ section.id }}" id="timeline-content">
 
   <div class="timeline_sidebar_sections">
     <ul class="years">
-      <li>
-        <span class="linezor"> </span>
-        <a href="#2014" class="h3">2014</a>
-      </li>
-      <li><span class="linezor"> </span><a href="#2015" class="h3">2015</a></li>
-      <li><span class="linezor"> </span><a href="#2018" class="h3">2018</a></li>
-      <li><span class="linezor"> </span><a href="#2019" class="h3">2019</a></li>
+      <li class="active"> <a href="#2014" class="h3">2014</a> </li>
+      <li> <a href="#2015" class="h3">2015</a></li>
+      <li> <a href="#2018" class="h3">2018</a></li>
+      <li> <a href="#2019" class="h3">2019</a></li>
     </ul>
   </div>
+
+  <script>
+  $(document).ready(function($){
+
+    $('.years li').click(function(){
+      //event.preventDefault();
+      event.stopPropagation();
+      $(this).closest("ul").find(".active").removeClass("active");
+      $(this).addClass("active");
+    });
+
+  });
+  </script>
 
   <div class="wrapper">
     
@@ -46,7 +61,7 @@
             <div class="video_wrap">
             {% unless  block.settings.image_position == true %}
               {% if sectionImage != blank %}
-              <div js-video-modal="trigger" js-video-target="#modal-{{ count }}" class="img-wrap play_text">
+              <div id="modal-video" {% if videoSectionUrlReady != blank %}js-video-modal="trigger" js-video-target="#modal-{{ count }}"{% endif %} class="img-wrap play_text">
                 {{ image_layout }}
               </div>
               {% endif %}
@@ -60,27 +75,32 @@
       {% if videoSectionUrlReady != blank %}
       {% assign videoSectionUrlReady = videoSectionUrlReady | split: "https://vimeo.com/" %}
       <div id="modal-{{ count }}" class="modal">
-        
-          
-        <div class="modal__video" >
-          <h4>{{ block.settings.video_eyebrow }}</h4>
-          <h2>{{ block.settings.video_title }}</h2>
+          <div class="modal__video" >
+              {% if block.settings.video_eyebrow != blank %}
+              <h4>{{ block.settings.video_eyebrow }}</h4>
+              {% endif %}
+              {% if block.settings.video_title != blank %}
+              <h2>{{ block.settings.video_title }}</h2>
+              {% endif %}
 
-          <div class="modal_video-wrap">
-          <iframe id="modal-video" src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-          </div>
+              <div class="modal_video-wrap-container">
+                <div class="modal_video-wrap">
+                  <iframe id="modal-video" src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+              </div>
 
-          <div class="modal__close modal__close--white" js-video-modal="close" js-video-target="#modal-{{sectionID}}">
-            {% include 'icons' with icon: 'close' %}
-          </div>
+              <div class="modal__close modal__close--white" js-video-modal="close" js-video-target="#modal-{{sectionID}}">
+                {% include 'icons' with icon: 'close' %}
+              </div>
 
-          <div class="video-modal-copy">{{ block.settings.video_copy }}</div>
-          <a href="{{ block.settings.button_text }}" class="button button--black">{{ block.settings.button_link }}</a>
-
-        </div>
-        
-       
-      </div>
+              {% if block.settings.video_copy != blank %}
+              <div class="video-modal-copy">{{ block.settings.video_copy }}</div>
+              {% endif %}
+              {% if block.settings.button_text %}
+              <a href="{{ block.settings.button_text }}" class="button button--black">{{ block.settings.button_link }}</a>
+              {% endif %}
+          </div><!-- modal__video -->
+      </div><!-- #modal-{count} -->
       {% endif %}
 
       </div><!-- row_wrapper -->
@@ -99,7 +119,7 @@
     "blocks": [
       {
         "type": "select",
-        "name": "Section",
+        "name": "Year Block",
         "settings": [
           {
             "id": "year",

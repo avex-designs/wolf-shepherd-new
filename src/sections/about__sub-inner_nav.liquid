@@ -23,12 +23,13 @@
 	</nav>	
 </section>
 
-
+{% if page.handle == 'performance-1' %}
 <div class="hero-image__mobile-text">
   <h2 class="d1 hero-image__title">
     {{ section.settings.title_mobile  }}
   </h2>
 </div>
+{% endif %}
 
 
 {% schema %}

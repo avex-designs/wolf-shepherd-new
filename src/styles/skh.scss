@@ -244,15 +244,15 @@ Performance page background images and alignments
             &:after {
                 content: '';
                 display: inline-block;
-                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Graphics_1.png?v=1583356267);
+                background-image: url(https://cdn.shopify.com/s/files/1/0966/8928/files/Graphics_1_1.png?v=1583790438);
                 background-repeat: no-repeat;
-                background-position: right;
+                background-position: top right;
                 height: 693px;
                 width: 100%;
                 max-width: 693px;
                 background-size: contain;
                 position: absolute;
-                right: 0;
+                right: -12%;
                 top: -36px;
                 z-index: -1;
             }
@@ -412,6 +412,8 @@ Performance page background images and alignments
                 background-position: 119% 50%;
                 height: 980px;
                 top: -215px;
+                top: -54%;
+                right: -10%;
             }
 
         }
@@ -544,6 +546,7 @@ Performance page background images and alignments
                     background-position: 443% 0%;
                     height: 380px;
                     top: -30px;
+                    right: -46%;
                 }
 
             }
@@ -625,37 +628,77 @@ section#timeline-content {
     ul.years {
         list-style: none;
         padding: 0 80px 0 0;
+        margin: 0;
 
-        .linezor {
-            display: inline-block;
-            height: 30px;
-            width: 2px;
-            color:#032540;
+        a {
+            display: flex;
+            align-items: center;
+            height: 49px;
+            padding-left: 20px;
+            position: relative;
+            margin-bottom: 8px;
+            color: #DBDBDB;
+
+            &:before {
+                content: ' ';
+                width: 2px;
+                background-color: #DBDBDB;
+                display: inline-block;
+                height: 100%;
+                position: absolute;
+                left: 0;
+            }
+        }
+
+        .active {
+
+            a {
+                color: #032540 !important;
+                padding-left: 40px;
+
+                &:before {
+                    background-color: #032540 !important;
+                }
+            }
         }
     }
 
     .row_wrapper:nth-child(odd) .img-wrap.play_text {
-        margin-left: -160px;
+        margin-left: -200px;
+        margin-right: 200px;
     }
 
     .wrapper {
         width: 100%;
-        padding: 0 80px;
+        padding: 0;
         max-width: 1120px;
-        margin-left: 80px;
+        margin-left: 100px;
     }
 
     .responsive-image__wrapper {
         display: inline-block;
+        z-index: -1;
+        max-width: 920px;
     }
 
     .page-width-timeline {
         position: relative;
 
         .video_wrap {
-            padding: 50px 0 50px 80px;
-            height: 117%;
-            border-left: 1px solid #032540;
+            padding: 70px 0 100px 100px;
+            position: relative;
+
+            &:before {
+                content: ' ';
+                display: inline-block;
+                position: absolute;
+                height: 100%;
+                width: 1px;
+                background-color: #032540;
+                z-index: -2;
+                top: 0;
+                left: 0;
+            }
         }
 
         .text-wrap {
@@ -663,7 +706,15 @@ section#timeline-content {
             align-items: center;
             margin-bottom: -20px;
             margin-top: -20px;
-            margin-left: 80px;
+            margin-left: 100px;
+
+            >* {
+                margin-bottom: 0;
+            }
+
+            h5 {
+                margin-left: 60px;
+            }
 
             &:before {
                 content: '';
@@ -677,9 +728,6 @@ section#timeline-content {
                 left: -11px;
             }
 
-            >* {
-                margin-bottom: 0;
-            }
         }
     }
 
@@ -689,6 +737,7 @@ section#timeline-content {
         height: auto;
         max-height: fit-content;
         padding: 80px;
+        max-width: 1280px;
 
         h4 {
             font-size: .875rem;
@@ -706,18 +755,25 @@ section#timeline-content {
             margin: 40px;
         }
 
-        .modal_video-wrap {
-            height: 0;
+        .modal_video-wrap-container {
             width: 100%;
-            padding-top: 56.5%;
-            position: relative;
-        }
+            max-width: 1120px;
 
-         iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+            .modal_video-wrap {
+                height: 0;
+                width: 100%;
+                padding-top: 56.5%;
+                position: relative;
+
+                iframe {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                } /* iframe */
+            } /* modal_video-wrap */
+        } /* modal_video-wrap-container */
+
+         
     }
 
 
@@ -727,6 +783,10 @@ section#timeline-content {
 @media screen and (max-width: 1679px) {
     section#timeline-content {
         padding: 0 80px;
+
+        ul.years {
+            padding: 0 160px 0 0;
+        }
     }
 }
 
@@ -734,6 +794,72 @@ section#timeline-content {
 @media screen and (max-width: 1023px) {
 
 section#timeline-content {
+    padding: 0 40px;
+    margin-top: 80px;
+
+    .timeline_sidebar_sections {
+        display: none;
+    }
+
+    .wrapper {
+        padding: 0;
+        margin-left: 70px;
+    }
+
+    .page-width-timeline .text-wrap {
+        margin-left: 60px;
+
+        h5 {
+            margin-left: 40px;
+        }
+    }
+
+    .row_wrapper .img-wrap.play_text {
+        margin-left: -170px !important;
+        margin-right: 0px !important;
+    }
+
+    .modal__video {
+        padding: 80px 0px;
+    }
+
+}    
+
+}
+
+
+@media screen and (max-width: 767px) {
+
+section#timeline-content {
+    padding: 0 24px;
+
+    .timeline_sidebar_sections {
+        display: none;
+    }
+
+    .wrapper {
+        padding: 0;
+        margin-left: 30px;
+    }
+
+    .page-width-timeline .text-wrap {
+        margin-left: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+
+        h5 {
+            margin-left: 0px;
+        }
+
+         &:before {
+            top: 12px;
+        }
+    }
+
+    .row_wrapper .img-wrap.play_text {
+        margin-left: -130px !important;
+    }
 
     .modal__video {
         padding: 80px 0px;
