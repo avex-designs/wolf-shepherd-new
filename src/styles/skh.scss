@@ -625,6 +625,20 @@ section#timeline-content {
     padding: 0 160px;
     justify-content: center;
 
+
+    /*#section_2014:before,
+    #section_2015:before,
+    #section_2016:before,
+    #section_2017:before,
+    #section_2018:before,
+    #section_2019:before,*/
+    div[id^="section_"]:before{
+        content: ' ';
+        display: block;
+        height: 74px;
+        margin: -74px 0 0;
+    }
+
     ul.years {
         list-style: none;
         padding: 0 80px 0 0;
@@ -732,12 +746,19 @@ section#timeline-content {
     }
 
 
+    .modal.is-active {  overflow: scroll; }
+
     .modal__video {
         background: #fff;
         height: auto;
         max-height: fit-content;
         padding: 80px;
         max-width: 1280px;
+        margin: 20px auto;
+        left: 0;
+        right:0;
+        top:0;
+        transform: translate(0%, 0%);
 
         h4 {
             font-size: .875rem;
@@ -773,7 +794,6 @@ section#timeline-content {
             } /* modal_video-wrap */
         } /* modal_video-wrap-container */
 
-         
     }
 
 
