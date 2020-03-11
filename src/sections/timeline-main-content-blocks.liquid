@@ -61,7 +61,7 @@
             <div class="video_wrap">
             {% unless  block.settings.image_position == true %}
               {% if sectionImage != blank %}
-              <div id="modal-video" {% if videoSectionUrlReady != blank %}js-video-modal="trigger" js-video-target="#modal-{{ count }}"{% endif %} class="img-wrap play_text">
+              <div {% if videoSectionUrlReady != blank %}js-video-modal="trigger" js-video-target="#modal-{{ count }}"{% endif %} class="img-wrap play_text">
                 {{ image_layout }}
               </div>
               {% endif %}
@@ -74,7 +74,7 @@
 
       {% if videoSectionUrlReady != blank %}
       {% assign videoSectionUrlReady = videoSectionUrlReady | split: "https://vimeo.com/" %}
-      <div id="modal-{{ count }}" class="modal">
+      <div id="modal-{{ count }}" class="modal" js-video-modal="close" js-video-target="#modal-{{ count }}">
           <div class="modal__video" >
               {% if block.settings.video_eyebrow != blank %}
               <h4>{{ block.settings.video_eyebrow }}</h4>
@@ -89,7 +89,7 @@
                 </div>
               </div>
 
-              <div class="modal__close modal__close--white" js-video-modal="close" js-video-target="#modal-{{sectionID}}">
+              <div class="modal__close modal__close--white" js-video-modal="close" js-video-target="#modal-{{ count }}">
                 {% include 'icons' with icon: 'close' %}
               </div>
 
@@ -139,7 +139,7 @@
           },
           {
             "id": "video",
-            "type": "textarea",
+            "type": "text",
             "label": "Video embed"
           },
           {

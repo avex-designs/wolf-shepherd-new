@@ -15,7 +15,8 @@ export default () => {
     container: document.querySelectorAll('[js-video-modal="container"]'),
     trigger: document.querySelectorAll('[js-video-modal="trigger"]'),
     overlay: document.querySelectorAll('[js-video-modal="overlay"]'),
-    close: document.querySelectorAll('[js-video-modal="close"]'),
+    close: document.querySelectorAll('[js-video-modal="close"], .modal'),
+    no_close: document.querySelectorAll('.modal__video'),
     _html: document.documentElement,
   };
 
@@ -34,6 +35,12 @@ export default () => {
 
     selectors.close.forEach((item) => {
       item.addEventListener('click', modalClose);
+    });
+
+    selectors.no_close.forEach((item) => {
+      item.addEventListener('click', function(event){
+        event.stopPropagation();
+      });
     });
 
     selectors._html.addEventListener('keydown', handleKeydown);
