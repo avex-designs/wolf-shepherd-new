@@ -61,7 +61,7 @@
             <div class="video_wrap">
             {% unless  block.settings.image_position == true %}
               {% if sectionImage != blank %}
-              <div {% if videoSectionUrlReady != blank %}js-video-modal="trigger" js-video-target="#modal-{{ count }}"{% endif %} class="img-wrap play_text">
+              <div {% if videoSectionUrlReady != blank %}js-video-modal="trigger" js-video-target="modal-{{ count }}"{% endif %} class="img-wrap play_text">
                 {{ image_layout }}
               </div>
               {% endif %}
@@ -85,7 +85,7 @@
 
               <div class="modal_video-wrap-container">
                 <div class="modal_video-wrap">
-                  <iframe id="modal-video" src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                  <iframe id="modal-video"  src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
               </div>
 

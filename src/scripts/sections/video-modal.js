@@ -20,7 +20,8 @@ export default () => {
     _html: document.documentElement,
   };
 
-  const player = new Player('modal-video');
+  //const player = new Player('modal-video');
+  var player
 
   function init() {
     setEventListeners();
@@ -54,8 +55,12 @@ export default () => {
 
   function modalActive(node) {
     const target = node.target.getAttribute('js-video-target');
-    const modalTarget = document.querySelector(target);
+    const modalTarget = document.querySelector('#'+target);
     modalTarget.classList.add(cssClasses.active);
+
+    console.log(target);
+    player = new Player(target);
+    
     player.play();
   }
 
