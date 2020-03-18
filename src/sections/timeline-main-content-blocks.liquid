@@ -36,6 +36,7 @@
       {% assign sectionImage = block.settings.image-picker %}
       {% assign sectionLayout = block.settings.layout %}
       {% assign videoSectionUrlReady = block.settings.video %}
+      {% assign sectionButtonColor = section.settings.button_color %}
 
       {% capture image_layout %}
           {% if sectionImage != blank %}
@@ -53,15 +54,29 @@
 
         <div class="row row-border-left page-width-timeline">
 
-            <div class="text-wrap">
+            <div class="text-wrap {% if block.settings.copy != blank %} margin-bot-pull {% endif %}">
                 <h2>{{ block.settings.year }}</h2>
-                <h5> {{ block.settings.caption }} </h5>
+                <div class="text_offset">
+                  <h5> {{ block.settings.caption }} </h5>
+                  {% if block.settings.copy != blank %}
+                  <span class="year_copy"> {{ block.settings.copy }} </span>
+                  {% endif %}
+                </div>
             </div>
 
-            <div class="video_wrap">
+            <div class="video_wrap {% if block.settings.copy != blank %} extra-top-pad {% endif %}">
             {% unless  block.settings.image_position == true %}
               {% if sectionImage != blank %}
               <div {% if videoSectionUrlReady != blank %}js-video-modal="trigger" js-video-target="modal-{{ count }}"{% endif %} class="img-wrap play_text">
+
+                {% if videoSectionUrlReady != blank %}
+                <a js-video-modal="trigger" js-video-target="modal-{{ count }}"
+                  title="{{ block.settings.img_button_text }}"
+                  class="btn {{ block.settings.button_color }}">
+                  {{ block.settings.img_button_text }}
+                </a>
+                {% endif %}
+
                 {{ image_layout }}
               </div>
               {% endif %}
@@ -133,9 +148,41 @@
             "default": "Hello World"
           },
           {
+            "id": "copy",
+            "type": "textarea",
+            "label": "Year's copy"
+          },
+          {
             "id": "image-picker",
             "type": "image_picker",
             "label": "Background Image"
+          },
+          {
+            "id": "img_button_text",
+            "type": "text",
+            "label": "Image Button Text",
+            "default": "Discover"
+          },
+          {
+            "id": "img_button_link",
+            "type": "url",
+            "label": "Image Button Link"
+          },
+          {
+            "type": "select",
+            "id": "button_color",
+            "label": "Button colour",
+            "default": "button button--black",
+            "options": [
+              {
+                "label": "Light",
+                "value": "button--white"
+              },
+              {
+                "label": "Dark",
+                "value": "button button--black"
+              }
+            ]
           },
           {
             "id": "video",
