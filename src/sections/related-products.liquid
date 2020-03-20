@@ -1,46 +1,46 @@
-{% comment %}
+{%- comment -%}
   modules/feature-collection.scss
-{% endcomment %}
+{%- endcomment -%}
 
-{% assign same_vendor = false %}
-{% assign same_type = false %}
+{%- assign same_vendor = false -%}
+{%- assign same_type = false -%}
 
-{% comment %}
+{%- comment -%}
   Collections to ignore.
   Never pick related items from those.
-{% endcomment %}
+{%- endcomment -%}
 
-{% assign exclusions = 'frontpage,all' | split: ',' %}
+{%- assign exclusions = 'frontpage,all' | split: ',' -%}
 
-{% comment %}
+{%- comment -%}
   Looking for a relevant collection.
-{% endcomment %}
+{%- endcomment -%}
 
-{% if product.metafields.c_f['Related Products'] %}
-  {% assign collection = collections[product.metafields.c_f['Related Products']] %}
-{% endif %}
+{%- if product.metafields.c_f['Related Products'] -%}
+  {%- assign collection = collections[product.metafields.c_f['Related Products']] -%}
+{%- endif -%}
 
-{% assign found_a_collection = false %}
-{% if collection and collection.all_products_count > 1 %}
-  {% unless exclusions contains collection.handle %}
-    {% assign found_a_collection = true %}
-  {% endunless %}
-{% endif %}
-{% unless found_a_collection %}
-  {% for c in product.collections %}
-    {% unless exclusions contains c.handle or c.all_products_count < 2 %}
-      {% assign found_a_collection = true %}
-      {% assign collection = c %}
-      {% break %}
-    {% endunless %}
-  {% endfor %}
-{% endunless %}
+{%- assign found_a_collection = false -%}
+{%- if collection and collection.all_products_count > 1 -%}
+  {%- unless exclusions contains collection.handle -%}
+    {%- assign found_a_collection = true -%}
+  {%- endunless -%}
+{%- endif -%}
+{%- unless found_a_collection -%}
+  {%- for c in product.collections -%}
+    {%- unless exclusions contains c.handle or c.all_products_count < 2 -%}
+      {%- assign found_a_collection = true -%}
+      {%- assign collection = c -%}
+      {%- break -%}
+    {%- endunless -%}
+  {%- endfor -%}
+{%- endunless -%}
 
-{% comment %}
+{%- comment -%}
   If we have a relevant collection.
-{% endcomment %}
+{%- endcomment -%}
 
-{% if found_a_collection %}
+{%- if found_a_collection -%}
 
   {%- assign counter = 0 -%}
   {%- assign collectionCounter = section.settings.product_count | times: 1 -%} 
@@ -50,69 +50,69 @@
 
   {%- capture collectionCounterClass -%}
     grid__item small--one-half
-    {% case collectionCounter %}
-      {% when 2 %}
+    {%- case collectionCounter -%}
+      {%- when 2 -%}
         medium-up--one-half
-      {% when 3 %}
+      {%- when 3 -%}
         medium-up--one-third
-      {% when 4 %}
+      {%- when 4 -%}
         medium-up--one-quarter
-      {% else %}
+      {%- else -%}
         medium-up--one-whole
-    {% endcase %}
+    {%- endcase -%}
   {%- endcapture -%}
 
-  {% capture related_items %}
-    {% for product in collection.products %}
-      {% unless product.handle == current_product.handle %}
-         {% unless same_vendor and current_product.vendor != product.vendor %}
-           {% unless same_type and current_product.type != product.type %}
+  {%- capture related_items -%}
+    {%- for product in collection.products -%}
+      {%- unless product.handle == current_product.handle -%}
+         {%- unless same_vendor and current_product.vendor != product.vendor -%}
+           {%- unless same_type and current_product.type != product.type -%}
   
-              {% include 'collection-grid-product' with gridWidth: collectionCounterClass  %}
+              {%- include 'collection-grid-product' with gridWidth: collectionCounterClass  -%}
 
-              {% assign counter = counter | plus: 1 %}
-              {% if counter == break_at %}
-                {% break %}
-              {% endif %}
-           {% endunless %}
-        {% endunless %}
-      {% endunless %}
-    {% endfor %}
-  {% endcapture %}
+              {%- assign counter = counter | plus: 1 -%}
+              {%- if counter == break_at -%}
+                {%- break -%}
+              {%- endif -%}
+           {%- endunless -%}
+        {%- endunless -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endcapture -%}
 
-  {% assign related_items = related_items | trim %}
+  {%- assign related_items = related_items | trim -%}
   
   <div class="related-products">
     <div class="page-width">
       <div class="grid feature-collection">
         
-        {% if section.settings.title != blank %}
+        {%- if section.settings.title != blank -%}
           <div class="grid__item">
             <div class="feature-collection__header">
               <h2 class="feature-collection__title">{{ section.settings.title | escape }}</h2>
             </div>
           </div>
-        {% endif %}
+        {%- endif -%}
 
-        {% unless related_items == blank %}
+        {%- unless related_items == blank -%}
           {{ related_items }}
-        {% endunless %}
+        {%- endunless -%}
 
-        {% if section.settings.show_button %}
+        {%- if section.settings.show_button -%}
           <div class="grid__item">
             <div class="feature-collection__button-row">
               <a href="{{collection.url}}" title="{{ section.settings.button_text }}">{{ section.settings.button_text  }}</a>
             </div>
           </div>
-        {% endif %}
+        {%- endif -%}
 
       </div>
     </div>
   </div>
 
-{% endif %}
+{%- endif -%}
   
-{% schema %}
+{%- schema -%}
   {
     "name": "Related products",
     "settings": [
@@ -145,4 +145,4 @@
     ]
   }
 
-{% endschema %}
+{%- endschema -%}

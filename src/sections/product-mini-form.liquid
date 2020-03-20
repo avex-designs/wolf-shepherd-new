@@ -19,3 +19,79 @@
     ]
   }
 {% endschema %}
+<script>
+if(!variant){
+  let swatches_mini = document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-2');
+  if(swatches_mini){
+    swatches_mini.querySelectorAll('button').forEach(it => {
+          it.classList.remove('is-active')
+    })
+  }
+
+
+  let swatches_mini_opt3 = document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-3');
+  if(swatches_mini_opt3){
+    swatches_mini_opt3.querySelectorAll('button').forEach(it => {
+        it.classList.remove('is-active')
+  })  
+  }
+  
+}
+
+if(document.querySelector('#current_selected_variant').innerHTML === ''){
+      setTimeout(()=>{
+        document.querySelector('[js-swatch-product="main"]').querySelector('[data-swatch-option="option-1"]').click()
+      }, 2000)
+    }
+
+document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-1').addEventListener('click', (event) => {
+  const isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+if(document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__size-container__title-trigger')){
+  document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__size-container__title-trigger').innerHTML = 'SELECT SIZE'
+}
+ 
+})
+</script>
+
+{% comment %} <script>
+document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-1').addEventListener('click', (event) => {
+  const isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+  
+ // document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__size-container__title-trigger').innerHTML = 'SELECT SIZE'
+
+  if(document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-2')){
+    document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-2').querySelectorAll('button').forEach(it => {
+      it.classList.remove('is-active')
+      it.classList.remove('is-disabled')
+    })
+  }
+  
+  if(document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-3')){
+    document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-3').querySelectorAll('button').forEach(it => {
+      it.classList.remove('is-active')
+      it.classList.remove('is-disabled')
+    })
+  }
+})
+
+document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-2').addEventListener('click', (event) => {
+  const isButton = event.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+
+  if(document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-3')){
+    document.querySelector('#shopify-section-product-mini-form').querySelector('.swatch__wrapper.option-3').querySelectorAll('button').forEach(it => {
+      it.classList.remove('is-active')
+      it.classList.remove('is-disabled')
+    })
+  }
+  
+})
+</script> {% endcomment %}

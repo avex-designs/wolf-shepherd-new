@@ -1,35 +1,33 @@
 <div class="testimonials {{section.settings.margin_bottom}}">
   <div {% if section.settings.full-width != 'full-width' %}class="page-width page-width--slider"{% endif %} data-section-id="{{ section.id }}" data-section-type="testimonials">
-    {% if section.blocks.size > 0 %}
+    {%- if section.blocks.size > 0 -%}
       <div class="testimonials__container">
         <div class="testimonials__slider testimonials__slider--{{section.id}}" data-count="{{ section.blocks.size }}">
-          {% for block in section.blocks %}
+          {%- for block in section.blocks -%}
             <div class="testimonials__slide testimonials__slide--{{ block.id }}" data-slide-count="{{forloop.index | minus: 1 }}" {{ block.shopify_attributes }}>
               <blockquote class="testimonials__slider-text font-reset">
-                {% if block.settings.quote != blank %}
+                {%- if block.settings.quote != blank -%}
                   <div class="testimonials__slider-text">‘‘{{ block.settings.quote | strip_html  }}’’</div>
-                {% endif %}
+                {%- endif -%}
               </blockquote>
-              <img src="{{ block.settings.image_dark | img_url: '250x' }}" alt="{{ block.settings.image.alt }}">
+              <img data-src="{{ block.settings.image_dark | img_url: '250x' }}" class="lazyload" alt="{{ block.settings.image.alt }}">
             </div>
-          {% endfor %}
+          {%- endfor -%}
         </div>
       </div>
-    {% endif %}
-
+    {%- endif -%}
     <div class="testimonials__images testimonials__images--{{section.id}}">
-      {% if section.blocks.size > 0 %}
-         {% for block in section.blocks %}
+      {%- if section.blocks.size > 0 -%}
+         {%- for block in section.blocks -%}
         <div data-slide-id="{{forloop.index}}" class="testimonials__image-container {% if forloop.first %}is-active{% endif %}">
-          <img class="testimonials__image" src="{{ block.settings.image | img_url: '250x' }}" alt="{{ block.settings.image.alt }}">
-          <img class="testimonials__image testimonials__image--two" src="{{ block.settings.image_dark | img_url: '250x' }}" alt="{{ block.settings.image.alt }}">
+          <img class="testimonials__image lazyload" data-src="{{ block.settings.image | img_url: '250x' }}" alt="{{ block.settings.image.alt }}">
+          <img class="testimonials__image testimonials__image--two lazyload" data-src="{{ block.settings.image_dark | img_url: '250x' }}" alt="{{ block.settings.image.alt }}">
         </div>
-        {% endfor %}
-      {% endif %}
+        {%- endfor -%}
+      {%- endif -%}
     </div>
-
-    {% if section.blocks.size == 0 %}
-      {% include 'no-blocks' %}
-    {% endif %}
+    {%- if section.blocks.size == 0 -%}
+      {%- include 'no-blocks' -%}
+    {%- endif -%}
   </div>
 </div>

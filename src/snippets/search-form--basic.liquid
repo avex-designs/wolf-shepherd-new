@@ -1,16 +1,21 @@
-<form action="/search" class="search-form" method="get" role="search">
-    <div class="search-form__container">
-        <label class="label-hidden" for="Search">
-            {{ 'general.search.placeholder' | t }}
-        </label>
-        <input name="type" type="hidden" value="product">
-        <label for="Search">Search</label>
-        <input type="search" name="q" id="Search" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}">
-        <button name="Search" type="submit">
-            <span class="h6">Search</span>
-            {% include 'icons' with icon: 'search-wolf' %}
-            <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-        </button>
+<form class="search-form" action="/search" method="get" role="search">
+  <div class="search-form__container">
+    <label for="Search" class="label-hidden">
+      {{ 'general.search.placeholder' | t }}
+    </label>
+    <input type="hidden" name="type" value="article,page,product" />
+    
+    <label for="Search">Search</label>
+    <input type="search"
+          name="q"
+          id="Search"
+          value="{{ search.terms | escape }}"
+          placeholder="{{ 'general.search.placeholder' | t }}">
+    <button type="submit" name="Search">
+      <span class="h6">Search</span>
+      {% include 'icons' with icon: 'search-wolf' %}
+      <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+    </button>
 
         <div class="search-form__close">
             {% include 'icons' with icon: 'close' %}

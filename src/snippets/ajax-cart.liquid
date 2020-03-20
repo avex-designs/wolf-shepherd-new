@@ -1,28 +1,28 @@
-{% assign upsell = settings.collection | default: all %}
+{%- assign upsell = settings.collection | default: all -%}
 {%- assign current_variant = product.selected_or_first_available_variant -%}
 
 {%- if settings.mini_cart == true or settings.ajax_cart == true -%}
 <div class="cart-ajax__wrapper {% if settings.mini_cart == true %}cart-ajax--mini-cart{% endif %}"
   style="opacity: 0">
-  <div class="cart-ajax__background">
-  </div>
+  {% comment %} <div class="cart-ajax__background">
+  </div> {% endcomment %}
 
 
   <div id="cart" class="cart-ajax" data-cart-total="{{ cart.item_count }}">
     <div class="cart-ajax__header">
       <a href="#" class="cart-ajax__close" title="Close Cart">
-        {% include 'icons' with icon: 'close' %}
+        {%- include 'icons' with icon: 'close' -%}
       </a>
       <h3 class="cart-ajax__title">Shopping Bag</h3>
     </div>
 
     <div class="cart-ajax__body">
-      {% if settings.freeshipping_enable == true %}
+      {%- if settings.freeshipping_enable == true -%}
         <div class="cart-ajax__freeshipping">
           <div class="freeshipping">
             <div js-freeshipping="info" class="freeshipping__info">
-              {% assign freeshippingThreshold = settings.freeshipping_threshold | times: 100 | money_without_trailing_zeros %}
-              {% assign freeshippingMessage = settings.freeshipping_message | replace: '$value$', freeshippingThreshold %}
+              {%- assign freeshippingThreshold = settings.freeshipping_threshold | times: 100 | money_without_trailing_zeros -%}
+              {%- assign freeshippingMessage = settings.freeshipping_message | replace: '$value$', freeshippingThreshold -%}
               {{freeshippingMessage}}
             </div>
             <div class="freeshipping__bar">
@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-      {% endif %}
+      {%- endif -%}
       
       <div class="cart-ajax__list"></div>
 
@@ -84,8 +84,8 @@
 
           
 
-          <a href="/checkout" class="button button--checkout" title="Checkout">checkout</a>
-          <a class="cart-ajax__international" title="International Checkout" href="https://wolfandshepherd.com/pages/international-checkout">International Checkout</a>
+          <a href="/checkout" class="button button--checkout" title="Checkout">{{ 'cart.general.checkout' | t }}</a>
+          {% comment %} <a class="cart-ajax__international" title="International Checkout" href="https://wolfandshepherd.com/pages/international-checkout">International Checkout</a> {% endcomment %}
         </div>
 
         {%- if settings.collection_enable == true %}

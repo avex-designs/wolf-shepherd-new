@@ -1,18 +1,13 @@
 <div class="product-header">
   <h1 class="product-header__title h3">{{ product.title }}</h1>
-
   <div class="product-header__price">
-    {% include 'product-price' %}
-
-    {% unless product.metafields.stamped.reviews_count == blank %}
+    {%- include 'product-price' -%}
+    {%- unless product.metafields.stamped.reviews_count == blank -%}
     <div class="review-info">
       <div data-slide="#readTheReviewsContainer" id="readTheReviews" class="slide-to">
         <span class="stamped-product-reviews-badge stamped-main-badge" data-id="{{ product.id }}" data-product-sku="{{ product.handle }}" style="display: inline-block;">{{ product.metafields.stamped.badge }}</span>
       </div>
     </div>
-
-
-    {% endunless %}
-
+    {%- endunless -%}
   </div>
 </div>

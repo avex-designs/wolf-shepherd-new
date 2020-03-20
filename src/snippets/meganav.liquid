@@ -9,34 +9,33 @@
           <h3>{{linklists[section.settings.mega_link_list].title}}</h3>
         </div>
         <ul>
-          {% for child_link in linklists[section.settings.mega_link_list].links %}
+          {%- for child_link in linklists[section.settings.mega_link_list].links -%}
             <li>
               <a class="meganav__link {% if child_link.active %}meganav__link--active{% endif %}" href="{{ child_link.url }}" title="{{ child_link.title }}">{{ child_link.title }}</a>
             </li>
-          {% endfor %}
+          {%- endfor -%}
         </ul>
       </div>
     </div>
-
     <div class="meganav__images">
       <div class="meganav__container">
         <div class="meganav__header">
           <h3>{{ section.settings.mega_title}}</h3>
         </div>
         <div class="meganav__image-container">
-          {% for block in section.blocks %}
-            {% assign meganav_image_title = 'meganav_image_title'  %}
-            {% assign meganav_image_link = 'meganav_image_link'  %}
-            {% assign meganav_image = 'meganav_image' %}
-            {% if block.settings[meganav_image] != blank %}
+          {%- for block in section.blocks -%}
+            {%- assign meganav_image_title = 'meganav_image_title'  -%}
+            {%- assign meganav_image_link = 'meganav_image_link'  -%}
+            {%- assign meganav_image = 'meganav_image' -%}
+            {%- if block.settings[meganav_image] != blank -%}
               <a href="{{ block.settings[meganav_image_link] }}" title="{{ block.settings[meganav_image_title] }}" class="meganav__image font-reset">
                 <div class="meganav__image-center">
                   {{ block.settings[meganav_image] | img_url: '100x' | img_tag }}
                   <h6>{{ block.settings[meganav_image_title] }}</h6>
                 </div>
               </a>
-            {% endif %}
-          {% endfor %}
+            {%- endif -%}
+          {%- endfor -%}
         </div>
       </div>
     </div>

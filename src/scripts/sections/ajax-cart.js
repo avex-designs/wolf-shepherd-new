@@ -44,7 +44,7 @@ export default () => {
     -----------------------------------------------------*/
     selectors.$form.on('submit', function(event) {
       event.preventDefault();
-
+     
       const $this = $(this);
       const formData = $this.serialize();
       const $error = $this.find('.error');
@@ -149,7 +149,6 @@ export default () => {
       error: (XMLHttpRequest) => {
         const data = eval(`(${XMLHttpRequest.responseText})`);
         const response = data.description;
-
         $error.html(response).removeClass('error--hide');
       },
     });

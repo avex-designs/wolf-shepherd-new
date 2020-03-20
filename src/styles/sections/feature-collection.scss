@@ -21,7 +21,7 @@
   }
 
   &--dark {
-    background: $COLOR_GREY;
+    background: #fff;
     padding: 12px 0 0;
   }
 
@@ -141,7 +141,7 @@
     &.feature-collection--dark {
       .swiper-container {
         &:before, &:after {
-          background-color: $COLOR_GREY;
+          background-color: #fff;
         }
       }
     }
