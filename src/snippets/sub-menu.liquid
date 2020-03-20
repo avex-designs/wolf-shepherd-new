@@ -1,15 +1,15 @@
-{% if section.settings.linklist != blank %}
+{%- if section.settings.linklist != blank -%}
   <div class="collection-navigation">
     <div class="page-width">
       <ul>
-      {% for link in linklists[section.settings.linklist].links %}
+      {%- for link in linklists[section.settings.linklist].links -%}
         <li class="collection-navigation__item {% if link.active %}collection-navigation__link--active{% endif %}">
           <a class="collection-navigation__link" href="{{ link.url }}" title="{{ link.title }}">
             {{ link.title }}
           </a>
         </li>
-      {% endfor %}
+      {%- endfor -%}
       </ul>
     </div>
   </div>
-{% endif %}
+{%- endif -%}

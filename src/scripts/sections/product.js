@@ -45,7 +45,7 @@ register('product', {
   onLoad() {
     this.$container = $(this.container);
     this.namespace = `.${this.id}`;
-
+  
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
     if (!$(selectors.productJson, this.$container).html()) {
@@ -55,6 +55,8 @@ register('product', {
     this.productSingleObject = JSON.parse(
       $(selectors.productJson, this.$container).html(),
     );
+
+   
 
     const options = {
       $container: this.$container,
@@ -72,6 +74,9 @@ register('product', {
       `variantChange${this.namespace}`,
       this.updateAddToCartState.bind(this),
     );
+
+    
+
 
     this.$container.on(
       `variantPriceChange${this.namespace}`,
@@ -155,18 +160,20 @@ register('product', {
    * @param {string} text - Updates the text notification content of the cart
    */
   updateAddToCartState(evt) {
+    
     const variant = evt.variant;
+
     if (variant) {
       $(selectors.priceWrapper, this.$container).removeClass(cssClasses.hide);
     } else {
       $(selectors.addToCart, this.$container).prop('disabled', true);
       $(selectors.addToCartText, this.$container).html(
-        theme.strings.unavailable,
+        theme.strings.makeselection,
       );
       $(selectors.priceWrapper, this.$container).addClass(cssClasses.hide);
       return;
     }
-
+    
     if (variant.available) {
       $(selectors.addToCart, this.$container).prop('disabled', false);
       $(selectors.addToCartText, this.$container).html(theme.strings.addToCart);

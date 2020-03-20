@@ -161,3 +161,10 @@ $ACCORDION_PADDING_LARGE: 22px;
     }
   }
 }
+
+.accordion .accordion__item:first-child {
+  border-bottom: none;
+}
+.accordion .accordion__item:nth-child(2) {
+  border-top: 1px solid $COLOR_GREY_2;
+}

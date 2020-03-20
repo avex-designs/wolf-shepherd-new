@@ -111,7 +111,7 @@ register('product-miniform', {
     } else {
       $(selectors.addToCart, this.$container).prop('disabled', true);
       $(selectors.addToCartText, this.$container).html(
-        theme.strings.unavailable,
+        theme.strings.selectsize,
       );
       $(selectors.priceWrapper, this.$container).addClass(cssClasses.hide);
       return;

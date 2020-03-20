@@ -1,80 +1,80 @@
 <style>
-  {% if section.settings.logo != blank %}
+  {%- if section.settings.logo != blank -%}
     .site-header__logo-image {
       max-width: {{ section.settings.logo_max_width }}px;
     }
-  {% endif %}
+  {%- endif -%}
 </style>
 
-{% capture logohtml %}
-  {% if template.name == 'index' %}
+{%- capture logohtml -%}
+  {%- if template.name == 'index' -%}
     <h1 class="site-header__site-logo" itemscope itemtype="http://schema.org/Organization">
-  {% else %}
+  {%- else -%}
     <div class="h1 site-header__site-logo"  itemscope itemtype="http://schema.org/Organization">
-  {% endif %}
+  {%- endif -%}
     <a href="/" itemprop="url" title="{{section.settings.logo.alt}}">
-      {% if section.settings.logo != blank %}
-        {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+      {%- if section.settings.logo != blank -%}
+        {%- capture image_size -%}{{ section.settings.logo_max_width }}x{%- endcapture -%}
         <img src="{{ section.settings.logo | img_url: image_size }}"
               srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
               alt="{{ section.settings.logo.alt | default: shop.name }}"
               itemprop="logo">
-      {% else %}
+      {%- else -%}
         {{ shop.name }}
-      {% endif %}
+      {%- endif -%}
     </a>
-  {% if template.name == 'index' %}
+  {%- if template.name == 'index' -%}
     </h1>
-  {% else %}
+  {%- else -%}
     </div>
-  {% endif %}
-{% endcapture %}
+  {%- endif -%}
+{%- endcapture -%}
 
 <div js-site-header="true" class="site-header 
-  {% if section.settings.logo_position == 'left' %} site-header--left-align {% endif %}"  
+  {%- if section.settings.logo_position == 'left' -%} site-header--left-align {%- endif -%}"  
   data-section-id="{{ section.id }}" data-section-type="site-header-section">
 
   <div class="page-width">
     
-    {% include 'site-header-navigation' %}
+    {%- include 'site-header-navigation' -%}
 
     <header class="site-header__header" role="banner">
       
       <div js-mobile-nav="toggle" class="site-header__hamburger-container">
-        {% include 'icons' with icon: 'hamburger-wolf' %}
+        {%- include 'icons' with icon: 'hamburger-wolf' -%}
       </div>
 
       {{logohtml}}
 
     </header>
 
-    {% if page.handle contains 'about' %}
-      {% if section.settings.enable_usp_about %}
+    {%- if page.handle contains 'about' -%}
+      {%- if section.settings.enable_usp_about -%}
         <div class="site-header__usp">
-          {% if section.settings.usp_url_about %}<a href="{{section.settings.usp_url_about}}" title="{{ section.settings.usp_text_about }}">{% endif %}
-          {% if section.settings.usp_image_about != blank %}
+          {%- if section.settings.usp_url_about -%}<a href="{{section.settings.usp_url_about}}" title="{{ section.settings.usp_text_about }}">{%- endif -%}
+          {%- if section.settings.usp_image_about != blank -%}
             <img src="{{ section.settings.usp_image_about | img_url: '100x' }}" alt="{{ section.settings.usp_image_about.alt }}"/>
-          {% endif %}
-          {% if section.settings.usp_text_about %}
+          {%- endif -%}
+          {%- if section.settings.usp_text_about -%}
             <span>{{ section.settings.usp_text_about }}</span>
-          {% endif %}
-          {% if section.settings.usp_url_about %}</a>{% endif %}
+          {%- endif -%}
+          {%- if section.settings.usp_url_about -%}</a>{%- endif -%}
         </div>
-      {% endif %}
-    {% else %}
-      {% if section.settings.enable_usp %}
+      {%- endif -%}
+    {%- else -%}
+      {%- if section.settings.enable_usp -%}
         <div class="site-header__usp">
-          {% if section.settings.usp_url %}<a href="{{section.settings.usp_url}}" title=="{{ section.settings.usp_text }}">{% endif %}
-          {% if section.settings.usp_image != blank %}
+          {%- if section.settings.usp_url -%}<a href="{{section.settings.usp_url}}" title=="{{ section.settings.usp_text }}">{%- endif -%}
+          {%- if section.settings.usp_image != blank -%}
             <img src="{{ section.settings.usp_image | img_url: '100x' }}" alt="{{ section.settings.usp_image.alt }}"/>
-          {% endif %}
-          {% if section.settings.usp_text %}
+          {%- endif -%}
+          {%- if section.settings.usp_text -%}
             <span>{{ section.settings.usp_text }}</span>
-          {% endif %}
-          {% if section.settings.usp_url %}</a>{% endif %}
+          {%- endif -%}
+          {%- if section.settings.usp_url -%}</a>{%- endif -%}
         </div>
-      {% endif %}
-    {% endif %}
+      {%- endif -%}
+    {%- endif -%}
 
     
     <div class="site-header__misc">
@@ -82,33 +82,33 @@
 
         <li>
           <a href="#"  class="site-header__search-icon" title="Search store">
-          {% include 'icons' with icon: 'search-wolf' %}
-            {% unless section.settings.enable_full_screen_search %}
-              {% include 'search-form--basic' %}
-            {% endunless %}
+          {%- include 'icons' with icon: 'search-wolf' -%}
+            {%- unless section.settings.enable_full_screen_search -%}
+              {%- include 'search-form--basic' -%}
+            {%- endunless -%}
           </a>
         </li>
 
-        {% if shop.customer_accounts_enabled %}
-          {% if customer %}
+        {%- if shop.customer_accounts_enabled -%}
+          {%- if customer -%}
             <li class="site-header__mobile-hide">
                 <a href="/account" title="Account">
-                  {% include 'icons' with icon: 'account-wolf' %}
+                  {%- include 'icons' with icon: 'account-wolf' -%}
                 </a>
             </li>
-          {% else %}
+          {%- else -%}
             <li class="site-header__mobile-hide">
               <a href="/account/login" title="Login">
-                {% include 'icons' with icon: 'account-wolf' %}
+                {%- include 'icons' with icon: 'account-wolf' -%}
               </a>
             </li>
-          {% endif %}
-        {% endif %}
+          {%- endif -%}
+        {%- endif -%}
 
         <li>
           <a href="/cart" id="Cart-icon" class="site-header__cart-icon" title="Cart">
-            <div class="cart-icon__container {% if cart.item_count != 0 %}is-active{% endif %}">
-              {% include 'icons' with icon: 'cart-wolf' %}
+            <div class="cart-icon__container {%- if cart.item_count != 0 -%}is-active{%- endif -%}">
+              {%- include 'icons' with icon: 'cart-wolf' -%}
               <span class="js-cart-item-count cart-count">{{ cart.item_count }}</span>
             </div>
           </a>
@@ -120,13 +120,13 @@
   
 </div>
 
-{% include 'ajax-cart' %}
+{%- include 'ajax-cart' -%}
 
-{% include 'site-header-navigation-mobile' %}
+{%- include 'site-header-navigation-mobile' -%}
 
-<div js-site-header="overlay" class="site-header__overlay">{% comment %}Do not delete this div{% endcomment %}</div>
+<div js-site-header="overlay" class="site-header__overlay">{%- comment -%}Do not delete this div{%- endcomment -%}</div>
 
-{% schema %}
+{%- schema -%}
   {
     "name": "Site Header",
     "settings": [
@@ -292,4 +292,4 @@
       }
     ]
   }
-{% endschema %}
+{%- endschema -%}

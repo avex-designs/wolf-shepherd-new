@@ -1,4 +1,5 @@
 {%- assign current_variant = product.selected_or_first_available_variant -%}
+
 <form class="product-form-quick-buy" 
   action="/cart/add" 
   method="post" 
@@ -24,12 +25,12 @@
 
         <div class="selector-wrapper js selector-wrapper--{{optionName}} {% if option.values.size == 1 %} selector-wrapper--hide {% endif %}">
           <div class="{% if swatchShow %}visually-hidden{% endif %}">
-            <label for="SingleOptionSelector-{{ forloop.index0 }}">
+            <label for="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}">
               {{ option.name }}
             </label>
       
             <select
-              id="SingleOptionSelector-{{ forloop.index0 }}"
+              id="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}"
               data-single-option-selector
               data-index="option{{ option.position }}"
               class="">

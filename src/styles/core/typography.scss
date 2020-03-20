@@ -50,7 +50,8 @@ $FONT_SIZE_BASE: 16px;
   font-size: 2em;
   font-weight: $WEIGHT_NORMAL;
   letter-spacing: $LETTER_SPACING_DISPLAY;
-  line-height: $LINE_HEIGHT_DISPLAY;
+  // line-height: $LINE_HEIGHT_DISPLAY;
+  line-height: 1;
 
   @include media-query($medium-up) {
     font-size: 40px;
@@ -98,7 +99,8 @@ h2, .h2 {
   font-size: 32px;
   font-size: 2em;
   font-weight: $WEIGHT_NORMAL;
-  line-height: $LINE_HEIGHT_DISPLAY;
+  // line-height: $LINE_HEIGHT_DISPLAY;
+  line-height: 1;
   margin: 0 0 $SPACING_L;
 
   @include media-query($medium-up) {

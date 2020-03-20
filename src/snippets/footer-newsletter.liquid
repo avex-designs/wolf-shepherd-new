@@ -1,18 +1,16 @@
 <section 
   class="newsletter">
-
-
-  {% form 'customer' %}
-  {% if form.posted_successfully? %}
+  {%- form 'customer' -%}
+  {%- if form.posted_successfully? -%}
     <h3 class="newsletter__title">Congratulations</h3>
     <p lass="newsletter__text">You have now subscribed to our newsletter.</p>
-  {% else %}
+  {%- else -%}
     <h3 class="newsletter__title">{{ block.settings.footer_title }}</h3>
     <p class="newsletter__text">{{ block.settings.newsletter-text }}</p>
-  {% endif %}
+  {%- endif %}
     {{ form.errors | default_errors }}
-    {% if form.posted_successfully? %}
-    {% else %}
+    {%- if form.posted_successfully? -%}
+    {%- else %}
       <div class="inline-form password__input-group">
         <input type="hidden" name="contact[tags]" value="newsletter">
         <input type="email"
@@ -26,7 +24,7 @@
         <button type="submit" class="button-arrow" name="commit" id="Subscribe">
         </button>
       </div>
-    {% endif %}
-  {% endform %}
+    {%- endif -%}
+  {%- endform -%}
 
 </section>

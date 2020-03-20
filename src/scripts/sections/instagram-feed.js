@@ -35,7 +35,12 @@ const api = {
 export default () => {
 
   // return false;
-
+  document.addEventListener('lazybeforeunveil', function(e){
+      var bg = e.target.getAttribute('data-bg');
+      if(bg){
+          e.target.style.backgroundImage = 'url(' + bg + ')';
+      }
+  });
   function createFeed() {
     const userFeed = new Instafeed({
       get: 'user',
@@ -45,7 +50,7 @@ export default () => {
       limit: 8,
       clientId: 'Client',
       sortBy: 'most-recent',
-      template: '<div class="instafeed__contianer"><a class="instafeed__img" target="_blank" href="\{\{link\}\}" style="background-image: url\(\{\{image\}\}\)" title="{{caption}}"><span class="instafeed__overlay"><span class="instafeed__overlay-text">{{caption}}</span></span></a></div>',
+      template: '<div class="instafeed__contianer"><a class="instafeed__img lazyload" target="_blank" href="\{\{link\}\}" data-expand="-20" data-bg="\{\{image\}\}\" title="{{caption}}"><span class="instafeed__overlay"><span class="instafeed__overlay-text">{{caption}}</span></span></a></div>',
       after: () => {
         createSlider();
       },

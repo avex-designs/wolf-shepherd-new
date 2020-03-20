@@ -1,78 +1,68 @@
 <div class="accordion_section">      
   <ul class="accordion">
-
-    {% unless product.description == blank %}
+    {%- unless product.description == blank -%}
       <li class="accordion__item font-reset" js-accordion="item">
         <button tabindex="0" class="accordion__control h6" js-accordion="control">
           Details 
           <span class="accordion__arrow-up accordion__arrow">
-            {% include 'icons' with icon: 'wolf-minus' %}
+            {%- include 'icons' with icon: 'wolf-minus' -%}
           </span>
           <span class="accordion__arrow accordion__arrow-down">
-            {% include 'icons' with icon: 'wolf-plus' %}
+            {%- include 'icons' with icon: 'wolf-plus' -%}
           </span>
         </button>
-
         <div id="content-1" class="accordion__content font-reset" js-accordion="content">
           {{ product.description }}
         </div>
       </li>
-    {% endunless %}
-
-    {% unless product.metafields.details.product_details == blank %}
+    {%- endunless -%}
+    {%- unless product.metafields.details.product_details == blank -%}
       <li class="accordion__item font-reset" js-accordion="item">
         <button tabindex="0" class="accordion__control h6" js-accordion="control">
           Story 
           <span class="accordion__arrow-up accordion__arrow">
-            {% include 'icons' with icon: 'wolf-minus' %}
+            {%- include 'icons' with icon: 'wolf-minus' -%}
           </span>
           <span class="accordion__arrow accordion__arrow-down">
-            {% include 'icons' with icon: 'wolf-plus' %}
+            {%- include 'icons' with icon: 'wolf-plus' -%}
           </span>
         </button>
-
         <div id="content-1" class="accordion__content font-reset" js-accordion="content">
            {{ product.metafields.details.product_details }}
         </div>
       </li>
-    {% endunless %}
-
-    {% unless product.metafields.fit.product_fit == blank %}
+    {%- endunless -%}
+    {%- unless product.metafields.fit.product_fit == blank -%}
       <li class="accordion__item font-reset" js-accordion="item">
         <button tabindex="0" class="accordion__control h6" js-accordion="control">
           Fit 
           <span class="accordion__arrow-up accordion__arrow">
-            {% include 'icons' with icon: 'wolf-minus' %}
+            {%- include 'icons' with icon: 'wolf-minus' -%}
           </span>
           <span class="accordion__arrow accordion__arrow-down">
-            {% include 'icons' with icon: 'wolf-plus' %}
+            {%- include 'icons' with icon: 'wolf-plus' -%}
           </span>
         </button>
-
         <div id="content-1" class="accordion__content font-reset" js-accordion="content">
            {{ product.metafields.fit.product_fit }}
         </div>
       </li>
-    {% endunless %}
-
-    {% unless product.metafields.worn_with.best_worn_with == blank %}
+    {%- endunless -%}
+    {%- unless product.metafields.worn_with.best_worn_with == blank -%}
       <li class="accordion__item font-reset" js-accordion="item">
         <button tabindex="0" class="accordion__control h6" js-accordion="control">
           Best Worn With
           <span class="accordion__arrow-up accordion__arrow">
-            {% include 'icons' with icon: 'wolf-minus' %}
+            {%- include 'icons' with icon: 'wolf-minus' -%}
           </span>
           <span class="accordion__arrow accordion__arrow-down">
-            {% include 'icons' with icon: 'wolf-plus' %}
+            {%- include 'icons' with icon: 'wolf-plus' -%}
           </span>
         </button>
-
         <div id="content-1" class="accordion__content font-reset" js-accordion="content">
            {{ product.metafields.worn_with.best_worn_with }}
         </div>
       </li>
-    {% endunless %}
-
+    {%- endunless -%}
   </ul>
 </div>
-

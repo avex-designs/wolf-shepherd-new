@@ -79,9 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   load('*');
 
-  if (Shopify.theme.role == 'unpublished') {
-    console.log(Shopify.theme);
-  }
+  // if (Shopify.theme.role == 'unpublished') {
+  //   console.log(Shopify.theme);
+  // }
 
   if (document.querySelector('.hero-image--ambassador') !== null) {
     Article().init();

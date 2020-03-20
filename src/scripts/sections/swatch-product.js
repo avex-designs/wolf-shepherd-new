@@ -21,7 +21,7 @@ const selectors = {
 export default (config) => {
 
   const container = document.querySelector(`${config.container}`);
-
+ 
   const nodeSelectors = {
     container: container.querySelectorAll(selectors.container),
     productJson: container.querySelector(selectors.productJson),
@@ -48,24 +48,36 @@ export default (config) => {
 
     nodeSelectors.$miniSwatchOpen.on('click', openMiniSwatch);
     nodeSelectors.$miniSwatchClose.on('click', closeMiniSwatch);
+    
+   
   }
 
   function handleClick(element) {
+  
     const target = element.target;
+   
     if (target.dataset.swatchOption === 'option-1') {
-      optionActive(target, 1);
-      checkInventory(target);
-      updateColorTitle(target);
-      
-      if (config.updateSlider === true) {
-        updateSlider(target);
-      }
+        $('[js-swatch-product="main"] [data-index="option2"]').val([])
+        $('[data-section-type="product-miniform"] [data-index="option2"]').val([])
+        $('[js-swatch-product="main"] [data-index="option3"]').val([])
+        $('[data-section-type="product-miniform"] [data-index="option3"]').val([])
+        optionActive(target, 1);
+        checkInventory(target);
+        updateColorTitle(target);
+        setSwatchesToUnactive()    
+        
+        if (config.updateSlider === true) {
+          updateSlider(target);
+        }
     }
     
     if (target.dataset.swatchOption === 'option-2') {
+      $('[js-swatch-product="main"] [data-index="option3"]').val([])
+      $('[data-section-type="product-miniform"] [data-index="option3"]').val([])
       optionActive(target, 2);
       checkInventory(target);
       updateSizeTitle(target);
+      setSwatchesToUnactivethird()  
     }
 
     if (target.dataset.swatchOption === 'option-3') {
@@ -93,37 +105,51 @@ export default (config) => {
     }
   }
 
-  function checkInventory() {
-    const currentOption1 = getCurrentSelected(1);
-    const currentOption2 = getCurrentSelected(2);
-    const currentOption3 = getCurrentSelected(3);
-    const inventory = getVariants();
+  async function checkInventory(target) {
+    const currentOption1 = await getCurrentSelected(1);
+    const currentOption2 = await getCurrentSelected(2);
+    const currentOption3 = await getCurrentSelected(3);
+    const inventory = await getVariants();
+    
+    if(target.dataset.swatchOption === 'option-1'){
+      setSwatchesToUnavailable()
+      setSwatchesToAvailableThird()
+    }
+    if(target.dataset.swatchOption === 'option-2'){
+      setSwatchesToUnavailableThird()
+    }
 
-    setSwatchesToUnavailable();
-
-    inventory.forEach((variant) => {
+    await inventory.forEach((variant, index) => {
       if (currentOption1 === variant.option1) {
+        updateOption2(variant, inventory[index-1], index);
         if (currentOption3 !== false) {
           if (currentOption3 === variant.option3) {
-            updateOption2(variant);
+            updateOption2(variant, inventory[index-1], index);
           }
-        } else if (currentOption2 !== false) {
-          updateOption2(variant);
-        }
+        } 
+        // else if (currentOption2 !== false) {
+        //     updateOption2(variant, inventory[index-1], index);
+        // }
       }
 
       if (currentOption1 === variant.option1 && currentOption2 === variant.option2) {
-        if (currentOption3 !== false) {
-          updateOption3(variant);
-        }
+          updateOption3(variant);      
       }
     });
+
+
   }
 
-  function updateOption2(variant) {
+  function updateOption2(variant, prev, index) {
     if (variant.available === false) {
-      const target = container.querySelector(`[data-swatch-option="option-2"][data-swatch-value="${variant.option2}"]`);
-      setToUnavailable(target);
+      const target = container.querySelector(`[data-swatch-option="option-2"][data-swatch-value="${variant.option2}"]`);      
+      if(index === 0){
+        setToUnavailable(target);
+      }else{
+        if(prev.option2 !== variant.option2 && prev.option3 === variant.option3){
+          setToUnavailable(target);
+        }
+      }      
     } else {
       const target = container.querySelector(`[data-swatch-option="option-2"][data-swatch-value="${variant.option2}"]`);
       setToAvailable(target);
@@ -141,20 +167,190 @@ export default (config) => {
   }
 
   function setSwatchesToUnavailable() {
+    if(container.dataset.sectionId !== 'product-mini-form'){
+      document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption === 'option-2' ){
+          setToUnavailable(element);
+        }    
+      });
+    }
+
+    if(container.getAttribute('js-swatch-product') !== 'main'){
+      document.querySelector('[js-swatch-product="main"]').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption === 'option-2' ){
+          setToUnavailable(element);
+        }    
+      });
+    }
+    
     nodeSelectors.container.forEach((element) => {
-      setToUnavailable(element);
+      if(element.dataset.swatchOption === 'option-2' ){
+        setToUnavailable(element);
+      }
+    });
+  }
+
+  function setSwatchesToUnavailableThird() {
+    if(container.dataset.sectionId !== 'product-mini-form'){
+      document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption === 'option-3' ){
+          setToUnavailable(element);
+        }    
+      });
+    }
+
+    if(container.getAttribute('js-swatch-product') !== 'main'){
+      document.querySelector('[js-swatch-product="main"]').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption === 'option-3' ){
+          setToUnavailable(element);
+        }    
+      });
+    }
+    
+    nodeSelectors.container.forEach((element) => {
+      if(element.dataset.swatchOption === 'option-3' ){
+        setToUnavailable(element);
+      }
+    });
+  }
+
+  function setSwatchesToAvailableThird() {
+    if(container.dataset.sectionId !== 'product-mini-form'){
+      document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption === 'option-3' ){
+          setToAvailable(element);
+        }    
+      });
+    }
+
+    if(container.getAttribute('js-swatch-product') !== 'main'){
+      document.querySelector('[js-swatch-product="main"]').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption === 'option-3' ){
+          setToAvailable(element);
+        }    
+      });
+    }
+    
+    nodeSelectors.container.forEach((element) => {
+      if(element.dataset.swatchOption === 'option-3' ){
+        setToAvailable(element);
+      }
+    });
+  }
+
+  function  setSwatchesToUnactive() {
+    if(container.dataset.sectionId !== 'product-mini-form'){
+      document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption !== 'option-1' ){
+          element.classList.remove(cssClasses.active);
+        }    
+      });
+    }
+
+    if(container.getAttribute('js-swatch-product') !== 'main'){
+      document.querySelector('[js-swatch-product="main"]').querySelectorAll('[js-product-swatches="container"]').forEach((element) => {
+        if(element.dataset.swatchOption !== 'option-1' ){
+          element.classList.remove(cssClasses.active);
+        }    
+      });
+    }
+    
+    nodeSelectors.container.forEach((element) => {
+      if(element.dataset.swatchOption !== 'option-1'){
+        element.classList.remove(cssClasses.active);
+      }      
+    });
+  }
+
+  function  setSwatchesToUnactivethird() {
+    nodeSelectors.container.forEach((element) => {
+      if(element.dataset.swatchOption === 'option-3'){
+        element.classList.remove(cssClasses.active);
+      }      
     });
   }
 
   function setToUnavailable(element) {
     element.classList.add(cssClasses.disabled);
+    //element.setAttribute("disabled", true);
+
+    if(container.dataset.sectionId !== 'product-mini-form'){
+      document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((elm) => {
+        if(element.dataset.swatchValue === elm.dataset.swatchValue ){
+          element.classList.add(cssClasses.disabled);
+          //element.setAttribute("disabled", true);
+        }    
+      });
+    }
+
+    if(container.getAttribute('js-swatch-product') !== 'main'){
+      document.querySelector('[js-swatch-product="main"]').querySelectorAll('[js-product-swatches="container"]').forEach((elm ) => {
+        if(element.dataset.swatchValue === elm.dataset.swatchValue){
+          element.classList.add(cssClasses.disabled);
+          //element.setAttribute("disabled", true);
+        }    
+      });
+    }
+    
   }
 
   function setToAvailable(element) {
     element.classList.remove(cssClasses.disabled);
+    //element.removeAttribute("disabled");
+    if(container.dataset.sectionId !== 'product-mini-form'){
+      document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((elm) => {
+        if(element.dataset.swatchValue === elm.dataset.swatchValue ){
+          elm.classList.remove(cssClasses.disabled);
+         // elm.removeAttribute("disabled");
+        }    
+      });
+    }
+
+    if(container.getAttribute('js-swatch-product') !== 'main'){
+      document.querySelector('[js-swatch-product="main"]').querySelectorAll('[js-product-swatches="container"]').forEach((elm) => {
+        if(element.dataset.swatchValue === elm.dataset.swatchValue ){
+          elm.classList.remove(cssClasses.disabled);
+         // elm.removeAttribute("disabled");
+        }      
+      });
+    }
+    
   }
 
   function optionActive(target, optionNumber) {
+    if(container.dataset.sectionId !== 'product-mini-form'){
+      document.querySelector('#shopify-section-product-mini-form').querySelectorAll(`[data-swatch-option="option-${optionNumber}"]`).forEach((element) => {
+        if(target.dataset.swatchValue === element.dataset.swatchValue){
+          element.classList.add(cssClasses.active);
+        }else{
+          element.classList.remove(cssClasses.active);
+        }      
+      });
+    }
+
+    if(container.getAttribute('js-swatch-product') !== 'main'){
+      document.querySelector('[js-swatch-product="main"]').querySelectorAll(`[data-swatch-option="option-${optionNumber}"]`).forEach((element) => {
+       // console.log(element, target)
+        if(target.dataset.swatchValue === element.dataset.swatchValue){
+          element.classList.add(cssClasses.active);
+        }else{
+          element.classList.remove(cssClasses.active);
+        }      
+      });
+    }
+
+    if(optionNumber === 1){
+      let colormini = document.querySelector('#shopify-section-product-mini-form').querySelector('.product-form-mini__form-toggle [js-swatch="color"]')
+      colormini.classList = ""
+      colormini.classList.add("product-form-mini--"+target.dataset.swatchValue.replace(/\s+/g, '-').toLowerCase())
+      colormini.innerHTML = target.dataset.swatchValue
+      document.querySelector('#shopify-section-product-mini-form').querySelector('.product-form-mini__form-toggle [js-swatch="size"]').innerHTML = ''
+    }
+    if(optionNumber === 2){
+      let sizemini = document.querySelector('#shopify-section-product-mini-form').querySelector('.product-form-mini__form-toggle [js-swatch="size"]')
+      sizemini.innerHTML = target.dataset.swatchValue
+    }
+
     container.querySelectorAll(`[data-swatch-option="option-${optionNumber}"]`).forEach((element) => {
       element.classList.remove(cssClasses.active);
     });
@@ -164,9 +360,9 @@ export default (config) => {
   function swatchChange() {
     const $this = $(this);
     const swatchValue = $this.attr('data-swatch-value');
-    const swatchOption = $this.attr('data-swatch-option').replace('-', '');
-
-    $(`${config.container} [data-index="${swatchOption}"]`).val(swatchValue).trigger('change');
+    const swatchOption = $this.attr('data-swatch-option').replace('-', '') 
+    $(`${config.container} [data-index="${swatchOption}"]`).val(swatchValue).trigger('change')
+      
     // $('.affirm-as-low-as').attr('data-amount', 32900);
     // affirm.ui.refresh();
   }

@@ -1,8 +1,8 @@
-{% comment %}
+{%- comment -%}
   modules/feature-collection.scss
-{% endcomment %}
+{%- endcomment -%}
 <div class="product-featured-collection {% if section.settings.background_light == false %}product-featured-collection--dark{% endif %}">
-{% if section.settings.title %}
+{%- if section.settings.title -%}
   <div class="page-width">
     <div class="grid">
       <div class="grid__item small--one-whole">
@@ -10,11 +10,10 @@
       </div>
     </div>
   </div>
-{% endif %}
-{% include 'section-featured-collection' %}
+{%- endif -%}
+{%- include 'section-featured-collection' -%}
 </div>
-
-{% schema %}
+{%- schema -%}
   {
     "name": "Featured collection",
     "settings": [
@@ -99,5 +98,4 @@
       }
     ]
   }
-
-{% endschema %}
+{%- endschema -%}

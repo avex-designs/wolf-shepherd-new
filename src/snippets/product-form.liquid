@@ -7,7 +7,6 @@
   <div class="product-swatches">
     {% unless product.has_only_default_variant %}
       {% for option in product.options_with_values %}
-
         {% if forloop.index == 2 %}
           <h6 class="swatch__header swatch__header--flex swatch__header--tablet">
             Size
@@ -16,11 +15,15 @@
           <div class="swatch__size-container">
             <div class="swatch__size-container__title" js-size-toggle="trigger">
               <span class="swatch__size-container__title-trigger" js-swatch="size">
-                {% for value in option.values %}  
-                  {% if option.selected_value == value %}
-                    SIZE: {{value}}
-                  {% endif %}
-                {% endfor %}
+                {%- if product.selected_variant.id -%}
+                  {%- for value in option.values -%}  
+                    {%- if option.selected_value == value -%}
+                      SIZE: {{value}}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  SELECT SIZE
+                {%- endif -%}
               </span>
               <span class="swatch__size-container__title-text">SELECT SIZE</span>
             </div>
@@ -54,7 +57,7 @@
                 </option>
               {% endfor %}
             </select>
-          </div>
+        </div>
 
           
           
@@ -88,6 +91,7 @@
       {% endfor %}
     </select>
   </div>
+
   <button class="button button--full"
     type="submit"
     name="add"
@@ -97,7 +101,11 @@
         {% if current_variant.available %}
           {{ 'products.product.add_to_cart' | t }}
         {% else %}
-          {{ 'products.product.sold_out' | t }}
+          {% if product.selected_variant %}
+            {{ 'products.product.sold_out' | t }}
+          {% else %}
+             {{ 'products.product.makeselection' | t }}
+          {% endif %}
         {% endif %}
       </span>
   </button>

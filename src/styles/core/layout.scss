@@ -56,6 +56,7 @@ html {
 body {
   &.is-lockdown {
     overflow: hidden !important;
+    -webkit-overflow-scrolling: auto;
   }
 }
 

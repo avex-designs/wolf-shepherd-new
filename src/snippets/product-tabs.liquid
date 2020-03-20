@@ -1,6 +1,6 @@
 <div class="tab_section">      
 
-    {% comment %}
+    {%- comment -%}
       Examaple Description:
       %title-1-start%
       Title 1 Here 
@@ -14,40 +14,40 @@
       %text-2-start%
       Text 2 Here
       %text-2-end%
-    {% endcomment %}
+    {%- endcomment -%}
 
-    {% for i in (1..10) %}
+    {%- for i in (1..10) -%}
 
-      {% assign titleSplitTrigger = '%title-' | append: i | append: '-start%' %}
-      {% assign titleSplitend = '%title-' | append: i | append: '-end%' %}
-      {% assign titleSplit = product.description | split: titleSplitTrigger %}
-      {% assign titleSplit = titleSplit[1] | split: titleSplitend %}
+      {%- assign titleSplitTrigger = '%title-' | append: i | append: '-start%' -%}
+      {%- assign titleSplitend = '%title-' | append: i | append: '-end%' -%}
+      {%- assign titleSplit = product.description | split: titleSplitTrigger -%}
+      {%- assign titleSplit = titleSplit[1] | split: titleSplitend -%}
      
-      {% if product.description contains titleSplitTrigger %}
-        <input id="tab{{i}}" type="radio" name="tabs" {% if forloop.first %}checked{% endif %}>
+      {%- if product.description contains titleSplitTrigger -%}
+        <input id="tab{{i}}" type="radio" name="tabs" {%- if forloop.first -%}checked{%- endif -%}>
         <label for="tab{{i}}">{{ titleSplit[0] | strip_html }}</label>
-      {% endif %}
+      {%- endif -%}
 
-    {% endfor %}
+    {%- endfor -%}
 
-    {% for i in (1..10) %}
+    {%- for i in (1..10) -%}
 
-      {% assign titleSplitTrigger = '%title-' | append: i | append: '-start%' %}
-      {% assign titleSplitend = '%title-' | append: i | append: '-end%' %}
-      {% assign titleSplit = product.description | split: titleSplitTrigger %}
-      {% assign titleSplit = titleSplit[1] | split: titleSplitend %}
+      {%- assign titleSplitTrigger = '%title-' | append: i | append: '-start%' -%}
+      {%- assign titleSplitend = '%title-' | append: i | append: '-end%' -%}
+      {%- assign titleSplit = product.description | split: titleSplitTrigger -%}
+      {%- assign titleSplit = titleSplit[1] | split: titleSplitend -%}
 
-      {% assign textSplitTrigger = '%text-' | append: i | append: '-start%' %}
-      {% assign textSplitend = '%text-' | append: i | append: '-end%' %}
-      {% assign textSplit = product.description | split: textSplitTrigger %}
-      {% assign textSplit = textSplit[1] | split: textSplitend %}
+      {%- assign textSplitTrigger = '%text-' | append: i | append: '-start%' -%}
+      {%- assign textSplitend = '%text-' | append: i | append: '-end%' -%}
+      {%- assign textSplit = product.description | split: textSplitTrigger -%}
+      {%- assign textSplit = textSplit[1] | split: textSplitend -%}
       
-      {% if product.description contains titleSplitTrigger %}
+      {%- if product.description contains titleSplitTrigger -%}
         <section id="content{{i}}">
           {{ textSplit[0] }}
         </section>
-      {% endif %}
+      {%- endif -%}
 
-    {% endfor %}
+    {%- endfor -%}
 
 </div>
