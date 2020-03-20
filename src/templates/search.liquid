@@ -13,22 +13,13 @@
   </div>
 
   {% if search.performed %}
-  
       <div class="grid">
         {% for item in search.results %}
           {% if item.object_type == 'product' %}
             {% assign product = item %}
             {% include 'collection-grid-product'  with gridWidth: "grid__item small-px--one-half medium-up--one-quarter" %}
-          {% endif %}
-        {% endfor %}
-
-        {% for item in search.results %}
-          {% if item.object_type != 'product' %}
-            <script>console.log({{ item | json }})</script>
-            <div class="grid__item width100">
-            <h3><a href="{{item.url}}" title="{{ item.title }}">{{ item.title }}</a></h3>
-            <p>{{ item.content | strip_html | truncatewords:70 }}</p>
-            </div>
+          {% else %}
+            <div class="grid__item medium-up--one-quarter"><h2><a href="{{item.url}}" title="{{ item.title }}">{{ item.title }}</a></h2></div>
           {% endif %}
         {% endfor %}
       </div>

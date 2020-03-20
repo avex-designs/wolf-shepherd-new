@@ -278,8 +278,6 @@
       "regular_price": "Regular price",
       "sold_out": "Sold Out",
       "unavailable": "Unavailable",
-      "makeselection": "Make A Selection",
-      "selectsize": "Select Size",
       "on_sale": "On Sale",
       "on_sale_from_html": "On Sale from {{ price }}",
       "from_text_html": "From {{ price }}",

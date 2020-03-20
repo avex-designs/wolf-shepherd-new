@@ -3,22 +3,22 @@
 
 <div class="grid">
     <div class="medium-up--one-half grid__item">
-      {%- if featured_image.src != blank -%}
+      {% if featured_image.src != blank %}
         <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
-      {%- endif -%}
+      {% endif %}
     </div>
 
     <div class="medium-up--one-half grid__item">
 
 
       <h1 class="product-header__title {% if product.title contains " | " %} no-marginb {% endif %}">{{ product.title | split:" || " | first}}</h1>
-      {%- if product.title contains " | " -%}
+      {% if product.title contains " | " %}
       <p class="product-header__subtitle uppercase">{{ product.title | split:" || " | last }}</p>
-      {%- endif -%}
+      {% endif %}
       
-      {%- if product.vendor != blank -%}
+      {% if product.vendor != blank %}
         <p>{{ product.vendor }}</p>
-      {%- endif -%}
+      {% endif %}
 
       <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
         <meta itemprop="priceCurrency" content="{{ shop.currency }}">
@@ -26,38 +26,38 @@
         <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
 
         <form action="/cart/add" method="post" enctype="multipart/form-data">
-          {%- unless product.has_only_default_variant -%}
-            {%- for option in product.options_with_values -%}
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
               <div class="selector-wrapper js">
-                <label for="SingleOptionSelector-{{ section.id }}">
+                <label for="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}">
                   {{ option.name }}
                 </label>
 
                 <select
-                  id="SingleOptionSelector-{{ section.id }}"
+                  id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
                   data-single-option-selector
                   data-index="option{{ option.position }}">
-                  {%- for value in option.values -%}
+                  {% for value in option.values %}
                     <option
                       value="{{ value | escape }}"
                       {% if option.selected_value == value %}selected="selected"{% endif %}>
                         {{ value }}
                     </option>
-                  {%- endfor -%}
+                  {% endfor %}
                 </select>
               </div>
-            {%- endfor -%}
-          {%- endunless -%}
+            {% endfor %}
+          {% endunless %}
 
           <select name="id" class="no-js" data-product-select>
-            {%- for variant in product.variants -%}
+            {% for variant in product.variants %}
               <option
                 {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
                 {% unless variant.available %}disabled="disabled"{% endunless %}
                 value="{{ variant.id }}">
                   {{ variant.title }}
               </option>
-            {%- endfor -%}
+            {% endfor %}
           </select>
 
           <label for="Quantity-{{ section.id }}">{{ 'products.product.quantity' | t }}</label>
@@ -68,14 +68,14 @@
             <div class="grid--full price-block">
               <div class="grid__item medium-up--three-eighths">
                 <div data-price-wrapper class="price-wrapper">
-                  {%- if product.compare_at_price_max > product.price -%}
+                  {% if product.compare_at_price_max > product.price %}
                     <div class="compare_at_price">Was
-                      {%- if current_variant.compare_at_price > current_variant.price -%}
+                      {% if current_variant.compare_at_price > current_variant.price %}
                         {{ current_variant.compare_at_price | money }}
-                      {%- endif -%}
+                      {% endif %}
                     </div>
                     <div class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</div>
-                  {%- endif -%}
+                  {% endif %}
 
                   <div data-product-price>
                     {{ current_variant.price | money }}
@@ -90,11 +90,11 @@
                 data-add-to-cart
                 {% unless current_variant.available %}disabled="disabled"{% endunless %}>
                   <span data-add-to-cart-text>
-                    {%- if current_variant.available -%}
+                    {% if current_variant.available %}
                       {{ 'products.product.add_to_cart' | t }}
-                    {%- else %}
+                    {% else %}
                       {{ 'products.product.sold_out' | t }}
-                    {%- endif -%}
+                    {% endif %}
                   </span>
                 </button>
               </div>
@@ -107,21 +107,21 @@
       </div>
 
       <div class="rte">
-        {%- if product.description contains "%title-1-start%" -%}
+        {% if product.description contains "%title-1-start%" %}
           {{ product.description | split :"%title-1-start%" | first }}
-        {%- else -%}
+        {% else %}
           {{ product.description}}
-        {%- endif -%}
+        {% endif %}
       </div>
 
-      {%- if section.settings.show_share_buttons -%}
-        {%- include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product -%}
-      {%- endif -%}
+      {% if section.settings.show_share_buttons %}
+        {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+      {% endif %}
 
-      {%- unless product == empty -%}
+      {% unless product == empty %}
         <script type="application/json" data-product-json>
           {{ product | json }}
         </script>
-      {%- endunless -%}
+      {% endunless %}
     </div>
 </div>

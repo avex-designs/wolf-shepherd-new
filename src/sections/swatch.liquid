@@ -1,24 +1,24 @@
 <style>
   {%- for block in section.blocks -%}
-    {%- assign blockColor = block.settings.color | handleize | downcase -%}
-    {%- assign swatchBackground = block.settings.hex-code -%}      
+    {% assign blockColor = block.settings.color | handleize | downcase %}
+    {% assign swatchBackground = block.settings.hex-code %}      
     .swatch-product--{{blockColor}} {
       background-color: {{swatchBackground}} !important;
-      {%- if block.settings.color_image != blank -%}
+      {% if block.settings.color_image != blank %}
         background-image: url({{block.settings.color_image | img_url: '40x'}}) !important;
-      {%- endif -%}
+      {% endif %}
     }
 
     .product-form-mini--{{blockColor}} {
       background-color: {{swatchBackground}} !important;
-      {%- if block.settings.color_image != blank -%}
+      {% if block.settings.color_image != blank %}
         background-image: url({{block.settings.color_image | img_url: '40x'}}) !important;
-      {%- endif -%} 
+      {% endif %} 
     }
   {%- endfor -%}
 </style>
 
-{%- schema -%}
+{% schema %}
   {
     "name": "Swatch",
     "blocks": [
@@ -45,4 +45,4 @@
       }
     ]
   }
-{%- endschema -%}
+{% endschema %}

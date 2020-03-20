@@ -1,60 +1,64 @@
 <nav class="site-header__nav site-header__mobile-hide" role="navigation" aria-label="Main Navigation">
   <ul class="site-nav">
-    {%- for link in linklists[section.settings.main_linklist].links -%}
-      {%- assign meganav = false -%}
-      {%- comment -%}
+    {% for link in linklists[section.settings.main_linklist].links %}
+      {% assign meganav = false %}
+      {% comment %}
       ------------------------------------------------------------------------------
         Has meganav
       ------------------------------------------------------------------------------
-      {%- endcomment -%}
+      {% endcomment %}
       {%- if section.settings.navlink_bind == link.title  -%}
-        {%- assign meganav = true -%}
+        {% assign meganav = true %}
         <li class="site-nav__item site-nav__item--has-meganav {% if link.active %}site-nav__link--active{% endif %}" 
           js-mega-nav="desktop-nav">
           <a class="site-nav__link" js-meganav="trigger" href="{{ link.url }}" tab-index="1" aria-expanded="false" aria-haspopup="true" title="{{ link.title }}">
             {{ link.title }}
           </a>
-          {%- include 'meganav' -%}
+          {% include 'meganav' %}
         </li>
-      {%- endif -%}
-      {%- comment -%}
+      {%- endif -%}  
+      
+
+      {% comment %}
       ------------------------------------------------------------------------------
         0 levels
       ------------------------------------------------------------------------------
-      {%- endcomment -%}
-      {%- if link.levels == 0 and meganav != true -%}
+      {% endcomment %}
+      {% if link.levels == 0 and meganav != true %}
         <li class="site-nav__item" data-meganav-parent="{{ link.title | handle }}" tab-index="1" aria-expanded="false" aria-haspopup="false">
           <a class="site-nav__link {% if link.active %}site-nav__link--active{% endif %}" js-meganav="trigger" href="{{ link.url }}" title="{{ link.title }}">
             {{ link.title }}
           </a>
         </li>
-      {%- comment -%}
+
+      {% comment %}
       ------------------------------------------------------------------------------
         1 level
       ------------------------------------------------------------------------------
-      {%- endcomment -%}
-      {%- elsif link.levels == 1 and meganav != true -%}
+      {% endcomment %}
+      {% elsif link.levels == 1 and meganav != true %}
         <li class="site-nav__item site-nav__item--has-dropdown" data-meganav-parent="{{ link.title | handle }}" tab-index="1" aria-expanded="false" aria-haspopup="true">
-          {%- if link.title contains 'ommunity' -%}
+          {% if link.title contains 'ommunity' %}
             <a class="site-nav__link secret-a {% if link.active %}site-nav__link--active{% endif %}" js-meganav="trigger" href="#!" title="{{ link.title }}">
               {{ link.title }}
             </a>
-          {%- else -%}
+          {% else %}
             <a class="site-nav__link {% if link.active %}site-nav__link--active{% endif %}" js-meganav="trigger" href="{{ link.url }}" title="{{ link.title }}">
               {{ link.title }}
             </a>
-          {%- endif -%}
+          {% endif %}
+
           <ul class="site-nav__dropdown navlist navlist--block">
-            {%- for child_link in link.links -%}
+            {% for child_link in link.links %}
               <li class="navlist__item">
-                <a class="navlist__link {% if child_link.active %}navlist__link--active{%- endif %}" href="{{ child_link.url }}" title="{{ child_link.title }}">
+                <a class="navlist__link {% if child_link.active %}navlist__link--active{% endif %}" href="{{ child_link.url }}" title="{{ child_link.title }}">
                   {{ child_link.title }}
                 </a>
               </li>
-            {%- endfor -%}
+            {% endfor %}
           </ul>
         </li>
-      {%- endif -%}
-    {%- endfor -%}
+      {% endif %}
+    {% endfor %}
   </ul>
 </nav>

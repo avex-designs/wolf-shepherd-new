@@ -1,5 +1,7 @@
-<div class="product-description__plain">
-    {%- comment -%}
+<div class="product-description__plain">      
+ 
+
+    {% comment %}
       Examaple Description:
       %title-1-start%
       Title 1 Here 
@@ -13,13 +15,15 @@
       %text-2-start%
       Text 2 Here
       %text-2-end%
-    {%- endcomment -%}
-    {%- if product.description contains '%title-' -%}
-    {%- assign mainDescription  = product.description | split: '%title-1-start%' | first -%}
-    {%- endif -%}
-    {%- if mainDescription != blank  -%}
+    {% endcomment %}
+
+    {% if product.description contains '%title-' %}
+    {% assign mainDescription  = product.description | split: '%title-1-start%' | first %}
+    {% endif %}
+
+    {% if mainDescription != blank  %}
       {{ mainDescription }}
-    {%- else -%}
+    {% else %}
       {{ product.description }}
-    {%- endif -%}
+    {% endif %}
 </div>

@@ -2,9 +2,9 @@
   <div class="grid">
     <div data-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true">
 
-      {%- assign current_variant = product.selected_variant  -%}
+      {%- assign current_variant = product.selected_or_first_available_variant -%}
       {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
-      <div class="visually-hidden" id="current_selected_variant">{{ product.selected_variant.id }}</div>
+
       <div class="grid__item medium-up--one-half large-up--seven-twelfths product-images__mobile-container">
         {% include 'product-header' %}
         {% include 'product-images' %}
@@ -86,74 +86,3 @@
     ]
   }
 {% endschema %}
-<script>
-
-const queryString = window.location.search
-const urlParams = new URLSearchParams(queryString)
-const variant = urlParams.get('variant')
-if(!variant){
- 
-  let swatches = document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-2');
-  if(swatches){
-    swatches.querySelectorAll('button').forEach(it => {
-          it.classList.remove('is-active')
-    })
-  }
-  
-  let swatches_opt3 = document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-3');
-  if(swatches_opt3){
-    swatches_opt3.querySelectorAll('button').forEach(it => {
-          it.classList.remove('is-active')
-    })
-  }
-  
-}
-
-document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-1').addEventListener('click', (event) => {
-  const isButton = event.target.nodeName === 'BUTTON';
-  if (!isButton) {
-    return;
-  }
-  
-  document.querySelector('#shopify-section-product').querySelector('.swatch__size-container__title-trigger').innerHTML = 'SELECT SIZE'
-})
-
-</script>
-
-{% comment %} <script>
-document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-1').addEventListener('click', (event) => {
-  const isButton = event.target.nodeName === 'BUTTON';
-  if (!isButton) {
-    return;
-  }
-  
-  document.querySelector('#shopify-section-product').querySelector('.swatch__size-container__title-trigger').innerHTML = 'SELECT SIZE'
-
-  if(document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-2')){
-    document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-2').querySelectorAll('button').forEach(it => {
-      it.classList.remove('is-active')
-      //it.classList.remove('is-disabled')
-    })
-  }
-  
-  if(document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-3')){
-    document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-3').querySelectorAll('button').forEach(it => {
-        it.classList.remove('is-active')
-        //it.classList.remove('is-disabled')
-    })
-  }  
-})
-
-document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-2').addEventListener('click', (event) => {
-  const isButton = event.target.nodeName === 'BUTTON';
-  if (!isButton) {
-    return;
-  }
-  if(document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-3')){
-    document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-3').querySelectorAll('button').forEach(it => {
-      it.classList.remove('is-active')
-      //it.classList.remove('is-disabled')
-    })
-  }  
-})
-</script> {% endcomment %}

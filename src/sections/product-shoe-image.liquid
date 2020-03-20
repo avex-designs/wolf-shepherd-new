@@ -1,29 +1,29 @@
-{%- assign sectionId = section.id -%}
-{%- assign sectionEnable = section.settings.enable -%}   
-{%- assign sectionImage = section.settings.image | img_url: '1700x'  -%}
-{%- assign sectionImageAlt = section.settings.image.alt  -%}
-{%- assign sectionImageTablet = section.settings.image_tablet | img_url: '1200x'  -%}
-{%- assign sectionImageTabletAlt = section.settings.image_tablet.alt  -%}
-{%- assign sectionImageMobile = section.settings.image_mobile | img_url: '800x'  -%}
-{%- assign sectionImageMobileAlt = section.settings.image_mobile.alt  -%}
-{%- assign sectionFullWidth = section.settings.full-width -%}
-{%- assign sectionMarginBottom = section.settings.margin_bottom -%}
+{% assign sectionId = section.id %}
+{% assign sectionEnable = section.settings.enable %}   
+{% assign sectionImage = section.settings.image | img_url: '1700x'  %}
+{% assign sectionImageAlt = section.settings.image.alt  %}
+{% assign sectionImageTablet = section.settings.image_tablet | img_url: '1200x'  %}
+{% assign sectionImageTabletAlt = section.settings.image_tablet.alt  %}
+{% assign sectionImageMobile = section.settings.image_mobile | img_url: '800x'  %}
+{% assign sectionImageMobileAlt = section.settings.image_mobile.alt  %}
+{% assign sectionFullWidth = section.settings.full-width %}
+{% assign sectionMarginBottom = section.settings.margin_bottom %}
 
-{%- if sectionEnable -%}
-  {%- if sectionFullWidth != 'full-width' -%}<div class="page-width">{%- endif -%}
+{% if sectionEnable %}
+  {% if sectionFullWidth != 'full-width' %}<div class="page-width">{% endif %}
 
 
 
   <div class="product-shoe-image {{ sectionMarginBottom }}">
 
-    {%- include 'header' with title: section.settings.title, text: section.settings.text -%}
+    {% include 'header' with title: section.settings.title, text: section.settings.text %}
 
     <img class="product-shoe-image__desktop lazyload" data-src="{{ sectionImage }}" alt="{{sectionImageAlt}}"/>
   </div>
 
-  {%- if sectionFullWidth != 'full-width' -%}</div>{%- endif -%}
+  {% if sectionFullWidth != 'full-width' %}</div>{% endif %}
   
-{%- endif -%}
+{% endif %}
  
 {% schema %}
   {

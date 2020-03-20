@@ -1,14 +1,14 @@
-{%- if swatchShow -%}
-{%- assign optionCount = 'option-' | append: forloop.index -%}
+{% if swatchShow %}
+{% assign optionCount = 'option-' | append: forloop.index %}
 <div class="swatch__wrapper">
-  {%- for value in option.values -%} 
+  {% for value in option.values %}  
 
-    {%- assign swatchValue = value | handleize | downcase -%}
-    {%- assign swatchBackground = 'transparent' -%}
+    {% assign swatchValue = value | handleize | downcase %}
+    {% assign swatchBackground = 'transparent' %}
 
-    {%- if optionName == 'color' or optionName == 'colour' -%}
-      {%- assign swatchBackground = value | handleize | downcase -%}
-    {%- endif -%}
+    {% if optionName == 'color' or optionName == 'colour' %}
+      {% assign swatchBackground = value | handleize | downcase %}
+    {% endif%}
 
     <button type="button" class="swatch swatch-product swatch-product--quick-add swatch-product--{{ value | handleize }}
     {% if option.selected_value == value %}is-active{% endif %}
@@ -19,10 +19,10 @@
     data-swatch-value="{{ value | escape }}"
     name="{{value}}"
     style="background-size: {{swatchBackground}};">
-      {%- unless optionName == 'color' or optionName == 'colour' -%}
+      {% unless optionName == 'color' or optionName == 'colour' %}
         {{ value | escape }}
-      {%- endunless -%}
+      {% endunless %}
     </button>
-  {%- endfor -%}
+  {% endfor %}
 </div>
-{%- endif -%}
+{% endif %}

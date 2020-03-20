@@ -1,4 +1,4 @@
-{%- assign current_variant = product.selected_variant -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
 
 <div class="product-swatches">
   <form class="product-form-mini" action="/cart/add" method="post" enctype="multipart/form-data">
@@ -94,11 +94,9 @@
           {%- if option.name == 'color' or option.name == 'Color' -%}
             <span js-swatch="color" class="product-form-mini--{{currentColor}}">{{option.selected_value}}</span>
           {%- endif -%}
-          
           {%- if option.name == 'size' or option.name == 'Size' -%}
-            <span js-swatch="size">{%- if product.selected_variant.id -%} {{option.selected_value}} {%- else -%} Select size {%- endif -%}</span>
+            <span js-swatch="size">{{option.selected_value}}</span>
           {%- endif -%}
-           
         {%- endfor -%}
 
         {% include 'icons' with icon: 'arown-down-wolf' %}
@@ -110,16 +108,12 @@
         data-add-to-cart
         {% unless current_variant.available %}disabled="disabled"{% endunless %}>
           <span data-add-to-cart-text>
-          {% if current_variant.available %}
-            {{ 'products.product.add_to_cart' | t }}
-          {% else %}
-            {% if product.selected_variant %}
-              {{ 'products.product.sold_out' | t }}
+            {% if current_variant.available %}
+              {{ 'products.product.add_to_cart' | t }}
             {% else %}
-              {{ 'products.product.selectsize' | t }}
+              {{ 'products.product.sold_out' | t }}
             {% endif %}
-          {% endif %}
-        </span>
+          </span>
       </button>
     </div>
 

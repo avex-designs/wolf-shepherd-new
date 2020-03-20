@@ -1,195 +1,194 @@
-{%- if type == "section" -%}
-  {%- assign sectionId = section.id -%}
-  {%- assign sectionEnable = section.settings.enable -%}
-  {%- assign sectionAlign = section.settings.alignment -%}
-  {%- assign sectionPositionX = section.settings.positionX -%}
-  {%- assign sectionPositionY = section.settings.positionY -%}    
-  {%- assign sectionImage = section.settings.image | img_url: '1700x'  -%}
-  {%- if section.settings.mobile_image != blank -%}
-    {%- assign sectionImageMobile = section.settings.mobile_image | img_url: '800x'  -%}
-  {%- else -%}
-    {%- assign sectionImageMobile = section.settings.image | img_url: '800x'  -%}
-  {%- endif -%}
-  {%- assign sectionHeight = section.settings.height -%}
-  {%- assign sectionFullWidth = section.settings.full-width -%}
-  {%- assign sectionMarginBottom = section.settings.margin_bottom -%}
-  {%- assign sectionTextColor = section.settings.text_color -%}
-  {%- assign sectionTextSize = section.settings.text_size | default: 'd2' -%}
-  {%- assign sectionTitle = section.settings.title -%}
-  {%- assign sectionText = section.settings.text -%}
-  {%- assign sectionButtonLabel = section.settings.button_label -%}
-  {%- assign sectionButtonLink = section.settings.button_link -%}
-  {%- assign sectionButtonColor = section.settings.button_color -%}
-  {%- assign sectionMobileTextPosition = section.settings.mobile_text_position -%}
-{%- elsif type == "collection" -%}
-  {%- assign sectionId = section.id -%}
-  {%- assign sectionEnable = true -%}
-  {%- assign sectionAlign = section.settings.alignment -%}
-  {%- assign sectionPositionX = section.settings.positionX -%}
-  {%- assign sectionPositionY = section.settings.positionY -%}
-  {%- if collection.metafields.collection['alternate-image'] != blank -%}
-    {%- assign sectionImage = collection.metafields.collection['alternate-image']  -%}
-    {%- assign sectionImageMobile = collection.metafields.collection['alternate-image'] -%}
-  {%- else -%}
-    {%- if collection.image == blank -%}
-      {%- assign sectionImage = section.settings.default_image | img_url: '1700x'  -%}
-      {%- assign sectionImageMobile = section.settings.default_image | img_url: '800x'  -%}
-    {%- else -%}
-      {%- assign sectionImage = collection.image | img_url: '1700x'  -%}
-      {%- assign sectionImageMobile = collection.image | img_url: '800x'  -%}
-    {%- endif -%}
-  {%- endif -%}
-  {%- assign sectionHeight = 'hero-image--small hero-image--collection' -%}
-  {%- assign sectionFullWidth = section.settings.full-width -%}
-  {%- assign sectionMarginBottom = section.settings.margin_bottom -%}
-  {%- assign sectionTextColor = section.settings.text_color -%}
-  {%- assign sectionTextSize = section.settings.text_size | default: 'd2' -%}
+{% if type == "section" %}
+  {% assign sectionId = section.id %}
+  {% assign sectionEnable = section.settings.enable %}
+  {% assign sectionAlign = section.settings.alignment %}
+  {% assign sectionPositionX = section.settings.positionX %}
+  {% assign sectionPositionY = section.settings.positionY %}    
+  {% assign sectionImage = section.settings.image | img_url: '1700x'  %}
+  {% if section.settings.mobile_image != blank %}
+    {% assign sectionImageMobile = section.settings.mobile_image | img_url: '800x'  %}
+  {% else %}
+    {% assign sectionImageMobile = section.settings.image | img_url: '800x'  %}
+  {% endif %}
+  {% assign sectionHeight = section.settings.height %}
+  {% assign sectionFullWidth = section.settings.full-width %}
+  {% assign sectionMarginBottom = section.settings.margin_bottom %}
+  {% assign sectionTextColor = section.settings.text_color %}
+  {% assign sectionTextSize = section.settings.text_size | default: 'd2' %}
+  {% assign sectionTitle = section.settings.title %}
+  {% assign sectionText = section.settings.text %}
+  {% assign sectionButtonLabel = section.settings.button_label %}
+  {% assign sectionButtonLink = section.settings.button_link %}
+  {% assign sectionButtonColor = section.settings.button_color %}
+  {% assign sectionMobileTextPosition = section.settings.mobile_text_position %}
+{% elsif type == "collection" %}
+  {% assign sectionId = section.id %}
+  {% assign sectionEnable = true %}
+  {% assign sectionAlign = section.settings.alignment %}
+  {% assign sectionPositionX = section.settings.positionX %}
+  {% assign sectionPositionY = section.settings.positionY %}
+  {% if collection.metafields.collection['alternate-image'] != blank %}
+    {% assign sectionImage = collection.metafields.collection['alternate-image']  %}
+    {% assign sectionImageMobile = collection.metafields.collection['alternate-image'] %}
+  {% else %}
+    {% if collection.image == blank %}
+      {% assign sectionImage = section.settings.default_image | img_url: '1700x'  %}
+      {% assign sectionImageMobile = section.settings.default_image | img_url: '800x'  %}
+    {% else %}
+      {% assign sectionImage = collection.image | img_url: '1700x'  %}
+      {% assign sectionImageMobile = collection.image | img_url: '800x'  %}
+    {% endif %}
+  {% endif %}
+  {% assign sectionHeight = 'hero-image--small hero-image--collection' %}
+  {% assign sectionFullWidth = section.settings.full-width %}
+  {% assign sectionMarginBottom = section.settings.margin_bottom %}
+  {% assign sectionTextColor = section.settings.text_color %}
+  {% assign sectionTextSize = section.settings.text_size | default: 'd2' %}
 
-  {%- assign sectionTitle = collection.title -%}
-  {%- assign sectionText = collection.description -%}
-  {%- assign sectionButtonLabel = blank -%}
-  {%- assign sectionButtonLink = blank -%}
-  {%- assign sectionButtonColor = blank -%}
-  {%- assign sectionMobileTextPosition = section.settings.mobile_text_position -%}
-  {%- assign mp4 = section.settings.mp4 -%}
-  {%- assign ogg = section.settings.ogg -%}
-{%- elsif type == "blog" -%}
-  {%- assign sectionId = section.id -%}
-  {%- assign sectionEnable = true -%}
-  {%- assign sectionAlign = section.settings.alignment -%}
-  {%- assign sectionPositionX = section.settings.positionX -%}
-  {%- assign sectionPositionY = section.settings.positionY -%}
-  {%- assign sectionImage = section.settings.image | img_url: '1700x'  -%}
-  {%- if section.settings.mobile_image != blank -%}
-    {%- assign sectionImageMobile = section.settings.mobile_image | img_url: '800x'  -%}
-  {%- else -%}
-    {%- assign sectionImageMobile = section.settings.image | img_url: '800x'  -%}
-  {%- endif -%}
-  {%- assign sectionHeight = 'hero-image--small hero-image--blog' -%}
-  {%- assign sectionFullWidth = section.settings.full-width -%}
-  {%- assign sectionMarginBottom = section.settings.margin_bottom -%}
-  {%- assign sectionTextColor = section.settings.text_color -%}
-  {%- assign sectionTextSize = section.settings.text_size | default: 'd2' -%}
-  {%- assign sectionSupertitle = section.settings.supertitle  -%}
-  {%- assign sectionTitle = blog.title -%}
-  {%- assign sectionText = '' -%}
-  {%- assign sectionButtonLabel = blank -%}
-  {%- assign sectionButtonLink = blank -%}
-  {%- assign sectionButtonColor = blank -%}
-  {%- assign sectionMobileTextPosition = section.settings.mobile_text_position -%}
-  {%- assign mp4 = section.settings.mp4 -%}
-  {%- assign ogg = section.settings.ogg -%}
-{%- elsif type == "article" -%}
-  {%- assign sectionId = 'null' -%}
-  {%- assign sectionEnable = true -%}
-  {%- assign sectionAlign = 'center' -%}
-  {%- assign sectionImage = article.image | img_url: '1700x' -%}
-  {%- assign sectionImageMobile = article.image | img_url: '800x' -%}
-  {%- assign sectionFullWidth = 'wrapper' -%}
-  {%- assign sectionMarginBottom = 'margin' -%}
-  {%- assign sectionTextColor = 'white' -%}
-  {%- assign sectionTextSize = 'd2' -%}
-  {%- assign sectionTitle = article.title -%}
-  {%- assign sectionText = article.content | strip_html | truncate: 100 -%}
-  {%- assign sectionButtonLabel = 'Read more' -%}
-  {%- assign sectionButtonLink = article.url -%}
-  {%- assign sectionButtonColor = 'white' -%}
-{%- elsif type == "Two blocks" -%}
-  {%- assign sectionId = block.id -%}
-  {%- assign sectionEnable = true -%}
-  {%- assign sectionAlign = block.settings.alignment -%}
-  {%- assign sectionPositionX = block.settings.positionX -%}
-  {%- assign sectionPositionY = block.settings.positionY -%}   
-  {%- assign sectionImage = block.settings.image | img_url: '900x'  -%}
-  {%- if block.settings.mobile_image != blank -%}
-    {%- assign sectionImageMobile = block.settings.mobile_image | img_url: '800x'  -%}
-  {%- else -%}
-    {%- assign sectionImageMobile = block.settings.image | img_url: '800x'  -%}
-  {%- endif -%}
-  {%- assign sectionHeight = section.settings.height -%}
-  {%- assign sectionFullWidth = 'full-width' -%}
-  {%- assign sectionMarginBottom = '' -%}
-  {%- assign sectionTextColor = block.settings.text_color -%}
-  {%- assign sectionTextSize = block.settings.text_size | default: 'd2' -%}
-  {%- assign sectionTitle = block.settings.title  -%}
-  {%- assign sectionText = block.settings.text -%}
-  {%- assign sectionButtonLabel = block.settings.button_label -%}
-  {%- assign sectionButtonLink = block.settings.button_link -%}
-  {%- assign sectionButtonColor = block.settings.button_color -%}
-  {%- assign sectionMobileTextPosition = block.settings.mobile_text_position -%}
-  {%- assign mp4 = block.settings.mp4 -%}
-  {%- assign ogg = block.settings.ogg -%}
-  {%- assign video_position = block.settings.video_position -%}
-{%- else -%}
-  {%- assign sectionId = block.id -%}
-  {%- assign sectionEnable = block.settings.enable | default: true -%}
-  {%- assign sectionAlign = block.settings.alignment -%}
-  {%- assign sectionPositionX = block.settings.positionX -%}
-  {%- assign sectionPositionY = block.settings.positionY -%}   
-  {%- assign sectionImage = block.settings.image | img_url: '1700x'  -%}
-  {%- if block.settings.mobile_image != blank -%}
-    {%- assign sectionImageMobile = block.settings.mobile_image | img_url: '800x'  -%}
-  {%- else -%}
-    {%- assign sectionImageMobile = block.settings.image | img_url: '800x'  -%}
-  {%- endif -%}
-  {%- assign sectionHeight = block.settings.height -%}
-  {%- assign sectionFullWidth = block.settings.full-width | default: 'full-width' -%}
-  {%- assign sectionMarginBottom = block.settings.margin_bottom -%}
-  {%- assign sectionTextColor = block.settings.text_color -%}
-  {%- assign sectionTextSize = block.settings.text_size | default: 'd2' -%}
-  {%- assign sectionSupertitle = block.settings.supertitle  -%}
-  {%- assign sectionTitle = block.settings.title  -%}
-  {%- assign sectionText = block.settings.text -%}
-  {%- assign sectionButtonLabel = block.settings.button_label -%}
-  {%- assign sectionButtonLink = block.settings.button_link -%}
-  {%- assign sectionButtonColor = block.settings.button_color -%}
-  {%- assign sectionMobileTextPosition = block.settings.mobile_text_position -%}
-  {%- assign mp4 = block.settings.mp4 -%}
-  {%- assign ogg = block.settings.ogg -%}
-{%- endif -%}
+  {% assign sectionTitle = collection.title %}
+  {% assign sectionText = collection.description %}
+  {% assign sectionButtonLabel = blank %}
+  {% assign sectionButtonLink = blank %}
+  {% assign sectionButtonColor = blank %}
+  {% assign sectionMobileTextPosition = section.settings.mobile_text_position %}
+  {% assign mp4 = section.settings.mp4 %}
+  {% assign ogg = section.settings.ogg %}
+{% elsif type == "blog" %}
+  {% assign sectionId = section.id %}
+  {% assign sectionEnable = true %}
+  {% assign sectionAlign = section.settings.alignment %}
+  {% assign sectionPositionX = section.settings.positionX %}
+  {% assign sectionPositionY = section.settings.positionY %}
+  {% assign sectionImage = section.settings.image | img_url: '1700x'  %}
+  {% if section.settings.mobile_image != blank %}
+    {% assign sectionImageMobile = section.settings.mobile_image | img_url: '800x'  %}
+  {% else %}
+    {% assign sectionImageMobile = section.settings.image | img_url: '800x'  %}
+  {% endif %}
+  {% assign sectionHeight = 'hero-image--small hero-image--blog' %}
+  {% assign sectionFullWidth = section.settings.full-width %}
+  {% assign sectionMarginBottom = section.settings.margin_bottom %}
+  {% assign sectionTextColor = section.settings.text_color %}
+  {% assign sectionTextSize = section.settings.text_size | default: 'd2' %}
+  {% assign sectionSupertitle = section.settings.supertitle  %}
+  {% assign sectionTitle = blog.title %}
+  {% assign sectionText = '' %}
+  {% assign sectionButtonLabel = blank %}
+  {% assign sectionButtonLink = blank %}
+  {% assign sectionButtonColor = blank %}
+  {% assign sectionMobileTextPosition = section.settings.mobile_text_position %}
+  {% assign mp4 = section.settings.mp4 %}
+  {% assign ogg = section.settings.ogg %}
+{% elsif type == "article" %}
+  {% assign sectionId = 'null' %}
+  {% assign sectionEnable = true %}
+  {% assign sectionAlign = 'center' %}
+  {% assign sectionImage = article.image | img_url: '1700x' %}
+  {% assign sectionImageMobile = article.image | img_url: '800x' %}
+  {% assign sectionFullWidth = 'wrapper' %}
+  {% assign sectionMarginBottom = 'margin' %}
+  {% assign sectionTextColor = 'white' %}
+  {% assign sectionTextSize = 'd2' %}
+  {% assign sectionTitle = article.title %}
+  {% assign sectionText = article.content | strip_html | truncate: 100 %}
+  {% assign sectionButtonLabel = 'Read more' %}
+  {% assign sectionButtonLink = article.url %}
+  {% assign sectionButtonColor = 'white' %}
+{% elsif type == "Two blocks" %}
+  {% assign sectionId = block.id %}
+  {% assign sectionEnable = true %}
+  {% assign sectionAlign = block.settings.alignment %}
+  {% assign sectionPositionX = block.settings.positionX %}
+  {% assign sectionPositionY = block.settings.positionY %}   
+  {% assign sectionImage = block.settings.image | img_url: '900x'  %}
+  {% if block.settings.mobile_image != blank %}
+    {% assign sectionImageMobile = block.settings.mobile_image | img_url: '800x'  %}
+  {% else %}
+    {% assign sectionImageMobile = block.settings.image | img_url: '800x'  %}
+  {% endif %}
+  {% assign sectionHeight = section.settings.height %}
+  {% assign sectionFullWidth = 'full-width' %}
+  {% assign sectionMarginBottom = '' %}
+  {% assign sectionTextColor = block.settings.text_color %}
+  {% assign sectionTextSize = block.settings.text_size | default: 'd2' %}
+  {% assign sectionTitle = block.settings.title  %}
+  {% assign sectionText = block.settings.text %}
+  {% assign sectionButtonLabel = block.settings.button_label %}
+  {% assign sectionButtonLink = block.settings.button_link %}
+  {% assign sectionButtonColor = block.settings.button_color %}
+  {% assign sectionMobileTextPosition = block.settings.mobile_text_position %}
+  {% assign mp4 = block.settings.mp4 %}
+  {% assign ogg = block.settings.ogg %}
+{% else %}
+  {% assign sectionId = block.id %}
+  {% assign sectionEnable = block.settings.enable | default: true %}
+  {% assign sectionAlign = block.settings.alignment %}
+  {% assign sectionPositionX = block.settings.positionX %}
+  {% assign sectionPositionY = block.settings.positionY %}   
+  {% assign sectionImage = block.settings.image | img_url: '1700x'  %}
+  {% if block.settings.mobile_image != blank %}
+    {% assign sectionImageMobile = block.settings.mobile_image | img_url: '800x'  %}
+  {% else %}
+    {% assign sectionImageMobile = block.settings.image | img_url: '800x'  %}
+  {% endif %}
+  {% assign sectionHeight = block.settings.height %}
+  {% assign sectionFullWidth = block.settings.full-width | default: 'full-width' %}
+  {% assign sectionMarginBottom = block.settings.margin_bottom %}
+  {% assign sectionTextColor = block.settings.text_color %}
+  {% assign sectionTextSize = block.settings.text_size | default: 'd2' %}
+  {% assign sectionSupertitle = block.settings.supertitle  %}
+  {% assign sectionTitle = block.settings.title  %}
+  {% assign sectionText = block.settings.text %}
+  {% assign sectionButtonLabel = block.settings.button_label %}
+  {% assign sectionButtonLink = block.settings.button_link %}
+  {% assign sectionButtonColor = block.settings.button_color %}
+  {% assign sectionMobileTextPosition = block.settings.mobile_text_position %}
+  {% assign mp4 = block.settings.mp4 %}
+  {% assign ogg = block.settings.ogg %}
+{% endif %}
 
-{%- if sectionEnable -%}
-  {%- if sectionFullWidth != 'full-width' -%}<div class="page-width page-width--hero-image">{%- endif -%}
+{% if sectionEnable %}
+  {% if sectionFullWidth != 'full-width' %}<div class="page-width page-width--hero-image">{% endif %}
 
-  {%- capture textCapture -%}
-    {%- if sectionSupertitle != blank -%}
+  {% capture textCapture %}
+    {% if sectionSupertitle != blank %}
       <p class="{{ sectionSupertitle }} hero-image__supertitle">{{ sectionSupertitle }}</p>
-    {%- endif -%}
+    {% endif %}
 
-    {%- if type contains 'collection' -%}
-      {%- if collection.description != blank -%}
+    {% if type contains 'collection' %}
+      {% if collection.description != blank %}
         <h1 class="visually-hidden">{{ collection.title }}</h1>
         <span class="{{ sectionTextSize }} hero-image__title">{{ collection.description }}</h2>
-      {%- else -%}
+      {% else %}
         <h1 class="{{ sectionTextSize }} hero-image__title">{{ collection.title }}</h1>
-      {%- endif -%}
-    {%- else -%}
-      {%- if sectionTitle != blank -%}
-        {%- if type contains 'collection' -%}
+      {% endif %}
+    {% else %}
+      {% if sectionTitle != blank %}
+        {% if type contains 'collection' %}
           <h1 class="{{ sectionTextSize }} hero-image__title">{{ sectionTitle }}</h1>
-        {%- else -%}
+        {% else %}
           <h2 class="{{ sectionTextSize }} hero-image__title">{{ sectionTitle }}</h2>
-        {%- endif -%}
-      {%- endif -%}
-    {%- endif -%}
+        {% endif %}
+      {% endif %}
+    {% endif %}
     
-    {%- unless type contains 'collection' -%}
+    {% unless type contains 'collection' %}
       <div class="rte-setting hero-image__text">
-        {%- if sectionText != blank -%}{{ sectionText }}{%- endif -%}
-        {%- if sectionButtonLabel != blank and sectionButtonLink != blank -%}
+        {% if sectionText != blank %}{{ sectionText }}{% endif %}
+        {% if sectionButtonLabel != blank and sectionButtonLink != blank %}
           <a href="{{ sectionButtonLink }}"
             title="{{ sectionButtonLabel }}"
             class="{{ sectionButtonColor }} {% if sectionMobileTextPosition contains '--mobile-text-under' %}button--white--compress{% endif %}">
             {{ sectionButtonLabel }}
           </a>
-        {%- endif -%}
+        {% endif %}
       </div>
-    {%- endunless -%}
-  {%- endcapture -%}
+    {% endunless %}
+  {% endcapture %}
 
-  {%- if sectionHeight contains 'ratio' -%}
+  {% if sectionHeight contains 'ratio' %}
     <div class="hero-image__ratio {{ sectionHeight }} {{ sectionMarginBottom }} ">
-  {%- endif -%}
+  {% endif %}
 
     <div class="hero-image hero-image--{{ sectionId }} 
       {{ sectionHeight }}
@@ -202,53 +201,31 @@
       {{ specialClass }} lazyload" 
       data-bgset="{{sectionImageMobile}} [(max-width: 749px)] | {{sectionImage}}">
 
-      {%- if mp4 != blank -%}
+      {% if mp4 != blank %}
         <div class="hero-image__video">
-        
-          <video  muted loop poster="{{ sectionImage }}" style="
-          {% if video_position == 'left' %} 
-            height: 100%;
-            left: 0;
-            top: 0;
-            transform: none; 
-          {% elsif video_position == 'right' %}
-            height: 100%;
-            left: auto;
-            top: 0;
-            transform: none;
-            right: 0;
-          {% elsif video_position == 'center' %}
-            height: 100%;
-            left: 50%;
-            top: 0;
-            transform: translate(-50%, 0%);
-          {% else %}
-              height: max-content;
-              width: 100%;
-          {% endif %}
-          ">
+          <video autoplay muted loop poster="{{ sectionImage }}">
             <source src="{{mp4}}" type="video/mp4">
             <source src="{{ogg}}" type="video/ogg">
             Your browser does not support HTML5 video.
           </video>
         </div>
-      {%- endif -%}
+      {% endif %}
 
       <div class="hero-image__wrapper">
         {{ textCapture }}
       </div>
     </div>
     
-  {%- if sectionHeight contains 'ratio' -%}
+  {% if sectionHeight contains 'ratio' %}
     </div>
-  {%- endif -%}
+  {% endif %}
 
-  {%- if sectionMobileTextPosition contains "--mobile-text-under" -%}
+  {% if sectionMobileTextPosition contains "--mobile-text-under" %}
     <div class="hero-image__mobile-text">
       {{ textCapture }}
     </div>
-  {%- endif -%}
+  {% endif %}
 
-  {%- if sectionFullWidth != 'full-width' -%}</div>{%- endif -%}
+  {% if sectionFullWidth != 'full-width' %}</div>{% endif %}
   
-{%- endif -%}
+{% endif %}

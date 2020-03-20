@@ -226,23 +226,8 @@ Swatches Styles
         color: #a3aeb7;
         opacity: 1;
       }
-      &::before{
-        content: '';
-        height: 100%;
-        width: 100%;
-        border: 1px solid #aaa;
-        background: linear-gradient(45deg, transparent 49%, #000 50%, transparent 51%);
-        display: block;
-        position: absolute;
-        left: 0;
-        top: 0;
-        
-      }
     }
-    &.is-active{
-      background-color: #032540;
-      color:#fff;
-    }
+
     &:hover, &.is-active, &:focus {
       border: 1px solid $COLOR_PRIMARY!important;
     }
@@ -434,19 +419,5 @@ Swatches Styles
     .swatch__size-toggle__title {
       display: none;
     }
-  }
-}
-
-.product-swatches .swatch__wrapper.option-3 .swatch-product--width.is-disabled{
-  &::before{
-    height: 100%;
-    width: 100%;
-    border: 1px solid #aaa;
-    background: linear-gradient(to top right, transparent calc(50% - 1px), #000, transparent calc(50% + 1px) );
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    
   }
 }

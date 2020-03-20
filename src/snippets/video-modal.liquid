@@ -1,35 +1,35 @@
-{%- if type == "section" -%}
-  {%- assign sectionID = section.id -%}
-  {%- assign sectionEnable = section.settings.enable -%}
-  {%- assign sectionFullWidth = section.settings.full-width -%}
-  {%- assign sectionMarginBottom = section.settings.margin_bottom -%}
-  {%- assign videoSectionBackground = section.settings.image | img_url: '1000x' -%}
-  {%- assign videoSectionUrlReady = section.settings.vimeo_link -%}
-  {%- assign textColor = section.settings.text_color -%}
-  {%- assign ogg = section.settings.mp4 -%}
-  {%- assign mp4 = section.settings.ogg -%}
-  {%- assign sectionTitle = section.settings.title -%}
-  {%- assign sectionText = section.settings.text -%}
-  {%- assign sectionButtonLabel = section.settings.button_1 -%}
-  {%- assign sectionButtonLink = section.settings.button_link_1 -%}
-  {%- assign sectionButtonLabelTwo = section.settings.play_text -%}
-  {%- if section.settings.text_color contains '--black' -%}
-    {%- assign sectionButtonColor = 'button' -%}
-  {%- else -%}
-    {%- assign sectionButtonColor = 'button button--white' -%}
-  {%- endif -%}
-{%- else -%}
-  {%- assign sectionEnable = block.settings.enable -%}
-  {%- assign sectionFullWidth = block.settings.full-width -%}
-  {%- assign sectionMarginBottom = block.settings.margin_bottom -%}
-  {%- assign videoSectionBackground = block.settings.image | img_url: '1000x' -%}
-  {%- assign videoSectionUrlReady = block.settings.video_link -%}
-{%- endif -%}
+{% if type == "section" %}
+  {% assign sectionID = section.id %}
+  {% assign sectionEnable = section.settings.enable %}
+  {% assign sectionFullWidth = section.settings.full-width %}
+  {% assign sectionMarginBottom = section.settings.margin_bottom %}
+  {% assign videoSectionBackground = section.settings.image | img_url: '1000x' %}
+  {% assign videoSectionUrlReady = section.settings.vimeo_link %}
+  {% assign textColor = section.settings.text_color %}
+  {% assign ogg = section.settings.mp4 %}
+  {% assign mp4 = section.settings.ogg %}
+  {% assign sectionTitle = section.settings.title %}
+  {% assign sectionText = section.settings.text %}
+  {% assign sectionButtonLabel = section.settings.button_1 %}
+  {% assign sectionButtonLink = section.settings.button_link_1 %}
+  {% assign sectionButtonLabelTwo = section.settings.play_text %}
+  {% if section.settings.text_color contains '--black' %}
+    {% assign sectionButtonColor = 'button' %}
+  {% else %}
+    {% assign sectionButtonColor = 'button button--white' %}
+  {% endif %}
+{% else %}
+  {% assign sectionEnable = block.settings.enable %}
+  {% assign sectionFullWidth = block.settings.full-width %}
+  {% assign sectionMarginBottom = block.settings.margin_bottom %}
+  {% assign videoSectionBackground = block.settings.image | img_url: '1000x' %}
+  {% assign videoSectionUrlReady = block.settings.video_link %}
+{% endif %}
 
-{%- if sectionEnable -%}
+{% if sectionEnable %}
 
-  <div class="{%- if sectionMarginBottom == 'margin' -%}section-margin-bottom{%- endif -%}" style="overflow: hidden;">
-    {%- if sectionFullWidth != 'full-width' -%}<div class="page-width page-width--hero-image">{%- endif -%}
+  <div class="{% if sectionMarginBottom == 'margin' %}section-margin-bottom{% endif %}" style="overflow: hidden;">
+    {% if sectionFullWidth != 'full-width' %}<div class="page-width page-width--hero-image">{% endif %}
 
       <div js-video-modal="container" class="video-modal {{textColor}}">
 
@@ -45,22 +45,22 @@
 
         <div class="video-modal__text-area">
 
-          {%- comment -%} <div class="play" js-video-modal="trigger" js-video-target="#modal-{{sectionID}}"></div> {%- endcomment -%}
+          {% comment %} <div class="play" js-video-modal="trigger" js-video-target="#modal-{{sectionID}}"></div> {% endcomment %}
 
-          {%- if sectionTitle != blank -%}
+          {% if sectionTitle != blank %}
             <h2 class="d2 video-modal__title">{{ sectionTitle | escape }}</h2>
-          {%- endif -%}
+          {% endif %}
           
           <div class="video-modal__text ">
-            {%- if sectionText != blank -%}{{ sectionText }}{%- endif -%}
+            {% if sectionText != blank %}{{ sectionText }}{% endif %}
           </div>
 
           <div class="video-modal__buttons">
-            {%- if sectionButtonLabel != blank and sectionButtonLink != blank -%}
+            {% if sectionButtonLabel != blank and sectionButtonLink != blank %}
               <a href="{{ sectionButtonLink }}" class="{{ sectionButtonColor }}" title="{{ sectionButtonLabel }}">
                 {{ sectionButtonLabel }}
               </a>
-            {%- endif -%}
+            {% endif %}
             <div js-video-modal="trigger" js-video-target="#modal-{{sectionID}}" class="play_text {{ sectionButtonColor }}">
               {{ sectionButtonLabelTwo }}
             </div>
@@ -68,40 +68,40 @@
         </div>
 
       </div>
-    {%- if sectionFullWidth != 'full-width' -%}</div>{%- endif -%}
+    {% if sectionFullWidth != 'full-width' %}</div>{% endif %}
 
     <div class="page-width">
       <div class="video-modal__mobile-text">
-        {%- if sectionTitle != blank -%}
+        {% if sectionTitle != blank %}
           <h2 class="d2 video-modal__title">{{ sectionTitle | escape }}</h2>
-        {%- endif -%}
+        {% endif %}
         
         <div class="video-modal__text ">
-          {%- if sectionText != blank -%}{{ sectionText }}{%- endif -%}
+          {% if sectionText != blank %}{{ sectionText }}{% endif %}
         </div>
 
         <div class="video-modal__buttons">
-          {%- if sectionButtonLabel != blank and sectionButtonLink != blank -%}
+          {% if sectionButtonLabel != blank and sectionButtonLink != blank %}
             <a href="{{ sectionButtonLink }}" class="button--white button--white--compress" title="{{ sectionButtonLabel }}">
               {{ sectionButtonLabel }}
             </a>
-          {%- endif -%}
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
 
-  {%- if videoSectionUrlReady != blank -%}
-    {%- assign videoSectionUrlReady = videoSectionUrlReady | split: "https://vimeo.com/" -%}
+  {% if videoSectionUrlReady != blank %}
+    {% assign videoSectionUrlReady = videoSectionUrlReady | split: "https://vimeo.com/" %}
     <div id="modal-{{sectionID}}" class="modal">
       <div class="modal__video" >
         <iframe id="modal-video" src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       
         <div class="modal__close modal__close--white" js-video-modal="close" js-video-target="#modal-{{sectionID}}">
-          {%- include 'icons' with icon: 'close' -%}
+          {% include 'icons' with icon: 'close' %}
         </div>
       </div>
     </div>
-  {%- endif -%}
+  {% endif %}
 
-{%- endif -%}
+{% endif %}

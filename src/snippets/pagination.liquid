@@ -1,25 +1,25 @@
 <ul class="pagination">
   <li class="back pagination-nav">
-    {%- unless paginate.previous.is_link -%}
+    {% unless paginate.previous.is_link %}
       <div class="wolf-arrow wolf-arrow--disabled prev">
         <span class="icon__fallback-text">{% comment %}{{ 'general.pagination.previous' | t }}{% endcomment %}Prev</span>
       </div>
-    {%- else -%}
+    {% else %}
       <a href="{{ paginate.previous.url }}" class="wolf-arrow prev" title="Previous">
         <span class="icon__fallback-text">{% comment %}{{ 'general.pagination.previous' | t }}{% endcomment %}Prev</span>
       </a>
-    {%- endunless -%}
+    {% endunless %}
   </li>
   <li class="pagination__pages">{{ paginate | default_pagination: next: '', previous: '' }}</li>
   <li class="next pagination-nav">
-    {%- unless paginate.next.is_link -%}
+    {% unless paginate.next.is_link %}
       <div class="wolf-arrow wolf-arrow--right wolf-arrow--disabled">
         <span class="icon__fallback-text">{% comment %}{{ 'general.pagination.next' | t }}{% endcomment %}Next</span>
       </div>
-    {%- else -%}
+    {% else %}
       <a href="{{ paginate.next.url }}" class="wolf-arrow wolf-arrow--right" title="Next">
         <span class="icon__fallback-text">{% comment %}{{ 'general.pagination.next' | t }}{% endcomment %}Next</span>
       </a>
-    {%- endunless -%}
+    {% endunless %}
   </li>
 </ul>

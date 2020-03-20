@@ -1,169 +1,167 @@
-{%- assign colours = '' -%}
-{%- for option in product.options_with_values -%}
-  {%- if option.name == 'Color' or option.name == 'color' -%}
-    {%- assign selectColour = option.selected_value | downcase | handleize -%}
-    {%- for value in option.values -%}
-      {%- assign colours = colours | append: value | append: ',' -%}
-    {%- endfor -%}
-  {%- endif -%}
-{%- endfor -%}
-{%- assign colours = colours | split: ',' -%}
+{% assign colours = '' %}
+{% for option in product.options_with_values %}
+  {% if option.name == 'Color' or option.name == 'color' %}
+    {% assign selectColour = option.selected_value | downcase | handleize %}
+    {% for value in option.values %}
+      {% assign colours = colours | append: value | append: ',' %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% assign colours = colours | split: ',' %}
+
 <div class="product-images__zoom-container">
   <div class="product-images__zoom-pane" js-product-gallery="zoomPane"></div>
-  {%- for color in colours -%}
-    {%- assign loopCounter  = 0 -%}
-    {%- assign productImage = '' -%}
-    {%- assign colorClean = color | split: '//' -%}
-    {%- assign colorClean = colorClean[0] | handleize -%}
+  {% for color in colours %}
+    {% assign loopCounter  = 0 %}
+    {% assign productImage = '' %}
+    {% assign colorClean = color | split: '//' %}
+    {% assign colorClean = colorClean[0] | handleize %}
+  
     <div id="product-images__container--{{colorClean}}" 
       class="product-images__container
       {% if selectColour == colorClean %} is-active {% endif %}" 
       data-slider="product-slider--{{colorClean}}"
       data-nav="product-nav--{{colorClean}}">
       <div class="product-images">
-        {%- if product.images.size > 1 -%}
+        {% if product.images.size > 1 %}
           
           <div class="main-product-slider" id="product-slider--{{colorClean}}">
-            {%- for image in product.images -%}
-              {%- assign varColor = image.alt | split: '//' -%}
-              {%- assign varColor = varColor[0] | handleize -%}
+            {% for image in product.images %}
+              {% assign varColor = image.alt | split: '//' %}
+              {% assign varColor = varColor[0] | handleize %}
 
-              {%- if varColor == colorClean -%}
-                {%- assign productImage = image.src | img_url: '800x'  -%}
-                {%- assign productImage2 = image.src | img_url: '600x'  -%}
-                {%- assign productImage3 = image.src | img_url: '300x'  -%}
-                {%- for variant in product.variants -%}
-                  {%- assign variantImage = variant.image.src | img_url: '800x'  -%}
-                  {%- if variantImage == productImage -%}
-                    {%- assign productImage = variantImage  -%}
-                    {%- assign productData = 'data-slick-variant="' | append: variant.id | append: '"'  -%}
-                    {%- if variant.selected -%}
-                      {%- assign slickStart = loopCounter  -%}
-                    {%- endif -%}
-                  {%- endif -%}
-                {%- endfor -%}
+              {% if varColor == colorClean %}
+                {% assign productImage = image.src | img_url: '800x'  %}
+
+                {% for variant in product.variants %}
+                  {% assign variantImage = variant.image.src | img_url: '800x'  %}
+                  {% if variantImage == productImage %}
+                    {% assign productImage = variantImage  %}
+                    {% assign productData = 'data-slick-variant="' | append: variant.id | append: '"'  %}
+                    {% if variant.selected %}
+                      {% assign slickStart = loopCounter  %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
                 
-                {%- if image.alt contains ' ' -%}
-                  {%- assign videoURL = image.alt | split: '//cdn' -%}
-                  {%- assign videoURL = videoURL[1] -%}
+                {% if image.alt contains ' ' %}
+                  {% assign videoURL = image.alt | split: '//cdn' %}
+                  {% assign videoURL = videoURL[1] %}
                   <video autoplay muted loop poster="{{ productImage }}">
                     <source src="//cdn{{videoURL}}" type="video/mp4">
                   </video>
-                {%- else -%}
-                  {%- assign zoomImage = image.src | img_url: '1024x' -%}
+                {% else %}
+                  {% assign zoomImage = image.src | img_url: '1024x' %}
                   <div js-product-gallery="zoom">
-                    {%- if loopCounter == 1 -%}
-                      <img src="{{ productImage }}" alt="{{ image.alt | escape }}"  class="lazyload" {{productData}} data-zoom="{{ zoomImage }}">
-                    {%- else -%}
-                    <style>img[data-sizes="auto"] { display: block; width: 100%; }</style>
+                    {% if loopCounter == 1 %}
+                      <img src="{{ productImage }}" alt="{{ image.alt | escape }}" {{productData}} data-zoom="{{ zoomImage }}">
+                    {% else %}
                       <img 
-                        class="lazyload" 
-                        
-                        data-src="{{ productImage3 }}"
-                        data-srcset="{{ productImage3 }} 300w,
-                        {{ productImage2 }} 600w,
-                        {{ productImage }} 800w"
+                      class="lazyload" 
+                      data-src="{{ productImage }}"
                       alt="{{ image.alt | escape }}" 
                       {{productData}} data-zoom="{{ zoomImage }}">
-                    {%- endif -%}
+                    {% endif %}
                   </div>
-                {%- endif -%}
+                {% endif %}
 
-                {%- assign loopCounter = loopCounter | plus: 1 -%}
-              {%- endif -%}
-            {%- endfor -%}
+                {% assign loopCounter = loopCounter | plus: 1 %}
+              {% endif %}
+            {% endfor %}
           </div>
+
           <div class="product-slider-nav">
             <div class="product-slider-nav__contianer" id="product-nav--{{colorClean}}">
-            {%- for image in product.images -%}
-              {%- assign varColor = image.alt | split: '//' -%}
-              {%- assign varColor = varColor[0] | handleize -%}
-              {%- if varColor == colorClean -%}
-                {%- assign productThumbnail = image.src | img_url: '80x'  -%}
+            {% for image in product.images %}
+              {% assign varColor = image.alt | split: '//' %}
+              {% assign varColor = varColor[0] | handleize %}
+              {% if varColor == colorClean %}
+                {% assign productThumbnail = image.src | img_url: '800x'  %}
     
                   <div class="product-slider-nav__image {% if image.alt contains '.mp4' %}product-slider-nav__image--video{% endif %}">
                     <div class="product-slider-nav__image-wrapper">
-                      <img src="{{ productThumbnail }}" class="lazyload" alt="{{ image.alt | escape }}">
+                      <img src="{{ productThumbnail }}" alt="{{ image.alt | escape }}">
                     </div>
                   </div>
                   
-              {%- endif -%}
-            {%- endfor -%}
+              {% endif %}
+            {% endfor %}
             </div>
 
           </div>
 
-        {%- else -%}
-          {%- if featured_image != blank -%}
-            <img src="{{ featured_image | img_url: '800x' }}" class="lazyload" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
-          {%- endif -%}
-        {%- endif -%}
+        {% else %}
+          {% if featured_image != blank %}
+            <img src="{{ featured_image | img_url: '800x' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+          {% endif %}
+        {% endif %}
       </div>
     </div>
-  {%- else -%}
+  {% else %}
     <div id="product-images__container--{{colorClean}}" 
       class="product-images__container is-active " 
       data-slider="product-slider--{{colorClean}}"
       data-nav="product-nav--{{colorClean}}">
       <div class="product-images">
-        {%- if product.images.size > 1 -%}
+        {% if product.images.size > 1 %}
         
-          {%- comment -%} <div class="product-images__zoom-pane" js-product-gallery="zoomPane"></div> {%- endcomment -%}
+          {% comment %} <div class="product-images__zoom-pane" js-product-gallery="zoomPane"></div> {% endcomment %}
 
           <div class="main-product-slider" id="product-slider--{{colorClean}}">
-            {%- for image in product.images -%}
-              {%- assign varColor = image.alt | split: '//' -%}
-              {%- assign varColor = varColor[0] | handleize -%}
+            {% for image in product.images %}
+              {% assign varColor = image.alt | split: '//' %}
+              {% assign varColor = varColor[0] | handleize %}
 
             
-                {%- assign productImage = image.src | img_url: '800x'  -%}
+                {% assign productImage = image.src | img_url: '800x'  %}
 
-                {%- for variant in product.variants -%}
-                  {%- assign variantImage = variant.image.src | img_url: '800x'  -%}
-                  {%- if variantImage == productImage -%}
-                    {%- assign productImage = variantImage  -%}
-                    {%- assign productData = 'data-slick-variant="' | append: variant.id | append: '"'  -%}
-                    {%- if variant.selected -%}
-                      {%- assign slickStart = loopCounter  -%}
-                    {%- endif -%}
-                  {%- endif -%}
-                {%- endfor -%}
+                {% for variant in product.variants %}
+                  {% assign variantImage = variant.image.src | img_url: '800x'  %}
+                  {% if variantImage == productImage %}
+                    {% assign productImage = variantImage  %}
+                    {% assign productData = 'data-slick-variant="' | append: variant.id | append: '"'  %}
+                    {% if variant.selected %}
+                      {% assign slickStart = loopCounter  %}
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}
                 
-                {%- if image.alt contains '.mp4' -%}
-                  {%- assign videoURL = image.alt | split: '//cdn' -%}
-                  {%- assign videoURL = videoURL[1] -%}
+                {% if image.alt contains '.mp4' %}
+                  {% assign videoURL = image.alt | split: '//cdn' %}
+                  {% assign videoURL = videoURL[1] %}
                   <video autoplay muted loop poster="{{ productImage }}">
                     <source src="//cdn{{videoURL}}" type="video/mp4">
                   </video>
-                {%- else -%}
+                {% else %}
                   <div js-product-gallery="zoom">
-                    <img src="{{ productImage }}" class="lazyload" alt="{{ image.alt | escape }}" {{productData}} data-zoom="{{ image.src | img_url: '1024x' }}">
+                    <img src="{{ productImage }}" alt="{{ image.alt | escape }}" {{productData}} data-zoom="{{ image.src | img_url: '1024x' }}">
                   </div>
-                {%- endif -%}
+                {% endif %}
 
-                {%- assign loopCounter = loopCounter | plus: 1 -%}
+                {% assign loopCounter = loopCounter | plus: 1 %}
 
-            {%- endfor -%}
+            {% endfor %}
           </div>
 
           <div class="product-slider-nav" id="product-nav--{{colorClean}}">
-            {%- for image in product.images -%}
-              {%- assign varColor = image.alt | split: '//' -%}
-              {%- assign varColor = varColor[0] | handleize -%}
+            {% for image in product.images %}
+              {% assign varColor = image.alt | split: '//' %}
+              {% assign varColor = varColor[0] | handleize %}
 
-              {%- assign productThumbnail = image.src | img_url: '240x'  -%}
+              {% assign productThumbnail = image.src | img_url: '240x'  %}
               <div class="product-slider-nav__image">
-                <img src="{{ productThumbnail }}" alt="{{ image.alt | escape }}" class="lazyload">
+                <img src="{{ productThumbnail }}" alt="{{ image.alt | escape }}">
               </div>
-            {%- endfor -%}
+            {% endfor %}
           </div>
 
-        {%- else -%}
-          {%- if featured_image != blank -%}
-            <img src="{{ featured_image | img_url: '800x' }}" alt="{{ featured_image.alt | escape }}" class="lazyload" data-product-featured-image>
-          {%- endif -%}
-        {%- endif -%}
+        {% else %}
+          {% if featured_image != blank %}
+            <img src="{{ featured_image | img_url: '800x' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+          {% endif %}
+        {% endif %}
       </div>
     </div>
-  {%- endfor -%}
+  {% endfor %}
 </div>

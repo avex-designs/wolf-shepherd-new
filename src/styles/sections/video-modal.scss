@@ -26,7 +26,7 @@ Video modal Section
 
   &--white {
     #{$parent}__overlay {
-      background: rgba($COLOR_PRIMARY, 0.4);
+      background: rgba($COLOR_PRIMARY, 0.6);
     }
 
     #{$parent}__text, #{$parent}__text *, #{$parent}__title {

@@ -1,9 +1,9 @@
 {% comment %}
   Set the default grid_item_width if no variable is set
 {% endcomment %}
-{%- unless grid_item_width -%}
-  {%- assign grid_item_width = gridWidth -%}
-{%- endunless -%}
+{% unless grid_item_width %}
+  {% assign grid_item_width = gridWidth %}
+{% endunless %}
 
 <div class="grid__item  {{ grid_item_width }}  blog-grid-item__match-height">
 
@@ -24,11 +24,11 @@
     </a>
 
     <p class="rte blog-grid-item__excerpt">
-      {%- if related.excerpt.size > 0 -%}
+      {% if related.excerpt.size > 0 %}
         {{ related.excerpt }}
-      {%- else -%}
+      {% else %}
         {{ related.content | strip_html | truncate: 100 }}
-      {%- endif -%}
+      {% endif %}
     </p>
   </div>
 </div>

@@ -1,51 +1,36 @@
-{% comment %} <script
+<script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous" async></script> {% endcomment %}
+  crossorigin="anonymous"></script>
 
-<script>
-    window.addEventListener('load', function() {
-        function loadScript(id, url, callback) {
-        let script = document.getElementById(id);
-        script.src = url;
-        script.onload = () => callback();
-    }
-  
-  setTimeout(function(){
-  	loadScript('stamped-script-widget','https://cdn-stamped-io.azureedge.net/files/widget.min.js', script => {});  	
-    loadScript('ze-snippet','https://static.zdassets.com/ekr/snippet.js?key=98f3b1fb-6960-4a40-bd71-bad9fd465059', script => {});
-	
-    //<!-- Taboola Pixel Code -->
-    window._tfa = window._tfa || [];
-    window._tfa.push({notify: 'event', name: 'page_view', id: 1065515});
-    !function (t, f, a, x) {
-          if (!document.getElementById(x)) {
-              t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
-          }
-    }(document.createElement('script'),
-    document.getElementsByTagName('script')[0],
-    '//cdn.taboola.com/libtrc/unip/1065515/tfa.js',
-    'tb_tfa_script');
-	//<!-- End of Taboola Pixel Code -->W
-    
-    //<!-- Affirm -->
-       _affirm_config = {
-      public_api_key: "MML2M0I09DFJJ5VU",
-      script: "https://cdn1.affirm.com/js/v2/affirm.js"
-    };
-    (function(l,g,m,e,a,f,b){var d,c=l[m]||{},h=document.createElement(f),n=document.getElementsByTagName(f)[0],k=function(a,b,c){return function(){a[b]._.push([c,arguments])}};c[e]=k(c,e,"set");d=c[e];c[a]={};c[a]._=[];d._=[];c[a][b]=k(c,a,b);a=0;for(b="set add save post open empty reset on off trigger ready setProduct".split(" ");a<b.length;a++)d[b[a]]=k(c,e,b[a]);a=0;for(b=["get","token","url","items"];a<b.length;a++)d[b[a]]=function(){};h.async=!0;h.src=g[f];n.parentNode.insertBefore(h,n);delete g[f];d(g);l[m]=c})(window,_affirm_config,"affirm","checkout","ui","script","ready");
-    // Use your live public API Key and https://cdn1.affirm.com/js/v2/affirm.js script to point to Affirm production environment.
-	//<!-- End Affirm -->
-    
-    }, 3000)
-    });
+<script async type="text/javascript" data-api-key="pubkey-km40UI8T4n2OqL8n82YeHJEEr1xqZ0" id="stamped-script-widget" src="https://cdn-stamped-io.azureedge.net/files/widget.min.js"></script>
+
+<!-- Taboola Pixel Code -->
+<script type='text/javascript'>
+  window._tfa = window._tfa || [];
+  window._tfa.push({notify: 'event', name: 'page_view', id: 1065515});
+  !function (t, f, a, x) {
+        if (!document.getElementById(x)) {
+            t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
+        }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/unip/1065515/tfa.js',
+  'tb_tfa_script');
 </script>
-
-<script async type="text/javascript" data-api-key="pubkey-km40UI8T4n2OqL8n82YeHJEEr1xqZ0" id="stamped-script-widget"></script>
-<script async type="text/javascript" id="ze-snippet" ></script>
 <noscript>
   <img src='//trc.taboola.com/1065515/log/3/unip?en=page_view'
       width='0' height='0' style='display:none'/>
 </noscript>
+<!-- End of Taboola Pixel Code -->
 
-<!-- End of wolfandshepherd Zendesk Widget script -->
+<!-- Affirm -->
+<script type="text/javascript">
+  _affirm_config = {
+    public_api_key: "MML2M0I09DFJJ5VU",
+    script: "https://cdn1.affirm.com/js/v2/affirm.js"
+  };
+  (function(l,g,m,e,a,f,b){var d,c=l[m]||{},h=document.createElement(f),n=document.getElementsByTagName(f)[0],k=function(a,b,c){return function(){a[b]._.push([c,arguments])}};c[e]=k(c,e,"set");d=c[e];c[a]={};c[a]._=[];d._=[];c[a][b]=k(c,a,b);a=0;for(b="set add save post open empty reset on off trigger ready setProduct".split(" ");a<b.length;a++)d[b[a]]=k(c,e,b[a]);a=0;for(b=["get","token","url","items"];a<b.length;a++)d[b[a]]=function(){};h.async=!0;h.src=g[f];n.parentNode.insertBefore(h,n);delete g[f];d(g);l[m]=c})(window,_affirm_config,"affirm","checkout","ui","script","ready");
+  // Use your live public API Key and https://cdn1.affirm.com/js/v2/affirm.js script to point to Affirm production environment.
+</script>
+<!-- End Affirm -->

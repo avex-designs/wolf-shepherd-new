@@ -3,67 +3,67 @@
     <div class="grid">
 
 
-      {%- if section.settings.logo-bottom-left -%}
+      {% if section.settings.logo-bottom-left %}
         <div class="grid__item medium-up--one-third">
           <img src="{{ section.settings.logo-bottom-left | img_url: '200x' }}" alt="{{section.settings.logo-bottom-left.alt}}"/>          
         </div>
         <div class="grid__item medium-up--two-thirds">
           <div class="grid">
-      {%- endif -%}
+      {% endif %}
 
 
-      {%- for block in section.blocks  -%}
+      {% for block in section.blocks  %}
 
-          {%- if block.type == 'footer_menu' -%}
+          {% if block.type == 'footer_menu' %}
             <div class="grid__item small--one-whole medium-up--one-quarter">
-              {%- if block.settings.footer_title != blank -%}
+              {% if block.settings.footer_title != blank %}
                 <h4>{{ block.settings.footer_title | escape }}</h4>
-              {%- endif -%}
+              {% endif %}
 
               {%- assign footer_linklist = block.settings.footer_linklist -%}
-              {%- if linklists[footer_linklist].links.size > 0 -%}
+              {% if linklists[footer_linklist].links.size > 0 %}
                 <ul>
-                  {%- for link in linklists[footer_linklist].links -%}
+                  {% for link in linklists[footer_linklist].links %}
                     <li><a href="{{ link.url }}" title="{{ link.title }}">{{ link.title }}</a></li>
-                  {%- endfor -%}
+                  {% endfor %}
                 </ul>
-              {%- endif -%}
+              {% endif %}
             </div>
-          {%- else -%}
+          {% else %}
             <div class="grid__item small--one-whole medium-up--one-half">
               {%- assign social_accounts = 'Twitter, Facebook, Vimeo, Pinterest, Instagram, Snapchat, Tumblr, YouTube,' | split: ', ' -%}
 
-              {%- include 'footer-newsletter' -%}
+              {% include 'footer-newsletter' %}
 
               <ul class="social-links">
-                {%- for social in social_accounts -%}
+                {% for social in social_accounts %}
                   {%- assign social_handle = social | handleize -%}
-                  {%- capture social_link -%}social_{{ social_handle }}_link{%- endcapture -%}
-                  {%- capture social_icon -%}icon-{{ social_handle }}{%- endcapture -%}
+                  {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                  {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
 
-                  {%- if settings[social_link] != blank -%}
+                  {% if settings[social_link] != blank %}
                     <li>
                       <a target="_blank" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-                        {%- include 'icons' with icon: social_handle  -%}
+                        {% include 'icons' with icon: social_handle  %}
                         <span class="icon-fallback-text">{{ social }}</span>
                       </a>
                     </li>
-                  {%- endif -%}
-                {%- endfor -%}
+                  {% endif %}
+                {% endfor %}
                 <li>
                   <a target="_blank" href="mailto:help@wolfandshepherd.com" title="Email">
-                    {%- include 'icons' with icon: 'email'  -%}
+                    {% include 'icons' with icon: 'email'  %}
                     <span class="icon-fallback-text">Email</span>
                   </a>
                 </li>
               </ul>
             </div>
-          {%- endif -%}
-      {%- endfor -%}
+          {% endif %}
+      {% endfor %}
 
-      {%- if section.settings.logo-bottom-left -%}
+      {% if section.settings.logo-bottom-left %}
         </div></div>
-      {%- endif -%}
+      {% endif %}
 
 
     </div>
@@ -77,31 +77,31 @@
           &copy; {{ 'now' | date: "%Y" }} {{ shop.name | link_to: '/' }}. All rights reserved.<span class="visually-hidden">Design by <a href="https://avexdesigns.com" target="_blank">Avex Designs.</a> Built by <a href="https://karmoon.co.uk/" target="_blank" title="Karmoon.co.uk">Karmoon</a></span>
         </div>
 
-        {%- if section.settings.show_payment_icons -%}
-          {%- unless shop.enabled_payment_types == empty -%}
+        {% if section.settings.show_payment_icons %}
+          {% unless shop.enabled_payment_types == empty %}
             {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
 
             <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
             <ul class="payment-icons">
-              {%- for type in shop.enabled_payment_types -%}
-                {%- if payment_icons_available contains type -%}
+              {% for type in shop.enabled_payment_types %}
+                {% if payment_icons_available contains type %}
                   <li>
                     {%- assign icon_name = type | prepend: 'icon-' -%}
-                    {%- include icon_name -%}
+                    {% include icon_name %}
                     <span class="visually-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
                   </li>
-                {%- endif -%}
-              {%- endfor -%}
+                {% endif %}
+              {% endfor %}
             </ul>
-          {%- endunless -%}
-        {%- endif -%}
+          {% endunless %}
+        {% endif %}
       </div>
 
     </div>
   </div>
 </footer>
 
-{%- schema -%}
+{% schema %}
   {
     "name": "Footer",
     "max_blocks": 4,
@@ -150,4 +150,4 @@
     ]
   }
 
-{%- endschema -%}
+{% endschema %}

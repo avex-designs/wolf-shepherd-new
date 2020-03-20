@@ -40,7 +40,7 @@
   {% include 'theme-strings' %}
 
   {% if template.directory == 'customers' %}
-    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer" async></script>
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
   {% endif %}
 
   {% include 'script-tags', layout: 'theme' %}
@@ -77,8 +77,6 @@
   {% endif %}
 
   {% include 'javascript-theme-includes' %}
-{% comment %} <style>
-#preview-bar-iframe{display: none !important}
-</style> {% endcomment %}
+
 </body>
 </html>

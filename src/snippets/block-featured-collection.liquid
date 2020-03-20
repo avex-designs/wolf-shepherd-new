@@ -5,7 +5,7 @@
   data-section-id="{{ section.id }}" 
   data-section-type="featured-collection-section">
 
-  {%- if section.settings.cart-title -%}
+  {% if section.settings.cart-title %}
     <div class="page-width feature-collection__title">
       <div class="grid">
         <div class="grid__item medium-up--one-whole">
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-  {%- endif -%}
+  {% endif %}
 
   <div class="page-width {% if section.settings.show_carousel %} page-width--slider {% endif %}">
     <div class="grid">
@@ -25,38 +25,38 @@
 
           {%- capture collectionCounterClass -%}
             grid__item small--one-half
-            {%- case collectionCounter -%}
-              {%- when '2' -%}
+            {% case collectionCounter %}
+              {% when '2' %}
                 medium-up--one-half
-              {%- when '3' -%}
+              {% when '3' %}
                 medium-up--one-third
-              {%- when '4' -%}
+              {% when '4' %}
                 medium-up--one-quarter
-              {%- when '5' -%}
+              {% when '5' %}
                 medium-up--one-fifth          
-              {%- when '6' -%}
+              {% when '6' %}
                 medium-up--one-third
-              {%- when '8' -%}
+              {% when '8' %}
                 medium-up--one-quarter
-              {%- else -%}
+              {% else %}
                 medium-up--one-whole
-            {%- endcase -%}
+            {% endcase %}
           {%- endcapture -%}
 
-          {%- if section.settings.show_carousel -%}
-            {%- assign slidesToShow = collectionCounter -%}
-            {%- assign collectionCounter = collectionCounter | times:3 -%}
-            {%- assign collectionCounterClass = 'swiper-slide' -%}
+          {% if section.settings.show_carousel %}
+            {% assign slidesToShow = collectionCounter %}
+            {% assign collectionCounter = collectionCounter | times:3 %}
+            {% assign collectionCounterClass = 'swiper-slide' %}
             <div class="swiper-container collection-carousel--{{section.id}}">
               <div class="swiper-wrapper">
-          {%- endif -%}
+          {% endif %}
 
-          {%- for product in collection.products limit: collectionCounter -%}
+          {% for product in collection.products limit: collectionCounter %}
 
-            {%- include 'collection-grid-product' with gridWidth: collectionCounterClass -%}
+            {% include 'collection-grid-product' with gridWidth: collectionCounterClass  %}
             
-          {%- else -%}
-            {%- for i in (1..collectionCounter) -%}
+          {% else %}
+            {% for i in (1..collectionCounter) %}
               <div class="item {% unless section.settings.show_carousel %}{{ collectionCounterClass }}{% endunless %}" >
                   <a href="#" class="product-link">
                     {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
@@ -69,23 +69,23 @@
 
                   <p>{{ 1999 | money }}</p>
               </div>
-            {%- endfor -%}
-          {%- endfor -%}
+            {% endfor %}
+          {% endfor %}
 
-          {%- if section.settings.show_carousel -%}
+          {% if section.settings.show_carousel %}
               </div>
               <div class="swiper-button-prev wolf-arrow"></div>
               <div class="swiper-button-next wolf-arrow wolf-arrow--right"></div>
             </div>
-          {%- endif -%}
+          {% endif %}
 
-          {%- if section.settings.show_button -%}
+          {% if section.settings.show_button %}
             <div class="grid__item">
               <div class="feature-collection__button-row">
                 <a href="{{collection.url}}" class="button--white button--white--compress" title="{{ section.settings.button_text  }}">{{ section.settings.button_text  }}</a>
               </div>
             </div>
-          {%- endif -%}
+          {% endif %}
 
         </div>
       </div>

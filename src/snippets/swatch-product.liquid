@@ -1,4 +1,5 @@
 {% if swatchShow %}
+
   {% assign colorCount = 0 %}
   {% for value in option.values %}
     {%- if optionName == 'color' or optionName == 'colour' -%}
@@ -8,13 +9,13 @@
   {% assign optionCount = 'option-' | append: forloop.index %}
 
   <h6 class="swatch__header {% if option.name == 'Size' or option.name == 'size' %} swatch__header--flex {% endif %}">
-    <span class="swatch__header__text">{% if optionName == 'color' or optionName == 'colour' %} Colorway {% else %} {{ option.name }} {% endif %}</span>
+    <span class="swatch__header__text">{{ option.name }}</span>
     <span class="font-reset">
       {%- for value in option.values -%}  
         {%- if optionName == 'color' or optionName == 'colour' -%}
           {% if option.selected_value == value %}
             <span js-swatch="color" class="swatch__header__color">{{ value }}</span>
-            <span class="swatch__header__color-count">{{colorCount}} {{colorCount | pluralize: 'colorway', 'colorways' }}</span>
+            <span class="swatch__header__color-count">{{colorCount}} {{colorCount | pluralize: 'color', 'colors' }}</span>
           {% endif %}
         {%- endif -%}
       {%- endfor -%}
@@ -29,20 +30,20 @@
     {% if option.name == 'Size' or option.name == 'size' %} swatch__wrapper--size {% endif %}">
 
     {% for value in option.values %}  
-      
+
       {% assign swatchValue = value | handleize | downcase %}
       {% assign swatchBackground = 'transparent' %}
 
       {% if optionName == 'color' or optionName == 'colour' %}
         {% assign swatchBackground = value | handleize | downcase %}
       {% endif%}
-     
-      <button type="button" {% if option.selected_value == value %} autofocus {% endif %}
+
+      <button type="button" {% if option.selected_value == value %}autofocus {% endif %}
         class="swatch swatch-product swatch-product--{{ value | handleize }}
         {% if option.selected_value == value %}is-active{% endif %}
-        {% if optionName == 'color' or optionName == 'colour' %} swatch-product--color {% endif %}
-        {% if optionName == 'size' or optionName == 'Size' %} swatch-product--size {{specialClass}}{% endif %}
-        {% if optionName == 'width' or optionName == 'Width' %} swatch-product--width {{specialClass}}{% endif %}" 
+        {% if optionName == 'color' or optionName == 'colour' %}swatch-product--color{% endif %}
+        {% if optionName == 'size' or optionName == 'Size' %}swatch-product--size {{specialClass}}{% endif %}
+        {% if optionName == 'width' or optionName == 'Width' %}swatch-product--width {{specialClass}}{% endif %}" 
         js-product-swatches="container"
         data-swatch-option="{{optionCount}}"
         data-swatch-value="{{ value | escape }}"
