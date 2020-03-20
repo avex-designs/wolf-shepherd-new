@@ -109,7 +109,7 @@
         {% endif %}
       </span>
   </button>
-  
+  <button {% if current_variant.available %} style="display:none" {% endif %}  class="button button--full" id="BIS_trigger">Notify me when available</button>
   <div class="affirm-as-low-as" data-page-type="product" data-amount="{{product.first_available_variant.price }}" data-affirm-color="black"></div>
 
   <div class="error error--hide"></div>

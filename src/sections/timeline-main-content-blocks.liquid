@@ -1,0 +1,139 @@
+<section data-section-id="{{ section.id }}" id="timeline-content">
+  <div class="wrapper">
+    
+    {% assign count = 0 %}
+    {% for block in section.blocks %}
+
+      {% assign count = count | plus: 1 %}
+      {% assign sectionImage = block.settings.image-picker %}
+      {% assign sectionLayout = block.settings.layout %}
+      {% assign videoSectionUrlReady = block.settings.video %}
+
+      {% capture image_layout %}
+          {% if sectionImage != blank %}
+            {% include 'responsive-image' with
+              image: sectionImage,
+              max_width: 920,
+              max_height: 720
+            %}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+      {% endcapture %}
+
+      <div class="row_wrapper">
+
+        <div class="row row-border-left page-width-timeline">
+
+          <div js-video-modal="trigger" js-video-target="#modal-{{ count }}" class="img-wrap play_text">
+
+            <div class="text-wrap">
+                <h2>{{ block.settings.year }}</h2>
+                <h5> {{ block.settings.caption }} </h5>
+            </div>
+
+            {% unless  block.settings.image_position == true %}
+              {% if sectionImage != blank %}
+              
+                {{ image_layout }}
+              
+              {% endif %}
+            {% endunless %}
+
+          </div>
+
+        </div> <!-- row -->
+
+      </div><!-- row_wrapper -->
+
+      {% if videoSectionUrlReady != blank %}
+      {% assign videoSectionUrlReady = videoSectionUrlReady | split: "https://vimeo.com/" %}
+      <div id="modal-{{ count }}" class="modal">
+        <div class="modal__video" >
+          <iframe id="modal-video" src="https://player.vimeo.com/video/{{ videoSectionUrlReady[1] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        
+          <div class="modal__close modal__close--white" js-video-modal="close" js-video-target="#modal-{{sectionID}}">
+            {% include 'icons' with icon: 'close' %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% endfor %}
+
+  </div> <!-- wrapper -->
+
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "Timeline Content",
+    "blocks": [
+      {
+        "type": "select",
+        "name": "Section",
+        "settings": [
+          {
+            "id": "year",
+            "type": "text",
+            "label": "Year"
+          },
+          {
+            "id": "caption",
+            "type": "text",
+            "label": "Year's caption",
+            "default": "Hello World"
+          },
+          {
+            "id": "image-picker",
+            "type": "image_picker",
+            "label": "Background Image"
+          },
+          {
+            "id": "video",
+            "type": "textarea",
+            "label": "Video embed"
+          },
+          {
+            "id": "video_eyebrow",
+            "type": "text",
+            "label": "Video Eyebrow Text"
+          },
+          {
+            "id": "video_title",
+            "type": "text",
+            "label": "Video Title"
+          },
+          {
+            "id": "video_copy",
+            "type": "textarea",
+            "label": "Copy for video modal"
+          },
+          {
+            "id": "button_link",
+            "type": "text",
+            "label": "Button Link"
+          },
+          {
+            "id": "button_text",
+            "type": "url",
+            "label": "Button Text"
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+        "name": "Timeline Content",
+        "category": "Performance Page",
+        "blocks": [
+          { 
+            "type": "select"
+          }
+        ]
+    }
+  ]
+  }
+{% endschema %}

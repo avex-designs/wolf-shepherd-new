@@ -1,0 +1,50 @@
+<section id="About_Page_links" class="{{ section.settings.margin_bottom }}">
+	<nav class="site-header__nav" role="navigation" aria-label="About Sub Pages Navigation">
+		<ul class="about_links">
+      {% for link in linklists.about-sub-nav.links %}
+      <li class="site-nav__item" data-meganav-parent="{{ link.title | handle }}" tab-index="1" aria-expanded="false" aria-haspopup="false">
+        <a class="site-nav__link {% if link.active %}site-nav__link--active{% endif %}" js-meganav="trigger" href="{{ link.url }}" title="{{ link.title }}">
+          {{ link.title }}
+        </a>
+      </li>
+      {% endfor %}
+      {% comment %}
+			<li>
+				<a href="/pages/our-mission" title="Our Mission Page">Our Mission</a>
+			</li>
+			<li>
+				<a href="/pages/performance-1" title="Performance Shoe Page">Performance Shoe</a>
+			</li>
+			<li>
+				<a href="/pages/timeline" title="Timeline Page">Timeline</a>
+			</li>
+      {% endcomment %}
+		</ul>
+	</nav>	
+</section>
+
+
+{% schema %}
+  {
+    "name": "Sub Pages Nav",
+    "class": "index-section index-section--flush",
+    "settings": [
+      {
+        "type": "select",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": "no-margin",
+        "options": [
+          {
+            "label": "Margin bottom",
+            "value": "section-margin-bottom"
+          },
+          {
+            "label": "No margin",
+            "value": "no-margin"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

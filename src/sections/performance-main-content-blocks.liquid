@@ -1,0 +1,134 @@
+<section data-section-id="{{ section.id }}" id="performance-two-col-section">
+  <div class="wrapper">
+    
+    {% for block in section.blocks %}
+
+      {% assign sectionImage = block.settings.image-picker %}
+      {% assign sectionLayout = block.settings.layout %}
+      {% capture image_layout %}
+          {% if sectionImage != blank %}
+            {% include 'responsive-image' with
+              image: sectionImage,
+              max_width: 900,
+              max_height: 720
+            %}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+      {% endcapture %}
+
+      <div class="row_wrapper {% if  block.settings.image_position == true %}img_to_edge section-margin-bottom {% endif %}">
+
+        {% if  block.settings.image_position == true %}
+            {% if sectionImage != blank %}
+              {{ image_layout }}
+            {% endif %}
+        {% endif %}
+
+        <div class="row page-width section-margin-bottom {% if sectionLayout == 'right' %}image-with-text--right{% endif %} {{ sectionMarginBottom }}">
+            {% comment %}
+            <div class="column img-wrap">
+              <img src="{{ block.settings.image-picker | img_url: '800x' }}" alt="{{ block.settings.image.alt }}">
+            </div>
+            {% endcomment %}
+            <div class="column text-wrap">
+              <div class="white--text">
+                <h5>{{ block.settings.eyebrow }}</h5>
+                <h2> {{ block.settings.title }} </h2>
+                <p> {{ block.settings.sectiontext }} </p>
+                <p> {{ block.settings.sectionlist }} </p>
+              </div>
+            </div>
+
+            {% unless  block.settings.image_position == true %}
+              {% if sectionImage != blank %}
+              <div class="column img-wrap">
+                {{ image_layout }}
+              </div>
+              {% endif %}
+            {% endunless %}
+
+        </div> <!-- row -->
+
+      </div><!-- row_wrapper -->
+
+    {% endfor %}
+
+  </div>
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "Two Column Img/Text",
+    "blocks": [
+      {
+        "type": "select",
+        "name": "Section",
+        "settings": [
+          {
+            "id": "eyebrow",
+            "type": "text",
+            "label": "Eyebrow"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title",
+            "default": "Hello World"
+          },
+          {
+            "id": "sectiontext",
+            "type": "textarea",
+            "label": "Section copy",
+            "default": "Hello World"
+          },
+          {
+            "id": "sectionlist",
+            "type": "html",
+            "label": "Section Copy List"
+          },
+          {
+            "id": "image-picker",
+            "type": "image_picker",
+            "label": "Background Image"
+          },
+          {
+            "type": "select",
+            "id": "layout",
+            "label": "Image alignment",
+            "default": "left",
+            "options": [
+              {
+                "value": "left",
+                "label": "Left"
+              },
+              {
+                "value": "right",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "checkbox",
+            "id": "image_position",
+            "label": "Image to edge?",
+            "default": false
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+        "name": "Two Column Img/Text",
+        "category": "Performance Page",
+        "blocks": [
+          { 
+            "type": "select"
+          }
+        ]
+    }
+  ]
+  }
+{% endschema %}

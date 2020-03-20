@@ -17,6 +17,7 @@
 
             <a class="collection-list__item" href="{% if collection == empty %}#{% else %}{{ collection.url }}{% endif %}" title="{{ collection.title }}">
 
+             
               {%- capture image_url -%}
                 {% if block.settings.image != blank %}
                   {{ block.settings.image | img_url: '480x' }}
@@ -26,13 +27,17 @@
                   {{ collection.products.first | img_url: '480x' }}
                 {% endif %}
               {%- endcapture -%}
+            
 
 
               {% if collection == empty %}
                 {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
                 {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
               {% else %}
-                <div class="collection-list__image lazyload" data-bgset="{{ image_url | handlize }}"></div>
+              <div class="sk-bg-parent">
+                <div class="sk-bg collection-list__image lazyload" data-bgset="{{ image_url | handlize }}">
+                </div>
+              </div>
               {% endif %}
 
               <h3>

@@ -1,0 +1,94 @@
+{% comment %}
+  modules/feature-collection.scss
+{% endcomment %}
+{% include 'section-featured-collection' %}
+
+{% schema %}
+  {
+    "name": "Featured collection - Perfromance",
+    "settings": [
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "select",
+        "id": "product_count",
+        "label": "Number of products to show",
+        "default": "4",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          },
+          {
+            "value": "5",
+            "label": "5"
+          },          
+          {
+            "value": "6",
+            "label": "6"
+          },
+          {
+            "value": "8",
+            "label": "8"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": "no-margin",
+        "options": [
+          {
+            "label": "Margin bottom",
+            "value": "section-margin-bottom"
+          },
+          {
+            "label": "No margin",
+            "value": "no-margin"
+          }
+        ]
+      },
+      {
+        "id": "show_carousel",
+        "type": "checkbox",
+        "label": "Show as carousel",
+        "info": "This will always show as four products on desktop"
+      },      
+      {
+        "id": "show_button",
+        "type": "checkbox",
+        "label": "Show Collection button"
+      },
+      {
+        "id": "button_text",
+        "type": "text",
+        "label": "Button text"
+      },
+      {
+        "id": "background_light",
+        "type": "checkbox",
+        "label": "Light background",
+        "default": true
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection - Performance",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}
