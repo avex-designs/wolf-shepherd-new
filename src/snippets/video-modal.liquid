@@ -49,14 +49,11 @@
 
           {%- if sectionTitle != blank -%}
             <h2 class="d2 video-modal__title">{{ sectionTitle | escape }}</h2>
-<<<<<<< HEAD
-          {%- endif -%}
-=======
+
           {% endif %}
           {% if sectionCopy != blank %}
             <div class="video-modal__copy">{{ sectionCopy | escape }}</div>
           {% endif %}
->>>>>>> page_speed_WORKING_2.27
           
           <div class="video-modal__text ">
             {%- if sectionText != blank -%}{{ sectionText }}{%- endif -%}
@@ -67,8 +64,9 @@
               <a href="{{ sectionButtonLink }}" class="{{ sectionButtonColor }}" title="{{ sectionButtonLabel }}">
                 {{ sectionButtonLabel }}
               </a>
-            {%- endif -%}
-            <div js-video-modal="trigger" js-video-target="#modal-{{sectionID}}" class="play_text {{ sectionButtonColor }}">
+            {% endif %}
+            <div js-video-modal="trigger" js-video-target="modal-{{sectionID}}" class="play_text {{ sectionButtonColor }}">
+
               {{ sectionButtonLabelTwo }}
             </div>
           </div>

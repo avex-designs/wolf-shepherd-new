@@ -23,6 +23,14 @@
 	</nav>	
 </section>
 
+{% if page.handle == 'performance-1' %}
+<div class="hero-image__mobile-text">
+  <h2 class="d1 hero-image__title">
+    {{ section.settings.title_mobile  }}
+  </h2>
+</div>
+{% endif %}
+
 
 {% schema %}
   {
@@ -44,6 +52,12 @@
             "value": "no-margin"
           }
         ]
+      },
+      {
+        "type": "richtext",
+        "id": "title_mobile",
+        "label": "Heading",
+        "default": "<p>Image with text overlay</p>"
       }
     ]
   }
