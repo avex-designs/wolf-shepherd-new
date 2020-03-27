@@ -50,7 +50,7 @@
                 {%- if image.alt contains ' ' -%}
                   {%- assign videoURL = image.alt | split: '//cdn' -%}
                   {%- assign videoURL = videoURL[1] -%}
-                  <video autoplay muted loop poster="{{ productImage }}">
+                  <video playsinline autoplay muted loop poster="{{ productImage }}">
                     <source src="//cdn{{videoURL}}" type="video/mp4">
                   </video>
                 {%- else -%}
@@ -135,7 +135,7 @@
                 {%- if image.alt contains '.mp4' -%}
                   {%- assign videoURL = image.alt | split: '//cdn' -%}
                   {%- assign videoURL = videoURL[1] -%}
-                  <video autoplay muted loop poster="{{ productImage }}">
+                  <video playsinline autoplay muted loop poster="{{ productImage }}">
                     <source src="//cdn{{videoURL}}" type="video/mp4">
                   </video>
                 {%- else -%}
