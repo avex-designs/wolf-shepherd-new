@@ -1,6 +1,7 @@
 {%- assign preload = '' -%}
 {%- assign swatchShow = false -%}      
 {%- if settings.show_swatches_collection -%}
+
   {%- for option in product.options_with_values -%}     
     {%- assign swatchShow = false -%}
     {%- assign optionName = option.name | downcase | handleize  -%}
@@ -11,8 +12,9 @@
     {%- if swatchShow -%}
     {%- assign colorCount = 0 -%}
       {%- for value in option.values -%}
-        {%- for variant in product.variants -%}     
-          {%- if variant.option1 == value or variant.option2 == value or variant.option3 == value -%}
+		{%- assign currentVar1 = product.variants | where: "option1",  value | first -%}
+        
+          {%- if currentVar1.option1 == value or currentVar1.option2 == value or currentVar1.option3 == value -%}
             {%- assign color = value | handleize -%}
             {%- if currentLoop contains color -%}
             {%- else -%}
@@ -20,7 +22,7 @@
             {%- endif -%}
             {%- assign currentLoop = currentLoop | append: ',' | append: color -%}
           {%- endif -%}
-        {%- endfor -%}
+       
       {%- endfor -%}
       {%- assign currentLoop = '' -%}
       <div class="swatch__container">

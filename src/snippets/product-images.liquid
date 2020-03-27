@@ -10,6 +10,9 @@
 {%- assign colours = colours | split: ',' -%}
 <div class="product-images__zoom-container">
   <div class="product-images__zoom-pane" js-product-gallery="zoomPane"></div>
+   {% assign variants_ids = product.variants | map: 'id' %}   
+   {% assign variants_images = product.variants | map: 'image' %}
+  	
   {%- for color in colours -%}
     {%- assign loopCounter  = 0 -%}
     {%- assign productImage = '' -%}
@@ -24,6 +27,7 @@
         {%- if product.images.size > 1 -%}
           
           <div class="main-product-slider" id="product-slider--{{colorClean}}">
+           
             {%- for image in product.images -%}
               {%- assign varColor = image.alt | split: '//' -%}
               {%- assign varColor = varColor[0] | handleize -%}
@@ -32,14 +36,14 @@
                 {%- assign productImage = image.src | img_url: '800x'  -%}
                 {%- assign productImage2 = image.src | img_url: '600x'  -%}
                 {%- assign productImage3 = image.src | img_url: '300x'  -%}
-                {%- for variant in product.variants -%}
-                  {%- assign variantImage = variant.image.src | img_url: '800x'  -%}
+            
+                {%- for variant in variants_ids -%}
+            		{%- assign variantImage = variants_images[forloop.index] | img_url: '800x'  -%}
+                  
                   {%- if variantImage == productImage -%}
                     {%- assign productImage = variantImage  -%}
-                    {%- assign productData = 'data-slick-variant="' | append: variant.id | append: '"'  -%}
-                    {%- if variant.selected -%}
-                      {%- assign slickStart = loopCounter  -%}
-                    {%- endif -%}
+                    {%- assign productData = 'data-slick-variant="' | append: variant | append: '"'  -%}
+                    
                   {%- endif -%}
                 {%- endfor -%}
                 
@@ -118,14 +122,13 @@
             
                 {%- assign productImage = image.src | img_url: '800x'  -%}
 
-                {%- for variant in product.variants -%}
-                  {%- assign variantImage = variant.image.src | img_url: '800x'  -%}
+                {%- for variant in variants_ids -%}
+            		{%- assign variantImage = variants_images[forloop.index] | img_url: '800x'  -%}
+                  
                   {%- if variantImage == productImage -%}
                     {%- assign productImage = variantImage  -%}
-                    {%- assign productData = 'data-slick-variant="' | append: variant.id | append: '"'  -%}
-                    {%- if variant.selected -%}
-                      {%- assign slickStart = loopCounter  -%}
-                    {%- endif -%}
+                    {%- assign productData = 'data-slick-variant="' | append: variant | append: '"'  -%}
+                    
                   {%- endif -%}
                 {%- endfor -%}
                 

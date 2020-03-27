@@ -14,7 +14,7 @@
   {%- endif -%}
     <a href="/" itemprop="url" title="{{section.settings.logo.alt}}">
       {%- if section.settings.logo != blank -%}
-        {%- capture image_size -%}{{ section.settings.logo_max_width }}x{%- endcapture -%}
+        {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
         <img src="{{ section.settings.logo | img_url: image_size }}"
               srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
               alt="{{ section.settings.logo.alt | default: shop.name }}"
@@ -31,7 +31,7 @@
 {%- endcapture -%}
 
 <div js-site-header="true" class="site-header 
-  {%- if section.settings.logo_position == 'left' -%} site-header--left-align {%- endif -%}"  
+  {% if section.settings.logo_position == 'left' %} site-header--left-align {% endif %}"  
   data-section-id="{{ section.id }}" data-section-type="site-header-section">
 
   <div class="page-width">
@@ -82,33 +82,33 @@
 
         <li>
           <a href="#"  class="site-header__search-icon" title="Search store">
-          {%- include 'icons' with icon: 'search-wolf' -%}
-            {%- unless section.settings.enable_full_screen_search -%}
-              {%- include 'search-form--basic' -%}
-            {%- endunless -%}
+          {% include 'icons' with icon: 'search-wolf' %}
+            {% unless section.settings.enable_full_screen_search %}
+              {% include 'search-form--basic' %}
+            {% endunless %}
           </a>
         </li>
 
-        {%- if shop.customer_accounts_enabled -%}
-          {%- if customer -%}
+        {% if shop.customer_accounts_enabled %}
+          {% if customer %}
             <li class="site-header__mobile-hide">
                 <a href="/account" title="Account">
-                  {%- include 'icons' with icon: 'account-wolf' -%}
+                  {% include 'icons' with icon: 'account-wolf' %}
                 </a>
             </li>
-          {%- else -%}
+          {% else %}
             <li class="site-header__mobile-hide">
               <a href="/account/login" title="Login">
-                {%- include 'icons' with icon: 'account-wolf' -%}
+                {% include 'icons' with icon: 'account-wolf' %}
               </a>
             </li>
-          {%- endif -%}
-        {%- endif -%}
+          {% endif %}
+        {% endif %}
 
         <li>
           <a href="/cart" id="Cart-icon" class="site-header__cart-icon" title="Cart">
-            <div class="cart-icon__container {%- if cart.item_count != 0 -%}is-active{%- endif -%}">
-              {%- include 'icons' with icon: 'cart-wolf' -%}
+            <div class="cart-icon__container {% if cart.item_count != 0 %}is-active{% endif %}">
+              {% include 'icons' with icon: 'cart-wolf' %}
               <span class="js-cart-item-count cart-count">{{ cart.item_count }}</span>
             </div>
           </a>
@@ -120,13 +120,13 @@
   
 </div>
 
-{%- include 'ajax-cart' -%}
+{% include 'ajax-cart' %}
 
-{%- include 'site-header-navigation-mobile' -%}
+{% include 'site-header-navigation-mobile' %}
 
-<div js-site-header="overlay" class="site-header__overlay">{%- comment -%}Do not delete this div{%- endcomment -%}</div>
+<div js-site-header="overlay" class="site-header__overlay">{% comment %}Do not delete this div{% endcomment %}</div>
 
-{%- schema -%}
+{% schema %}
   {
     "name": "Site Header",
     "settings": [
@@ -292,4 +292,4 @@
       }
     ]
   }
-{%- endschema -%}
+{% endschema %}

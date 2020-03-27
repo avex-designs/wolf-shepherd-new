@@ -38,17 +38,24 @@
       <script type="application/json" id="product" data-product-json>
         {{ product | json }}
       </script>
-      
-      <script id="productInventory" data-inventory-json type="application/json">
-        {% for variant in product.variants %}
-          window.ProductInventoryJSON[{{ variant.id | json }}] = {
-            available: {{ variant.available | json }},
-            id: {{ variant.id | json }},
-            incoming: {{ variant.incoming | json }},
-            inventory_quantity: {{ variant.inventory_quantity | json }},
-          }
-        {% endfor %}
+      <script id="productInventory" data-inventory-json type="application/json"></script>
+      <script>
+     	let product = document.querySelector('#product').textContent;
+        let productJson = product && JSON.parse(product)
+        let output = ''
+        productJson && productJson.variants.forEach(item => {
+          	
+        let cst = `window.ProductInventoryJSON[${item.id}] = {
+            available: ${item.available},
+            id: ${item.id},
+            incoming: ${item.incoming},
+            inventory_quantity: ${item.inventory_quantity},
+        }`            
+           return output +=  '\n' + cst
+        });
+        document.querySelector('#productInventory').textContent = output
       </script>
+      
     {% endunless %}
 
 

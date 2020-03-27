@@ -295,7 +295,9 @@ export default (config) => {
   }
 
   function setToAvailable(element) {
-    element.classList.remove(cssClasses.disabled);
+   
+    if(element){
+      element.classList.remove(cssClasses.disabled);
     //element.removeAttribute("disabled");
     if(container.dataset.sectionId !== 'product-mini-form'){
       document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((elm) => {
@@ -305,7 +307,7 @@ export default (config) => {
         }    
       });
     }
-
+  }
     if(container.getAttribute('js-swatch-product') !== 'main'){
       document.querySelector('[js-swatch-product="main"]').querySelectorAll('[js-product-swatches="container"]').forEach((elm) => {
         if(element.dataset.swatchValue === elm.dataset.swatchValue ){
@@ -362,7 +364,9 @@ export default (config) => {
     const swatchValue = $this.attr('data-swatch-value');
     const swatchOption = $this.attr('data-swatch-option').replace('-', '') 
     $(`${config.container} [data-index="${swatchOption}"]`).val(swatchValue).trigger('change')
-      
+    if(container.dataset.sectionId !== 'product-mini-form'){
+    $(`[data-section-type="product-miniform"] [data-index="${swatchOption}"]`).val(swatchValue).trigger('change')
+    }
     // $('.affirm-as-low-as').attr('data-amount', 32900);
     // affirm.ui.refresh();
   }

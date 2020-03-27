@@ -205,6 +205,27 @@ $border-color: #dedede;
       padding: 10px 0;
       text-align: center;
     }
+    @media screen and (max-width:500px){
+      button{
+        text-decoration: none !important;
+      }
+    }
+    .cartremovetext {
+      padding: 0;
+      text-align: right;
+      @media screen and (max-width:500px){
+        display: none;
+      }
+    }
+    .cartremovex {
+      padding: 0;
+      text-align: right;
+      display: none;
+      font-size: 16px;
+      @media screen and (max-width:500px){
+        display: block;
+      }
+    }
   }
 
   &__quanity-wrapper {
