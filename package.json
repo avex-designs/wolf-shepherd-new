@@ -38,7 +38,7 @@
     "@shopify/theme-variants": "^1.0.0-alpha.8",
     "drift-zoom": "^1.4.0",
     "instafeed.js": "^1.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-match-height": "^0.7.2",
     "jquery.cookie": "^1.4.1",
     "lazysizes": "^4.1.1",
