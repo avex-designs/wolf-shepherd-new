@@ -13,11 +13,11 @@
       <div class="grid__item medium-up--one-half large-up--five-twelfths product-meta__container">
         <div class="product-meta">
           
-          {% include 'product-header' %}
-          {% include 'product-form' %}
+          {% include 'product-header' with type: 'seconds' %}
+          {% include 'product-form' with type: 'seconds' %}
 
           <div class="product-description">
-            {% include 'product-accordion' %}
+            {% include 'product-accordion-seconds' %}
           </div>
 
           {% if section.settings.enable_usp %}
@@ -100,14 +100,14 @@ const urlParams = new URLSearchParams(queryString)
 const variant = urlParams.get('variant')
 if(!variant){
  
-  let swatches = document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-2');
+  let swatches = document.querySelector('#shopify-section-product-seconds').querySelector('.swatch__wrapper.option-2');
   if(swatches){
     swatches.querySelectorAll('button').forEach(it => {
           it.classList.remove('is-active')
     })
   }
   
-  let swatches_opt3 = document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-3');
+  let swatches_opt3 = document.querySelector('#shopify-section-product-seconds').querySelector('.swatch__wrapper.option-3');
   if(swatches_opt3){
     swatches_opt3.querySelectorAll('button').forEach(it => {
           it.classList.remove('is-active')
@@ -116,20 +116,20 @@ if(!variant){
   
 }
 
-document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-1').addEventListener('click', (event) => {
+document.querySelector('#shopify-section-product-seconds').querySelector('.swatch__wrapper.option-1').addEventListener('click', (event) => {
   const isButton = event.target.nodeName === 'BUTTON';
   if (!isButton) {
     return;
   }
-  if( document.querySelector('#shopify-section-product').querySelector('.swatch__size-container__title-trigger')){
-document.querySelector('#shopify-section-product').querySelector('.swatch__size-container__title-trigger').innerHTML = 'SELECT SIZE'
+  if(document.querySelector('#shopify-section-product-seconds').querySelector('.swatch__size-container__title-trigger')){
+    document.querySelector('#shopify-section-product-seconds').querySelector('.swatch__size-container__title-trigger').innerHTML = 'SELECT SIZE'
   }
   
 })
 
 </script>
 
-{% comment %} <script>
+{% comment %} ===<script>
 document.querySelector('#shopify-section-product').querySelector('.swatch__wrapper.option-1').addEventListener('click', (event) => {
   const isButton = event.target.nodeName === 'BUTTON';
   if (!isButton) {

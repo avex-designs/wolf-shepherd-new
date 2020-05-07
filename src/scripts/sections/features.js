@@ -49,11 +49,11 @@ register('features', {
 
   addSlider() {
     const section = this;
-    const $slider = $(`.features__wrapper--${this.id}`);
-    if ($slider.hasClass('slick-initialized')) {
-      $slider.slick('reinit');
-    } else {
-      $slider.slick(section.getSliderSettings());
-    }
+    // const $slider = $(`.features__wrapper--${this.id}`);
+    // if ($slider.hasClass('slick-initialized')) {
+    //   $slider.slick('reinit');
+    // } else {
+    //   $slider.slick(section.getSliderSettings());
+    // }
   },
 });

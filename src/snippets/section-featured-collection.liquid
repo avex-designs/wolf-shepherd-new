@@ -3,7 +3,7 @@
     <div class="page-width feature-collection__title">
       <div class="grid">
         <div class="grid__item medium-up--one-whole">
-          <h4>{{section.settings.cart-title}}</h4>
+          <h4>{% if collection.handle == 'seconds' %}More from the Warehouse Sale{% else %}{{section.settings.cart-title}}{% endif %}</h4>
         </div>
       </div>
     </div>
@@ -11,8 +11,12 @@
   <div class="page-width {% if section.settings.show_carousel %} page-width--slider {% endif %}">
     <div class="grid">
       <div class="grid__item medium-up--one-whole">
-        <div class="feature-collection__container">          
+        <div class="feature-collection__container">         
+          {% if collection.handle == 'seconds' %} 
+          {%- assign collection = collections.seconds -%}
+          {% else %}
           {%- assign collection = collections[section.settings.collection] -%}
+          {% endif %}
           {%- assign collectionCounter = section.settings.product_count -%}   
           {%- capture collectionCounterClass -%}
             grid__item small--one-half

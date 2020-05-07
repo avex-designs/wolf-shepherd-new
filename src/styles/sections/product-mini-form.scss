@@ -172,6 +172,9 @@
 .product-form-mini__footer .spurit-po-wrapper{
   width: 100%;
 }
+.design-pre-order-template-wrapper button{
+  width: 100%;
+}
 .product-form-mini__footer .design-pre-order-template-wrapper .pre-order-2-button{
   width: 100% !important;
   background-color: #dce4ed !important;
@@ -181,4 +184,8 @@
   font-size: 12px !important;
   font-weight: 300 !important;
   padding: 15px 0 !important;
+  border-radius: 0;
+}
+.product-form-mini__footer .design-pre-order-template-wrapper .pre-order-2-button.hover{
+  display: none !important;
 }

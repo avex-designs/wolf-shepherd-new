@@ -481,3 +481,64 @@ Collection
     }
   }
 }
+
+.seconds-image-block {
+  justify-content: left;
+  .hero-image__wrapper{
+   
+    h1{
+      font-size: 70px;
+      margin-bottom: 20px;
+      @media screen and (max-width: 759px){
+        font-size: 51px;
+      }
+    }
+    p{
+      font-weight: 600;
+      letter-spacing: 2px;
+      line-height: 6px;
+      font-size: 16px;
+      font-family: "SackersGothicStd-Medium", sans-serif;
+      text-transform: uppercase;
+
+      span{
+        font-size: 20px;
+        font-weight: 400;
+      }
+
+      @media screen and (max-width: 759px){
+        font-size: 14px;
+        margin-bottom: 6px;
+        line-height: 18px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 759px){
+    justify-content: center;
+    align-items: flex-start;
+    height: auto;
+    min-height: 620px;
+    background-size: cover;
+    background-position: 50% 100%;
+    .hero-image__wrapper{
+      margin-top: 20px;
+    }
+  }
+
+}
+.disclaimer{
+  padding: 30px 0;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  p{
+    font-family: "AtlasGrotesk-Light",sans-serif;
+  }
+  @media screen and (max-width: 759px){
+    padding: 30px 25px;
+    p{
+      line-height: 15px;
+    }
+  }
+}

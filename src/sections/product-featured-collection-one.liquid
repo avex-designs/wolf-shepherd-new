@@ -1,19 +1,20 @@
 {%- comment -%}
   modules/feature-collection.scss
 {%- endcomment -%}
+
 <div class="product-featured-collection {% if section.settings.background_light == false %}product-featured-collection--dark{% endif %}">
 {%- if section.settings.title -%}
   <div class="page-width">
     <div class="grid">
       <div class="grid__item small--one-whole">
-        <h2 class="product-featured-collection__title">{{section.settings.title}}</h2>
+        <h2 class="product-featured-collection__title">{% if collection.handle == 'seconds' %}More from the Warehouse Sale{% else %}{{section.settings.title}}{% endif %}</h2>
       </div>
     </div>
   </div>
 {%- endif -%}
 {%- include 'section-featured-collection' -%}
 </div>
-{%- schema -%}
+{% schema %}
   {
     "name": "Featured collection",
     "settings": [
@@ -98,4 +99,4 @@
       }
     ]
   }
-{%- endschema -%}
+{% endschema %}

@@ -1,0 +1,122 @@
+<div class="seconds-slider ">
+  <div class="seconds-slider-main page-width" data-section-id="{{ section.id }}" data-section-type="seconds-slider">
+      {% for i in (1..4) %}
+      <div class="seconds-slider-child">        
+        {%- if i == 1 -%}
+          <h3>{{- section.settings.carousel_item1_title -}}</h3>
+          <div class="seconds-slide-child">
+            {% for block in section.blocks %}
+              {% assign id = block.settings.carousel_id | plus: 0 %}
+              {% if id == i %}
+                <div><img src="{{block.settings.carousel_image | img_url: '400x' }}" alt="{{block.settings.carousel_image.alt}}" /></div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {%- elsif  i == 2 -%}
+          <h3>{{- section.settings.carousel_item2_title -}}</h3>
+          <div class="seconds-slide-child">
+            {% for block in section.blocks %}
+              {% assign id = block.settings.carousel_id | plus: 0 %}
+              {% if id == i %}
+                <div><img src="{{block.settings.carousel_image | img_url: '400x' }}" alt="{{block.settings.carousel_image.alt}}" /></div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {%- elsif  i == 3 -%}
+          <h3>{{- section.settings.carousel_item3_title -}}</h3>
+          <div class="seconds-slide-child">
+            {% for block in section.blocks %}
+              {% assign id = block.settings.carousel_id | plus: 0 %}
+              {% if id == i %}
+                <div><img src="{{block.settings.carousel_image | img_url: '400x' }}" alt="{{block.settings.carousel_image.alt}}" /></div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {%- else -%}
+          <h3>{{- section.settings.carousel_item4_title -}}</h3>
+          <div class="seconds-slide-child">
+            {% for block in section.blocks %}
+              {% assign id = block.settings.carousel_id | plus: 0 %}
+              {% if id == i %}
+                <div><img src="{{block.settings.carousel_image | img_url: '400x' }}" alt="{{block.settings.carousel_image.alt}}" /></div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {%- endif -%}              
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% schema %}
+  {
+    "name": "Seconds Slider",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Carousel Title"
+      },
+      {
+        "type": "text",
+        "id": "carousel_item1_title",
+        "label": "Item 1 Title"
+      },
+      {
+        "type": "text",
+        "id": "carousel_item2_title",
+        "label": "Item 2 Title"
+      },
+      {
+        "type": "text",
+        "id": "carousel_item3_title",
+        "label": "Item 3 Title"
+      },
+      {
+        "type": "text",
+        "id": "carousel_item4_title",
+        "label": "Item 4 Title"
+      }
+    ],
+  
+    
+    "blocks":[
+      {
+        "type": "heading",
+        "name": "Carousel Item",
+         "settings": [
+           {
+              "type":      "select",
+              "id":        "carousel_id",
+              "label":     "Carousel ID",
+              "options": [
+                {
+                  "value": "1",
+                  "label": "1"
+                },
+                {
+                  "value": "2",
+                  "label": "2"
+                },
+                {
+                  "value": "3",
+                  "label": "3"
+                },
+                {
+                  "value": "4",
+                  "label": "4"
+                }
+              ]
+            },
+            {
+            "type": "image_picker",
+            "id": "carousel_image",
+            "label": "Image"
+            }
+         ]
+
+      }
+    ]
+   
+  }
+
+{% endschema %}

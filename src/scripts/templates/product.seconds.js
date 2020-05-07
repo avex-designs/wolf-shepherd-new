@@ -5,9 +5,7 @@ import '../sections/product-miniform';
 
 import '../sections/size-guide';
 import SwatchProduct from '../sections/swatch-product';
-
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('productjs')
   ProductSlider().init();
   
   if (document.querySelector('[js-swatch-product="main"]') !== null) {

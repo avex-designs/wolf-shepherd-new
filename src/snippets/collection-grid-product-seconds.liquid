@@ -1,0 +1,93 @@
+{%- comment -%}
+  Set the default grid_item_width if no variable is set
+{%- endcomment -%}
+{%- unless grid_item_width -%}
+  {%- assign grid_item_width = gridWidth -%}
+{%- endunless -%}
+{%- comment -%}
+  Check if the product is sold out and set a variable to be used below.
+{%- endcomment -%}
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+  {%- assign sold_out = false -%}
+{%- endif -%}
+{%- comment -%}
+  If product contains tag badge
+{%- endcomment -%}
+{%- assign has_badge_text = false -%}
+{%- assign has_badge_color = false -%}
+{%- assign badge_text = '' -%}
+{%- assign badge_color = '' -%}
+{%- for tag in product.tags -%}
+  {%- if tag contains "badge-text" -%}
+    {%- assign has_badge_text = true -%}
+    {%- assign badge_text = tag | split: ':' | last -%}
+  {%- endif -%}
+  {%- if tag contains "badge-colour" or tag contains "badge-color" -%}
+    {%- assign has_badge_color = true -%}
+    {%- assign badge_color = tag | split: ':' | last -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign stock_counter = 0 -%}
+{%- if sold_out == true -%}
+  {%- assign has_badge_text = true -%}
+  {%- assign badge_text = 'Sold Out' -%}
+{%- else -%}
+  {%- for variant in product.variants -%}
+    {%- if variant.inventory_management == "shopify" and variant.inventory_policy != "continue" -%}
+      {%- assign stock_counter = stock_counter | plus: variant.inventory_quantity -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign stock_level = settings.low_in_stock | plus: 0  -%}
+  {%- if stock_counter != 0 and stock_counter <= stock_level -%}
+    {%- assign has_badge_text = true -%}
+    {%- assign badge_text = stock_counter | append: ' left in stock' -%}
+  {%- endif -%}
+{%- endif -%}
+<div class="collection-grid-item__match-height {{ grid_item_width }} text-{{section.settings.product-text-alignment}}">
+  <div class="collection-grid-item">
+    {%- if has_badge_text -%}
+      <div class="collection-grid-item__badge" {% if has_badge_color %} style="background-color: {{ badge_color }}" {% endif %} >{{ badge_text }}</div>
+    {%- endif -%}
+    <a href="{{ product.url | within: collection }}" class="collection-grid-item__image-wrapper" title="Imag of {{ product.title }}">
+        {%- assign image_url = product.featured_image.src | img_url: '380x' -%}
+        {%- assign image_url_2x = product.featured_image.src | img_url: '880x' -%}
+        <img 
+        data-src="{{ image_url }}"
+        data-srcset="{{image_url}} 1x"
+        alt="{{ product.featured_image.alt | escape }}"  
+        class="lazyload" />
+    </a>
+    <div class="collection-grid-item__text-wrapper">
+      <a href="{{ product.url }}" title="{{ product.title }}">
+        <h3 class="h4 collection-grid-item__title">{{ product.title }}</h3>
+        {%- if section.settings.show_excerpt -%}
+          <p>{{product.description | strip_html | truncatewords:30 }}</p>
+        {%- endif -%}
+        <p class="collection-grid-item__price">
+          {%- if product.compare_at_price > product.price -%}
+            {%- if product.price_varies -%}
+              
+              {%- assign sale_price = product.price | money_without_trailing_zeros -%}
+              {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+            {%- else -%}
+              <del style="color:#000;"><span style="color:#000">{{ product.compare_at_price | money_without_trailing_zeros }}</span></del>
+              {% comment %} {{ 'products.product.on_sale' | t }} {% endcomment %}
+              <strong>{{ product.price | money_without_trailing_zeros }}</strong>
+            {%- endif -%}
+          {%- else -%}
+            {%- if product.price_varies -%}
+            
+              {%- assign price = product.price | money_without_trailing_zeros -%}
+              {{ 'products.product.from_text_html' | t: price: price }}
+            {%- else -%}
+          
+              {{ product.price | money_without_trailing_zeros }}
+            {%- endif -%}
+          {%- endif -%}
+        </p>
+      </a>
+    </div>
+{%- include 'swatch-collection' -%}
+  </div>
+</div>

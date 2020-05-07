@@ -63,10 +63,16 @@ export default (config) => {
         $('[data-section-type="product-miniform"] [data-index="option3"]').val([])
         optionActive(target, 1);
         checkInventory(target);
-        updateColorTitle(target);
+        if(target.dataset && target.dataset.swatchColor){
+          updateColorTitle(target);
+        }else if(target.classList.contains('swatch-product--size')){
+          
+          updateSizeTitle(target);
+        }
+       
         setSwatchesToUnactive()    
         
-        if (config.updateSlider === true) {
+        if (config.updateSlider === true && target.dataset.swatchColor) {
           updateSlider(target);
         }
     }
@@ -96,8 +102,12 @@ export default (config) => {
   }
 
   function getCurrentSelected(value) {
+    //console.log(container)
+    //console.log(value)
     const option = container.querySelector(`[data-swatch-option="option-${value}"].is-active`);
+   
     if (option === null) {
+      
       return false;
     } else {
       const optionValue = option.dataset.swatchValue;
@@ -112,8 +122,10 @@ export default (config) => {
     const inventory = await getVariants();
     
     if(target.dataset.swatchOption === 'option-1'){
-      setSwatchesToUnavailable()
-      setSwatchesToAvailableThird()
+      if(currentOption2){
+        setSwatchesToUnavailable()
+        setSwatchesToAvailableThird()
+      }
     }
     if(target.dataset.swatchOption === 'option-2'){
       setSwatchesToUnavailableThird()
@@ -271,12 +283,15 @@ export default (config) => {
   }
 
   function setToUnavailable(element) {
-    element.classList.add(cssClasses.disabled);
+    if(element && element.classList){
+      element.classList.add(cssClasses.disabled);
+    }
+    
     //element.setAttribute("disabled", true);
 
     if(container.dataset.sectionId !== 'product-mini-form'){
       document.querySelector('#shopify-section-product-mini-form').querySelectorAll('[js-product-swatches="container"]').forEach((elm) => {
-        if(element.dataset.swatchValue === elm.dataset.swatchValue ){
+        if(element && element.dataset.swatchValue === elm.dataset.swatchValue ){
           element.classList.add(cssClasses.disabled);
           //element.setAttribute("disabled", true);
         }    
@@ -343,14 +358,19 @@ export default (config) => {
 
     if(optionNumber === 1){
       let colormini = document.querySelector('#shopify-section-product-mini-form').querySelector('.product-form-mini__form-toggle [js-swatch="color"]')
-      colormini.classList = ""
-      colormini.classList.add("product-form-mini--"+target.dataset.swatchValue.replace(/\s+/g, '-').toLowerCase())
-      colormini.innerHTML = target.dataset.swatchValue
-      document.querySelector('#shopify-section-product-mini-form').querySelector('.product-form-mini__form-toggle [js-swatch="size"]').innerHTML = ''
+      if(colormini){
+        colormini.classList = ""
+        colormini.classList.add("product-form-mini--"+target.dataset.swatchValue.replace(/\s+/g, '-').toLowerCase())
+        colormini.innerHTML = target.dataset.swatchValue
+        document.querySelector('#shopify-section-product-mini-form').querySelector('.product-form-mini__form-toggle [js-swatch="size"]').innerHTML = ''
+      }
     }
     if(optionNumber === 2){
       let sizemini = document.querySelector('#shopify-section-product-mini-form').querySelector('.product-form-mini__form-toggle [js-swatch="size"]')
-      sizemini.innerHTML = target.dataset.swatchValue
+      if(sizemini){
+        sizemini.innerHTML = target.dataset.swatchValue
+      }
+      
     }
 
     container.querySelectorAll(`[data-swatch-option="option-${optionNumber}"]`).forEach((element) => {
@@ -373,21 +393,26 @@ export default (config) => {
 
   function updateSlider(target) {
     const swatchValue = target.dataset.slider;
-
     $('.product-images__container').removeClass(cssClasses.active);
     $(`#${swatchValue}`).addClass(cssClasses.active);
   }
 
   function updateColorTitle(target) {
     const swatchColor = target.dataset.swatchValue;
-
-    container.querySelector('[js-swatch="color"]').innerHTML = swatchColor;
+    if(container.querySelector('[js-swatch="color"]')){
+      container.querySelector('[js-swatch="color"]').innerHTML = swatchColor;
+    }
+    
   }
 
   function updateSizeTitle(target) {
     const swatchSize = target.dataset.swatchValue;
-
-    container.querySelector('[js-swatch="size"]').innerHTML = `SIZE: ${swatchSize}`;
+    if(target.dataset.swatchColor){
+      container.querySelector('[js-swatch="size"]').innerHTML = `SIZE: ${swatchSize}`;
+    }else{
+      document.querySelector('.product-form-mini__form-toggle [js-swatch="size"]').innerHTML = `SIZE: ${swatchSize}`;
+    }
+    
   }
 
   function openMiniSwatch() {

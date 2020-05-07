@@ -33,7 +33,7 @@
   {%- else -%}
     {%- if collection.image == blank -%}
       {%- assign sectionImage = section.settings.default_image | img_url: '1700x'  -%}
-      {%- assign sectionImageMobile = section.settings.default_image | img_url: '800x'  -%}
+      {%- assign sectionImageMobile = section.settings.mobile_image | img_url: '800x'  -%}
     {%- else -%}
       {%- assign sectionImage = collection.image | img_url: '1700x'  -%}
       {%- assign sectionImageMobile = collection.image | img_url: '800x'  -%}
@@ -147,7 +147,7 @@
   {%- assign mp4 = block.settings.mp4 -%}
   {%- assign ogg = block.settings.ogg -%}
 {%- endif -%}
-
+<script>console.log({{sectionImageMobile | json }})</script>
 {%- if sectionEnable -%}
   {%- if sectionFullWidth != 'full-width' -%}<div class="page-width page-width--hero-image">{%- endif -%}
 
@@ -161,7 +161,13 @@
         <h1 class="visually-hidden">{{ collection.title }}</h1>
         <span class="{{ sectionTextSize }} hero-image__title">{{ collection.description }}</h2>
       {%- else -%}
-        <h1 class="{{ sectionTextSize }} hero-image__title">{{ collection.title }}</h1>
+        {% if section.settings.custom_title %}
+          {{ section.settings.custom_title }}          
+        {% else %}
+          <h1 class="{{ sectionTextSize }} hero-image__title">{{ collection.title }}</h1>
+        {% endif %}
+        
+        
       {%- endif -%}
     {%- else -%}
       {%- if sectionTitle != blank -%}
@@ -192,6 +198,7 @@
   {%- endif -%}
 
     <div class="hero-image hero-image--{{ sectionId }} 
+    {% if section.settings.custom_title %} seconds-image-block {% endif %}
       {{ sectionHeight }}
       {{ sectionPositionX }}
       {{ sectionPositionY }} 
@@ -252,3 +259,10 @@
   {%- if sectionFullWidth != 'full-width' -%}</div>{%- endif -%}
   
 {%- endif -%}
+{% if section.settings.disclaimer %}
+<div class="page-width" id="disclaimer">
+  <div class="disclaimer">
+    {{ section.settings.disclaimer }}
+  </div>
+</div>
+{% endif %}

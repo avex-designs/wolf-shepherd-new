@@ -61,6 +61,20 @@
     }
   }
 
+  @media (min-width: 300px) {
+    &__wrapper {
+      display: block;
+    }
+
+    &__block {
+      margin-bottom: 45px;
+      padding: 0 12px;
+      width: 45%;
+      vertical-align: top;
+    display: inline-block !important;
+    }
+  }
+
   @media (min-width: 760px) {
     &__wrapper {
       display: flex;

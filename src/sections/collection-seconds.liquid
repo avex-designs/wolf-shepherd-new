@@ -1,0 +1,459 @@
+{% comment %}
+  modules/.scss
+{% endcomment %}
+{%- assign collectionCounter = section.settings.product_per_row -%} 
+{%- capture collectionCounterClass -%}
+  grid__item small-px--one-half
+  {% case collectionCounter %}
+    {% when '2' %}
+      medium-up--one-half
+    {% when '3' %}
+      medium-up--one-third
+    {% when '4' %}
+      medium-up--one-quarter
+    {% else %}
+      medium-up--one-whole
+  {% endcase %}
+{%- endcapture -%}
+
+{% assign collectionCount = section.settings.product_per_page | plus: 0  %}
+
+{% paginate collection.products by collectionCount %}
+
+  {% include 'hero-image' with type: 'collection' %}
+
+  {% include 'sub-menu' %}
+
+  <div class="collection-wrapper">
+    <div class="page-width page-width--no-max">
+
+      <div class="grid">
+        <div class="grid__item medium-up--one-quarter">
+          <div class="collection-filter__container">
+            <div class="collection-filter">
+              {% include 'filter-menu' %}
+            </div>
+          </div>
+        </div>
+        <div class="grid__item medium-up--three-quarters">
+        <div class="grid">
+          {% for product in collection.products %}
+
+            {% include 'collection-grid-product-seconds' with gridWidth: collectionCounterClass  %}
+
+            {% if forloop.index == 12 %}
+              {% for block in section.blocks %}
+                <div class="grid__item small--one-whole collection__hero">
+                  {% include 'hero-image' with type: 'block' %}
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+              <p>{{ 'collections.general.no_matches' | t }}</p>
+              {% break %}
+            {% endif %}
+            
+          {% endfor %}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if paginate.pages > 1 %}
+  <div class="page-width text-center">
+    {% include 'pagination' %}
+  </div>
+  {% endif %}
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Collection Seconds L",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Collection hero image"
+      },
+      {
+        "type": "select",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": "no-margin",
+        "options": [
+          {
+            "label": "Margin bottom",
+            "value": "section-margin-bottom"
+          },
+          {
+            "label": "No margin",
+            "value": "no-margin"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "full-width",
+        "label": "Full width",
+        "default": "full-width",
+        "options": [
+          {
+            "label": "Full width",
+            "value": "full-width"
+          },
+          {
+            "label": "Within wrapper",
+            "value": "wrapper"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "positionX",
+        "label": "Text position horizontal",
+        "default": "hero-image--center",
+        "options": [
+          {
+            "value": "hero-image--left",
+            "label": "Left"
+          },
+          {
+            "value": "hero-image--center",
+            "label": "Center"
+          },
+          {
+            "value": "hero-image--right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "positionY",
+        "label": "Text position vertical",
+        "default": "hero-image--middle",
+        "options": [
+          {
+            "value": "hero-image--top",
+            "label": "Top"
+          },
+          {
+            "value": "hero-image--middle",
+            "label": "Middle"
+          },
+          {
+            "value": "hero-image--bottom",
+            "label": "Bottom"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "alignment",
+        "label": "Text alignment",
+        "default": "hero-image--text-center",
+        "options": [
+          {
+            "value": "hero-image--text-left",
+            "label": "Left"
+          },
+          {
+            "value": "hero-image--text-center",
+            "label": "Center"
+          },
+          {
+            "value": "hero-image--text-right",
+            "label": "Right"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "text_color",
+        "label": "Text colour",
+        "default": "hero-image--black",
+        "options": [
+          {
+            "label": "Light",
+            "value": "hero-image--white"
+          },
+          {
+            "label": "Dark",
+            "value": "hero-image--black"
+          }
+        ]
+      },
+      {
+        "type": "image_picker",
+        "id": "default_image",
+        "label": "Default image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Mobile image"
+      },
+
+       {
+        "type": "html",
+        "id": "custom_title",
+        "label": "Custom title"
+      },
+      {
+        "type": "richtext",
+        "id": "disclaimer",
+        "label": "Disclaimer"
+      },
+
+      {
+        "type": "header",
+        "content": "Collection Settings"
+      },
+      {
+        "type": "link_list",
+        "id": "linklist",
+        "label": "Navigation"
+      }, 
+      {
+        "type": "number",
+        "id": "product_per_page",
+        "label": "Number of products per page"
+      },
+      {
+        "type": "select",
+        "id": "product_per_row",
+        "label": "Number of products per row",
+        "default": "3",
+        "options": [
+          {
+            "value": "2",
+            "label": "2"
+          },
+          {
+            "value": "3",
+            "label": "3"
+          },
+          {
+            "value": "4",
+            "label": "4"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 1,
+    "blocks": [
+      {
+        "type": "hero",
+        "name": "Hero image",
+        "settings": [
+          {
+            "type": "select",
+            "id": "height",
+            "label": "Block height",
+            "default": "hero-image--xlarge",
+            "options": [
+              {
+                "label": "Small",
+                "value": "hero-image--small"
+              },
+              {
+                "label": "Medium",
+                "value": "hero-image--medium"
+              },
+              {
+                "label": "Large",
+                "value": "hero-image--large"
+              },
+              {
+                "label": "X-Large",
+                "value": "hero-image--xlarge"
+              },
+              {
+                "label": "Ratio Collection",
+                "value": "hero-image__ratio--collection"
+              }
+            ]
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Desktop Image",
+            "info": "Advised size:"
+          },
+
+          {
+            "type": "text",
+            "id": "mp4",
+            "label": "Auto play mp4",
+            "info": "Advised size:"
+          },
+          {
+            "type": "text",
+            "id": "ogg",
+            "label": "Auto play ogg",
+            "info": "Advised size:"
+          },
+
+          {
+            "type": "select",
+            "id": "positionX",
+            "label": "Text position horizontal",
+            "default": "hero-image--center",
+            "options": [
+              {
+                "value": "hero-image--left",
+                "label": "Left"
+              },
+              {
+                "value": "hero-image--center",
+                "label": "Center"
+              },
+              {
+                "value": "hero-image--right",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "positionY",
+            "label": "Text position vertical",
+            "default": "hero-image--middle",
+            "options": [
+              {
+                "value": "hero-image--top",
+                "label": "Top"
+              },
+              {
+                "value": "hero-image--middle",
+                "label": "Middle"
+              },
+              {
+                "value": "hero-image--bottom",
+                "label": "Bottom"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "alignment",
+            "label": "Text alignment",
+            "default": "hero-image--text-center",
+            "options": [
+              {
+                "value": "hero-image--text-left",
+                "label": "Left"
+              },
+              {
+                "value": "hero-image--text-center",
+                "label": "Center"
+              },
+              {
+                "value": "hero-image--text-right",
+                "label": "Right"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_color",
+            "label": "Text colour",
+            "default": "hero-image--black",
+            "options": [
+              {
+                "label": "Light",
+                "value": "hero-image--white"
+              },
+              {
+                "label": "Dark",
+                "value": "hero-image--black"
+              }
+            ]
+          },
+          {
+            "type": "select",
+            "id": "text_size",
+            "label": "Text size",
+            "default": "d1",
+            "options": [
+              {
+                "label": "XLarge",
+                "value": "d1"
+              },
+              {
+                "label": "Large",
+                "value": "d2"
+              }
+            ]
+          },
+          {
+            "type": "richtext",
+            "id": "title",
+            "label": "Heading",
+            "default": "<p>Image with text overlay</p>"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use overlay text to give your customers insight into your brand. Select imagery and text that relates to your style and story.</p>"
+          },     
+          {
+            "type": "text",
+            "id": "button_label",
+            "label": "Button label"
+          },
+          {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button link"
+          },
+          {
+            "type": "select",
+            "id": "button_color",
+            "label": "Button colour",
+            "default": "button button--black",
+            "options": [
+              {
+                "label": "Light",
+                "value": "button--white"
+              },
+              {
+                "label": "Dark",
+                "value": "button button--black"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "content": "Mobile only settings"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile Image",
+            "info": "Advised size:"
+          },
+          {
+            "type": "select",
+            "id": "mobile_text_position",
+            "label": "Mobile text position",
+            "default": "hero-image--mobile-text-overlay",
+            "options": [
+              {
+                "label": "Text under",
+                "value": "hero-image--mobile-text-under"
+              },
+              {
+                "label": "Text overlay",
+                "value": "hero-image--mobile-text-overlay"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}

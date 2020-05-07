@@ -30,6 +30,7 @@ import '../sections/collection-page';
 import '../sections/features';
 import '../sections/reviews';
 import '../sections/testimonials';
+import '../sections/seconds-slider';
 import SwatchProduct from '../sections/swatch-product';
 
 import Accordion from '../components/accordion';

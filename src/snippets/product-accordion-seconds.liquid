@@ -1,0 +1,53 @@
+<div class="accordion_section">      
+  <ul class="accordion">
+    
+    
+      <li class="accordion__item font-reset" js-accordion="item">
+        <button tabindex="0" class="accordion__control h6" js-accordion="control">
+          THE SECONDS COLLECTION
+          <span class="accordion__arrow-up accordion__arrow">
+            {%- include 'icons' with icon: 'wolf-minus' -%}
+          </span>
+          <span class="accordion__arrow accordion__arrow-down">
+            {%- include 'icons' with icon: 'wolf-plus' -%}
+          </span>
+        </button>
+        <div id="content-1" class="accordion__content font-reset" js-accordion="content">
+            <p>The Seconds Collection is a private, limited collection of our shoes that don't quite meet the standards to be sold as "mint condition". Some of these are customer returns while others are unworn shoes that were scuffed slightly during shipping, or came from our manufacturer in less than perfect condition. Please take a look below at some examples of what you might expect to see on your pair of Seconds.</p>
+            <p>Also note that every shoe purchased will be different and not exactly as pictured here.</p>
+        </div>
+      </li>
+
+      <li class="accordion__item font-reset" js-accordion="item">
+        <button tabindex="0" class="accordion__control h6" js-accordion="control">
+          FINAL SALE
+          <span class="accordion__arrow-up accordion__arrow">
+            {%- include 'icons' with icon: 'wolf-minus' -%}
+          </span>
+          <span class="accordion__arrow accordion__arrow-down">
+            {%- include 'icons' with icon: 'wolf-plus' -%}
+          </span>
+        </button>
+        <div id="content-1" class="accordion__content font-reset" js-accordion="content">
+            <p>Because of the heavily discounted nature of the shoes in this collection, all Seconds purchases are FINAL SALE. No returns or exchanges are offered on these products.</p>
+        </div>
+      </li>
+    {%- unless product.metafields.fit.product_fit == blank -%}
+      <li class="accordion__item font-reset" js-accordion="item">
+        <button tabindex="0" class="accordion__control h6" js-accordion="control">
+          Fit 
+          <span class="accordion__arrow-up accordion__arrow">
+            {%- include 'icons' with icon: 'wolf-minus' -%}
+          </span>
+          <span class="accordion__arrow accordion__arrow-down">
+            {%- include 'icons' with icon: 'wolf-plus' -%}
+          </span>
+        </button>
+        <div id="content-1" class="accordion__content font-reset" js-accordion="content">
+           {{ product.metafields.fit.product_fit }}
+        </div>
+      </li>
+    {%- endunless -%}
+    
+  </ul>
+</div>

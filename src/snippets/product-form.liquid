@@ -4,7 +4,7 @@
   enctype="multipart/form-data" 
   onclick="_tfa.push({notify: 'event', name: 'Add_to_Bag', id: 1065515});">
 
-  <div class="product-swatches">
+  <div class="product-swatches {% if type == 'seconds' %} product-seconds-form {% endif %}">
     {% unless product.has_only_default_variant %}
       {% for option in product.options_with_values %}
         {% if forloop.index == 2 %}
@@ -110,9 +110,10 @@
       </span>
   </button>
  
-  <script>console.log({{current_variant.available | json }}, 'EEEE')</script>
+  {% if type != 'seconds' %}
   <button {% if product.selected_variant == blank or current_variant.available %} style="display:none" {% endif %}  class="button button--full" id="BIS_trigger">Notify me when available</button>
+  
   <div class="affirm-as-low-as" data-page-type="product" data-amount="{{product.first_available_variant.price }}" data-affirm-color="black"></div>
-
+{% endif %}
   <div class="error error--hide"></div>
 </form>

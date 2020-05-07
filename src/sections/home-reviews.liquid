@@ -1,0 +1,113 @@
+<div class="reviews {{ section.settings.margin_bottom }}">
+  <div class="page-width" data-section-id="{{ section.id }}" data-section-type="reviews">
+    <h1 class="reviews__title">{{ section.settings.reviews__main-header }}</h1>
+    <div class="reviews__wrapper reviews__wrapper--{{section.id}}">
+      {% for block in section.blocks %}
+        {% assign title = 'reviews__icon--title' %}
+        {% assign text = 'reviews__icon--text' %}
+        {% assign name = 'reviews__icon--name' %}
+          <div class="reviews__block">
+
+          <span class="stamped-starrating stamped-badge-starrating">
+            <i class="stamped-fa stamped-fa-star" style="color:#032540 !important;"></i>
+            <i class="stamped-fa stamped-fa-star" style="color:#032540 !important;"></i>
+            <i class="stamped-fa stamped-fa-star" style="color:#032540 !important;"></i>
+            <i class="stamped-fa stamped-fa-star" style="color:#032540 !important;"></i>
+            <i class="stamped-fa stamped-fa-star" style="color:#032540 !important;"></i>
+            </span>
+
+              <div class="reviews__subtitle">
+                <h5>{{ block.settings[title] | strip_html | escape }}</h5>
+              </div>
+              <div class="reviews__text">
+                <p>{{ block.settings[text] }}</p>
+              </div>
+              <div class="reviews__name">
+                <h6>{{ block.settings[name] | strip_html }}</h6>
+              </div>
+          </div>
+      {% endfor %}
+    </div>
+    <div class="reviews__footer">
+      {% if section.settings.button_label != blank and section.settings.button_link != blank %}
+        <a title="{{ section.settings.button_label }}" href="{{ section.settings.button_link }}" class="button--white button--white--compress">
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Home Reviews",
+    "class": "index-section",
+    "max_blocks": 3,
+    "settings": [
+      {
+        "type": "header",
+        "content": "Table of reviews"
+      },
+      {
+        "type": "text",
+        "id": "reviews__main-header",
+        "label": "Reviews main header"      
+      },
+      {
+        "type": "select",
+        "id": "margin_bottom",
+        "label": "Margin bottom",
+        "default": "no-margin",
+        "options": [
+          {
+            "label": "Margin bottom",
+            "value": "section-margin-bottom"
+          },
+          {
+            "label": "No margin",
+            "value": "no-margin"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "review",
+        "name": "Review",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "reviews__icon--title",
+            "label": "Title"
+          },
+          {
+            "type": "richtext",
+            "id": "reviews__icon--text",
+            "label": "Text"
+          },
+          {
+            "type": "richtext",
+            "id": "reviews__icon--name",
+            "label": "name"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Home Reviews",
+        "category": "Text"
+      }
+    ]
+  }
+{% endschema %}

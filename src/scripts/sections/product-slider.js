@@ -84,13 +84,16 @@ export default () => {
 
   function setZoomEvents() {
     const windowWidth = $(window).width();
-    const navHeight = document.querySelector('.product-slider-nav').offsetHeight;
-    nodeSelectors.zoomPane.style.bottom = `${navHeight + 16}px`;
+    if(document.querySelector('.product-slider-nav')){
+      const navHeight = document.querySelector('.product-slider-nav').offsetHeight;
+      
+      nodeSelectors.zoomPane.style.bottom = `${navHeight + 16}px`;
 
-    if (windowWidth >= jsWidth.tablet) {
-      [...nodeSelectors.zoomImage].forEach((element, index) => {
-        zoomImages[index] = new Drift(element.querySelector('img'), zoomOptions);
-      });
+      if (windowWidth >= jsWidth.tablet) {
+        [...nodeSelectors.zoomImage].forEach((element, index) => {
+          zoomImages[index] = new Drift(element.querySelector('img'), zoomOptions);
+        });
+      }
     }
   }
 

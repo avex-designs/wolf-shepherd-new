@@ -302,7 +302,9 @@ export default () => {
               <a href="${cart.url}" title="${cart.product_title}" class="js-click-gtm h6 cart-ajax__row__title">
                 ${cart.product_title}
                 <small class="cart-ajax__row__variant">${cartVariantTitle}</small>
+                
               </a>
+              ${cart.product_type == 'Seconds' || cart.product_type == 'seconds' ? '<strong class="final_sale_ajax">FINAL SALE</strong>' : '' }
               <span class="cart-ajax__row__money">${cartLinePrice}</span>
               <div class="quantity-wrapper">
                 <button name="Quantity decrease" type="button" class="quantity-wrapper__minus js--quantity" data-increment="false">-</button>

@@ -227,6 +227,13 @@ $CART_HEIGHT: calc(100vh - 280px);
     &:nth-child(3) {
       vertical-align: bottom;
     }
+    .final_sale_ajax{
+      letter-spacing: 1px;
+      font-size: 10px;
+      font-family: "SackersGothicStd-Medium", sans-serif;
+      margin-bottom: 10px;
+      display: block;
+    }
   }
 
   &__row__image {
