@@ -39,15 +39,15 @@
         <div class="grid">
           {% for product in collection.products %}
 
-            {% include 'collection-grid-product' with gridWidth: collectionCounterClass  %}
+            {% include 'collection-grid-product-carousel' with gridWidth: collectionCounterClass  %}
 
-            {% if forloop.index == 12 %}
+            {% comment %}{% if forloop.index == 12 %}
               {% for block in section.blocks %}
                 <div class="grid__item small--one-whole collection__hero">
                   {% include 'hero-image' with type: 'block' %}
                 </div>
               {% endfor %}
-            {% endif %}
+            {% endif %}{% endcomment %}
 
             {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
               <p>{{ 'collections.general.no_matches' | t }}</p>

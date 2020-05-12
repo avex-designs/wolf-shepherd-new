@@ -51,10 +51,10 @@
     {%- endif -%}
     <a href="{{ product.url | within: collection }}" class="collection-grid-item__image-wrapper" title="Imag of {{ product.title }}">
         {%- assign image_url = product.featured_image.src | img_url: '380x' -%}
-        {%- assign image_url_2x = product.featured_image.src | img_url: '880x' -%}
+        {%- assign image_small = product.featured_image.src | img_url: '50x' -%}
         <img 
+        src="{{image_small}}"
         data-src="{{ image_url }}"
-        data-srcset="{{image_url}} 1x"
         alt="{{ product.featured_image.alt | escape }}"  
         class="lazyload" />
     </a>

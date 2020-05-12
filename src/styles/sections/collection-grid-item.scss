@@ -207,6 +207,99 @@
       padding: 8px 8px 23px;
     }
   }
+  .medium-up--one-third{
+    width: 100% !important;   
+     
+  }
+
+  .grid__item.medium-up--three-quarters{
+    .product-item-coll{
+        padding-bottom: 3.5rem;
+        padding-top: 5rem;
+        margin-left: 50px;
+        border-bottom: 1px solid #ccc;
+        @media screen and (max-width: 1300px){
+          margin-right: 50px;
+        }
+      &:first-child{
+        padding-top: 0;  
+      }
+      .collection-grid-item__text-wrapper{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 15px 20px 15px;
+        align-items: center;
+        h5{
+          margin: 0;
+          font-weight: 600;
+          font-size: 9px;
+          letter-spacing: 1px;
+          font-family: "SackersGothicStd-Medium", sans-serif;
+        }
+        a{
+          p{
+            font-size: 9px !important;
+          letter-spacing: 1px;
+            font-family: "SackersGothicStd-Medium", sans-serif;
+            font-weight: 600;
+            margin: 0;
+          }
+        }
+      }
+    }
+    .grid__item{
+      padding-left: 0;
+      float: none;
+     
+    }
+    .collection-grid-item__title{
+      font-weight: 600;
+    font-size: 15px !important;
+    padding-left: 0;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    }
+  }
+ 
+  .slider-parent{
+    .slick-track{
+      margin: initial !important;
+    }
+    .slick-arrow{
+      position: absolute;
+      top: 50%;
+      margin-top: -25px;
+    }
+    .slick-prev{
+      left: -38px;
+    }
+    .slick-next{
+      right: -38px;
+    }
+    .collection-grid-item{
+      margin: 5px 5px;
+      padding: 0;
+      @media only screen and (min-width: 1025px){
+        &:hover{
+          z-index: 1;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 748px) {
+    .page-width.page-width--no-max > .grid{
+      margin: 0;
+      .collection-filter{
+        margin-left: -50px;
+      }
+    }
+    .grid__item.medium-up--three-quarters{
+      padding-left: 0;
+      &>.grid{
+        margin: 0;
+      }
+    }
+  }
 }
 
 .ie9 .collection-grid-item .collection-grid-item__badge {
