@@ -25,7 +25,7 @@ export default () => {
     const imageTwo = target.dataset.variantImageTwo;
     const collectionGridItem = target.parentElement.parentElement.parentElement;
     const productLinks = collectionGridItem.querySelectorAll('a');
-
+    console.log(href)
     for (let i = 0; i < collectionGridItem.childNodes.length; i++) {
       if (collectionGridItem.childNodes[i].className === 'collection-grid-item__image-wrapper') {
         const imageContainer = collectionGridItem.childNodes[i];
@@ -35,6 +35,8 @@ export default () => {
     }
 
     productLinks.forEach((productLink) => {
+      //console.log(productLink)
+      // console.log(href)
       updateURL(productLink, href);
     });
 

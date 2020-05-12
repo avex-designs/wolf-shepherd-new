@@ -46,7 +46,8 @@
                       {%- assign imageCount = imageCount | plus: 1 -%}
                     {%- endif -%}
                   {%- endfor -%}
-                  <div js-swatch-image="trigger" data-href="{{ variant.url }}" data-variant-image-one="{{productImageOne}}" data-variant-image-two="{{productImageTwo}}" class="swatch swatch__tooltip swatch-product swatch-product--{{color }}"  style="background-color: {{ color }};">
+                 
+                  <div js-swatch-image="trigger" data-href="{{ currentVar.url  }}" data-variant-image-one="{{productImageOne}}" data-variant-image-two="{{productImageTwo}}" class="swatch swatch__tooltip swatch-product swatch-product--{{color }}"  style="background-color: {{ color }};">
                   <span class="swatch__tooltip-info">{{color}}</span>
                   </div>                
             {%- endif -%}  
