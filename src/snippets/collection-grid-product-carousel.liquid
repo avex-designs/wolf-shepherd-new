@@ -46,116 +46,132 @@
   {%- endif -%}
 {%- endif -%}
 
+{% assign varprice_max ='' %}
+{% assign varprice_min ='' %}
+{% assign varpricewww ='' %}
 
-{% comment %}{% assign var_list ='' %}
-{%- for option in product.options_with_values -%} 
-{%- assign colors = option | where: 'name', 'Color' | map: 'values' -%}
-{%- for value in colors[0] -%}
-{% assign var_list = var_list | append: ',' | append: value %} 
-{% endfor %}
-{% endfor %}
-{% assign pf_vars = var_list |  remove_first: ',' | split: ',' | uniq %}  
-<script>console.log({{pf_vars | json }})</script>
-{% endcomment %}
+{% for pp in similar_titles%}
+{% assign varpricewww = varpricewww | append: ',' | append: pp.title %}
+{% assign varprice_min = varprice_min | append: ',' | append: pp.price_min %}
+{% assign varprice_max = varprice_max | append: ',' | append: pp.price_max %}
+{% endfor%}
+{% assign varpricewww_ = varpricewww |  remove_first: ',' | split: ',' | uniq %} 
+{% assign pf_min = varprice_min |  remove_first: ',' | split: ',' | uniq | sort | first %} 
+{% assign pf_max = varprice_max |  remove_first: ',' | split: ',' | uniq | sort | last %} 
 
-{% if product.available %}
-<div class="product-item-coll">
-<h3 class="h4 collection-grid-item__title">{{ product.title }}</h3>
-<div class="collection-grid-item__match-height slider-parent {{ grid_item_width }} text-{{section.settings.product-text-alignment}}">
-  
-  
-    {%- for option in product.options_with_values -%} 
+{% assign var_list ='' %}
+{% for sm in similar_titles %}
+  {%- for option in sm.options_with_values -%} 
     {%- assign colors = option | where: 'name', 'Color' | map: 'values' -%}
-    {% unless colors.size == 0 %}
     {%- for value in colors[0] -%}
-      {% assign prod = product.variants | where: 'option1', value | first %}
-      <div class="slider-item">
-        <div class="collection-grid-item ">
-        <a href="{{ prod.url | within: collection }}" class="collection-grid-item__image-wrapper" title="Imag of {{ prod.title }}">
-            {%- assign image_url = prod.featured_image.src | img_url: '380x' -%}
-            {%- assign image_small = prod.featured_image.src | img_url: '50x' -%}
-            <img 
-            src="{{image_small}}"
-            data-src="{{ image_url }}"
-            alt="{{ prod.featured_image.alt | escape }}"  
-            class="lazyload" />
-        </a>
-        <div class="collection-grid-item__text-wrapper">
-          <h5>{{ value }}</h5>
-          <a href="{{ prod.url }}" title="{{ prod.title }}">
-            
-            {%- if section.prod.show_excerpt -%}
-              <p>{{prod.description | strip_html | truncatewords:30 }}</p>
-            {%- endif -%}
-            <p class="collection-grid-item__price">
-              {%- if prod.compare_at_price > prod.price -%}
-                {%- if prod.price_varies -%}
-                  {%- assign sale_price = prod.price | money_without_trailing_zeros -%}
-                  {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-                {%- else -%}
-                  {{ 'products.product.on_sale' | t }}
-                  {{ prod.price | money_without_trailing_zeros }}
-                {%- endif -%}
-              {%- else -%}
-                {%- if prod.price_varies -%}
-                  {%- assign price = prod.price | money_without_trailing_zeros -%}
-                  {{ 'products.product.from_text_html' | t: price: price }}
-                {%- else -%}
-                  {{ prod.price | money_without_trailing_zeros }}
-                {%- endif -%}
-              {%- endif -%}
-            </p>
-          </a>
-        </div>
-
-        </div>
-      </div>
+      {% assign var_list = var_list | append: ',' | append: value %} 
     {% endfor %}
-    {% else%}
-    {% assign prod = product.variants | first %}
-    <div class="slider-item">
-      <div class="collection-grid-item ">
-      <a href="{{ prod.url | within: collection }}" class="collection-grid-item__image-wrapper" title="Imag of {{ prod.title }}">
-          {%- assign image_url = prod.featured_image.src | img_url: '380x' -%}
-          {%- assign image_small = prod.featured_image.src | img_url: '50x' -%}
-          <img 
-          src="{{image_small}}"
-          data-src="{{ image_url }}"
-          alt="{{ prod.featured_image.alt | escape }}"  
-          class="lazyload" />
-      </a>
-      <div class="collection-grid-item__text-wrapper">
-        <h5>{{ prod.options | first }}</h5>
-        <a href="{{ prod.url }}" title="{{ prod.title }}">
-          
-          {%- if section.prod.show_excerpt -%}
-            <p>{{prod.description | strip_html | truncatewords:30 }}</p>
-          {%- endif -%}
-          <p class="collection-grid-item__price">
-            {%- if prod.compare_at_price > prod.price -%}
-              {%- if prod.price_varies -%}
-                {%- assign sale_price = prod.price | money_without_trailing_zeros -%}
-                {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-              {%- else -%}
-                {{ 'products.product.on_sale' | t }}
-                {{ prod.price | money_without_trailing_zeros }}
-              {%- endif -%}
-            {%- else -%}
-              {%- if prod.price_varies -%}
-                {%- assign price = prod.price | money_without_trailing_zeros -%}
-                {{ 'products.product.from_text_html' | t: price: price }}
-              {%- else -%}
-                {{ prod.price | money_without_trailing_zeros }}
-              {%- endif -%}
-            {%- endif -%}
-          </p>
-        </a>
-      </div>
+  {% endfor %}
+{% endfor %}
+{% assign pf_vars = var_list |  remove_first: ',' | split: ',' | uniq %} 
 
-      </div>
-    </div>
+<div class="product-item-coll">
+<h3 class="h4 collection-grid-item__title">{{ similar_titles[0].title }}</h3>
+{% unless pf_min == pf_max %}
+<p class="only_mobile">{{ pf_min | money_without_trailing_zeros }} - {{ pf_max | money_without_trailing_zeros }}</p>
+{% else %}
+<p class="only_mobile">{{ pf_min | money_without_trailing_zeros }}</p>
+{% endunless %}
+<div class="collection-grid-item__match-height slider-parent {{ grid_item_width }} text-{{section.settings.product-text-alignment}}">
+    {% unless pf_vars.size == 0 %}
+      {%- for value in pf_vars -%}
+        {% for product in similar_titles %}
+          {% assign prod = product.variants | where: 'option1', value | first %}
+          {% unless prod == null %}
+          <div class="slider-item">
+            <div class="collection-grid-item ">
+            <a href="{{ prod.url | within: collection }}" class="collection-grid-item__image-wrapper" title="Imag of {{ prod.title }}">
+                {%- assign image_url = prod.featured_image.src | img_url: '380x' -%}
+                {%- assign image_small = prod.featured_image.src | img_url: '50x' -%}
+                <img 
+                src="{{image_small}}"
+                data-src="{{ image_url }}"
+                alt="{{ prod.featured_image.alt | escape }}"  
+                class="lazyload" />
+            </a>
+            <div class="collection-grid-item__text-wrapper">
+              <h5>{{ value }}</h5>
+              <a href="{{ prod.url }}" title="{{ prod.title }}">
+                {%- if section.prod.show_excerpt -%}
+                  <p>{{prod.description | strip_html | truncatewords:30 }}</p>
+                {%- endif -%}
+                <p class="collection-grid-item__price">
+                  <span class="text_mobile">See details</span>
+                  <span class="price_desctop">
+                  {%- if prod.compare_at_price > prod.price -%}
+                    {%- if prod.price_varies -%}
+                      {%- assign sale_price = prod.price | money_without_trailing_zeros -%}
+                      {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                    {%- else -%}
+                      <span class="compare_at_price">{{ prod.compare_at_price | money_without_trailing_zeros }}</span>
+                      {{ prod.price | money_without_trailing_zeros }}
+                    {%- endif -%}
+                  {%- else -%}
+                    {%- if prod.price_varies -%}
+                      {%- assign price = prod.price | money_without_trailing_zeros -%}
+                      {{ 'products.product.from_text_html' | t: price: price }}
+                    {%- else -%}
+                      {{ prod.price | money_without_trailing_zeros }}
+                    {%- endif -%}
+                  {%- endif -%}</span>
+                </p>
+              </a>
+            </div>
+
+            </div>
+          </div>
+          {% endunless %}
+        {% endfor %}
+      {% endfor %}
+      {% else %}
+      {% for product in similar_titles %}
+      {% assign prod = product.variants | first %}
+        <div class="slider-item">
+          <div class="collection-grid-item ">
+            <a href="{{ prod.url | within: collection }}" class="collection-grid-item__image-wrapper" title="Imag of {{ prod.title }}">
+                {%- assign image_url = prod.featured_image.src | img_url: '380x' -%}
+                {%- assign image_small = prod.featured_image.src | img_url: '50x' -%}
+                <img 
+                src="{{image_small}}"
+                data-src="{{ image_url }}"
+                alt="{{ prod.featured_image.alt | escape }}"  
+                class="lazyload" />
+            </a>
+            <div class="collection-grid-item__text-wrapper">
+              <h5>{{ prod.options | first }}</h5>
+              <a href="{{ prod.url }}" title="{{ prod.title }}">
+                
+                {%- if section.prod.show_excerpt -%}
+                  <p>{{prod.description | strip_html | truncatewords:30 }}</p>
+                {%- endif -%}
+                <p class="collection-grid-item__price">
+                  {%- if prod.compare_at_price > prod.price -%}
+                    {%- if prod.price_varies -%}
+                      {%- assign sale_price = prod.price | money_without_trailing_zeros -%}
+                      {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                    {%- else -%}
+                      {{ 'products.product.on_sale' | t }}
+                      {{ prod.price | money_without_trailing_zeros }}
+                    {%- endif -%}
+                  {%- else -%}
+                    {%- if prod.price_varies -%}
+                      {%- assign price = prod.price | money_without_trailing_zeros -%}
+                      {{ 'products.product.from_text_html' | t: price: price }}
+                    {%- else -%}
+                      {{ prod.price | money_without_trailing_zeros }}
+                    {%- endif -%}
+                  {%- endif -%}
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     {% endunless %}
-    {% endfor %}
 </div>
 </div>
-{% endif %}

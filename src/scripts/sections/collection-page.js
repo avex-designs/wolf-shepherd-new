@@ -21,9 +21,9 @@ theme.Collection = (function() {
         },
       },
       {
-        breakpoint: 550,
+        breakpoint: 748,
         settings: {
-          slidesToShow: 1
+          slidesToShow: 1.3
         },
       }
     ]

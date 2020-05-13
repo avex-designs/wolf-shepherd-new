@@ -286,6 +286,75 @@
       }
     }
   }
+  .product-item-coll{
+    position: relative;
+    .only_mobile{
+      display: none;
+      position: absolute;
+      top:75px;
+      right: 0;
+      font-weight: bold;
+      font-size: 13px !important;
+      font-family: "SackersGothicStd-Medium", sans-serif;
+      font-weight: 600;
+    }
+    &:first-child{
+      .only_mobile{
+        top: 0;
+      }
+    }
+    .collection-grid-item__text-wrapper{
+      position: relative;
+    }
+    .collection-grid-item__price .text_mobile{
+      display: none;
+      text-transform: uppercase;
+    }
+    
+  }
+  @media screen and (max-width: 747px) {
+    .product-item-coll{
+      .only_mobile{
+        display: block;
+      }
+      .collection-grid-item__price .text_mobile{
+        display: block;
+      }
+      .collection-grid-item__price .price_desctop{
+        display: none;
+      }
+      .slick-list .slick-track .slick-slide .collection-grid-item__text-wrapper h5{
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .slick-list .slick-track .slick-slide .collection-grid-item__text-wrapper .text_mobile{
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .slick-list .slick-track .slick-slide.slick-active .collection-grid-item__text-wrapper h5{
+        opacity: 1;
+      }
+      .slick-list .slick-track .slick-slide.slick-active .collection-grid-item__text-wrapper .text_mobile{
+        opacity: 1;
+      }
+      .slick-list .slick-track .slick-slide {
+        .collection-grid-item__text-wrapper a {
+          position: absolute;
+          right: -28%;
+          top: 0;
+          z-index: 2;
+        }
+        &:last-child{
+          .collection-grid-item__text-wrapper a {
+            right: 0;
+          }
+        }
+      }
+    }
+    .collection-filter .filter-menu{
+      margin-left: 50px;
+    }
+  }
   @media screen and (max-width: 748px) {
     .page-width.page-width--no-max > .grid{
       margin: 0;

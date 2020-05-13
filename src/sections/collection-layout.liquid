@@ -37,24 +37,33 @@
         </div>
         <div class="grid__item medium-up--three-quarters">
         <div class="grid">
-          {% for product in collection.products %}
+          {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+            <p>{{ 'collections.general.no_matches' | t }}</p>
+          {% else %}
+            {% assign joined_products ='' %}
+            {% assign all_titles = collection.products | map: 'title' | uniq %}
+          
+            {% for ttle in all_titles %}
+              {% assign similar_titles = collection.products | where: 'title', ttle %}
+              {% include 'collection-grid-product-carousel' with gridWidth: collectionCounterClass  %}
+            {% endfor %}
+          {% endif %}
+          
+         {% comment %}  {% for product in collection.products %}
 
             {% include 'collection-grid-product-carousel' with gridWidth: collectionCounterClass  %}
 
-            {% comment %}{% if forloop.index == 12 %}
+           {% if forloop.index == 12 %}
               {% for block in section.blocks %}
                 <div class="grid__item small--one-whole collection__hero">
                   {% include 'hero-image' with type: 'block' %}
                 </div>
               {% endfor %}
-            {% endif %}{% endcomment %}
-
-            {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
-              <p>{{ 'collections.general.no_matches' | t }}</p>
-              {% break %}
             {% endif %}
+
+         
             
-          {% endfor %}
+          {% endfor %}{% endcomment %}
         </div>
         </div>
       </div>
