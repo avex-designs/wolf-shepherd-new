@@ -36,12 +36,15 @@
                 {%- assign productImage = image.src | img_url: '800x'  -%}
                 {%- assign productImage2 = image.src | img_url: '600x'  -%}
                 {%- assign productImage3 = image.src | img_url: '300x'  -%}
+                {%- assign productImage3_sm = image.src | img_url: '50x'  -%}
             
                 {%- for variant in variants_ids -%}
             		{%- assign variantImage = variants_images[forloop.index] | img_url: '800x'  -%}
+            		{%- assign variantImage_sm = variants_images[forloop.index] | img_url: '50x'  -%}
                   
                   {%- if variantImage == productImage -%}
                     {%- assign productImage = variantImage  -%}
+                    {%- assign productImage_sm = variantImage_sm  -%}
                     {%- assign productData = 'data-slick-variant="' | append: variant | append: '"'  -%}
                     
                   {%- endif -%}
@@ -57,12 +60,12 @@
                   {%- assign zoomImage = image.src | img_url: '1024x' -%}
                   <div js-product-gallery="zoom">
                     {%- if loopCounter == 1 -%}
-                      <img src="{{ productImage }}" alt="{{ image.alt | escape }}"  class="lazyload" {{productData}} data-zoom="{{ zoomImage }}">
+                      <img src="{{ productImage_sm }}" data-src="{{ productImage }}" alt="{{ image.alt | escape }}"  class="lazyload" {{productData}} data-zoom="{{ zoomImage }}">
                     {%- else -%}
                     <style>img[data-sizes="auto"] { display: block; width: 100%; }</style>
                       <img 
                         class="lazyload" 
-                        
+                        src="{{ productImage3_sm }}"
                         data-src="{{ productImage3 }}"
                         data-srcset="{{ productImage3 }} 300w,
                         {{ productImage2 }} 600w,
@@ -84,10 +87,11 @@
               {%- assign varColor = varColor[0] | handleize -%}
               {%- if varColor == colorClean -%}
                 {%- assign productThumbnail = image.src | img_url: '80x'  -%}
+                {%- assign productThumbnail_sm = image.src | img_url: '10x'  -%}
     
                   <div class="product-slider-nav__image {% if image.alt contains '.mp4' %}product-slider-nav__image--video{% endif %}">
                     <div class="product-slider-nav__image-wrapper">
-                      <img src="{{ productThumbnail }}" class="lazyload" alt="{{ image.alt | escape }}">
+                      <img src="{{ productThumbnail_sm }}" data-src="{{ productThumbnail }}" class="lazyload" alt="{{ image.alt | escape }}">
                     </div>
                   </div>
                   
@@ -99,7 +103,7 @@
 
         {%- else -%}
           {%- if featured_image != blank -%}
-            <img src="{{ featured_image | img_url: '800x' }}" class="lazyload" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+            <img src="{{ featured_image | img_url: '50x' }}" data-src="{{ featured_image | img_url: '800x' }}" class="lazyload" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
           {%- endif -%}
         {%- endif -%}
       </div>
@@ -121,9 +125,11 @@
 
             
                 {%- assign productImage = image.src | img_url: '800x'  -%}
+                {%- assign productImage_sm = image.src | img_url: '50x'  -%}
 
                 {%- for variant in variants_ids -%}
             		{%- assign variantImage = variants_images[forloop.index] | img_url: '800x'  -%}
+            		{%- assign variantImage_sm = variants_images[forloop.index] | img_url: '50x'  -%}
                   
                   {%- if variantImage == productImage -%}
                     {%- assign productImage = variantImage  -%}
@@ -140,7 +146,7 @@
                   </video>
                 {%- else -%}
                   <div js-product-gallery="zoom">
-                    <img src="{{ productImage }}" class="lazyload" alt="{{ image.alt | escape }}" {{productData}} data-zoom="{{ image.src | img_url: '1024x' }}">
+                    <img src="{{ productImage_sm }}" data-src="{{ productImage }}" class="lazyload" alt="{{ image.alt | escape }}" {{productData}} data-zoom="{{ image.src | img_url: '1024x' }}">
                   </div>
                 {%- endif -%}
 
@@ -155,15 +161,16 @@
               {%- assign varColor = varColor[0] | handleize -%}
 
               {%- assign productThumbnail = image.src | img_url: '240x'  -%}
+              {%- assign productThumbnail_sm = image.src | img_url: '50x'  -%}
               <div class="product-slider-nav__image">
-                <img src="{{ productThumbnail }}" alt="{{ image.alt | escape }}" class="lazyload">
+                <img src="{{ productThumbnail_sm }}" data-src="{{ productThumbnail }}" alt="{{ image.alt | escape }}" class="lazyload">
               </div>
             {%- endfor -%}
           </div>
 
         {%- else -%}
           {%- if featured_image != blank -%}
-            <img src="{{ featured_image | img_url: '800x' }}" alt="{{ featured_image.alt | escape }}" class="lazyload" data-product-featured-image>
+            <img src="{{ featured_image | img_url: '50x' }}" data-src="{{ featured_image | img_url: '800x' }}" alt="{{ featured_image.alt | escape }}" class="lazyload" data-product-featured-image>
           {%- endif -%}
         {%- endif -%}
       </div>

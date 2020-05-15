@@ -23,19 +23,23 @@
 
 .product-header {
   display: none;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
 
   &__title {
     margin-bottom: 4px;
   }
 
   &__price {
-    display: flex;
+    display: block;
     font-family: $FONT_BODY;
     font-size: $FONT_SIZE_XSMALL;
     justify-content: space-between;
     letter-spacing: 0.35px;
 
+    span.stamped-badge{
+      display: flex;
+      align-items: center;
+    }
     .stamped-badge-starrating {
       .stamped-fa-star {
         color: $COLOR_PRIMARY;

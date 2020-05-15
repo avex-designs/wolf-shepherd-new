@@ -3,7 +3,8 @@
   method="post" 
   enctype="multipart/form-data" 
   onclick="_tfa.push({notify: 'event', name: 'Add_to_Bag', id: 1065515});">
-
+  {% assign with_similar_titles = collection.products | where: 'title', product.title %}
+  
   <div class="product-swatches {% if type == 'seconds' %} product-seconds-form {% endif %}">
     {% unless product.has_only_default_variant %}
       {% for option in product.options_with_values %}
@@ -61,7 +62,7 @@
 
           
           
-            {% include 'swatch-product' with specialClass: 'js-main-form'  %}
+            {% include 'swatch-product-similar-titles' with specialClass: 'js-main-form'  %}
 
 
         </div>

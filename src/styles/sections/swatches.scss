@@ -259,7 +259,7 @@ Swatches Styles
 
     &.is-active, &:hover, &:focus {
       border: 0;
-      box-shadow: 0 0 0 1px $COLOR_BORDER, 0 0 0 2px $COLOR_WHITE, 0 0 0 3px $COLOR_BLACK;
+      box-shadow: 0 0 0 1px $COLOR_BORDER, 0 0 0 1px $COLOR_WHITE, 0 0 0 3px $COLOR_BLACK;
     }
   }
 

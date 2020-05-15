@@ -10,6 +10,7 @@
   <h6 class="swatch__header {% if option.name == 'Size' or option.name == 'size' %} swatch__header--flex {% endif %}">
     <span class="swatch__header__text">{% if optionName == 'color' or optionName == 'colour' %} Colorway {% else %} {{ option.name }} {% endif %}</span>
     <span class="font-reset">
+      
       {%- for value in option.values -%}  
         {%- if optionName == 'color' or optionName == 'colour' -%}
           {% if option.selected_value == value %}

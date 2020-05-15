@@ -57,12 +57,13 @@ export default () => {
       asNavFor: slider,
       dots: false,
       arrows: true,
-      prevArrow: '<div class="slick-arrow slick-prev wolf-arrow"></div>',
+      prevArrow: '<div class="slick-arrow slick-prev wolf-arrow wolf-arrow--left"></div>',
       nextArrow: '<div class="slick-arrow slick-next wolf-arrow wolf-arrow--right"></div>',
       centerMode: false,
       focusOnSelect: true,
       vertical: false,
       verticalSwiping: false,
+      infinite: false,
       lazyLoad: 'ondemand',
     });
   }

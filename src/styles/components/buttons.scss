@@ -167,6 +167,11 @@
   background-position: calc(50% + 1px) calc(50%);
 }
 
+.wolf-arrow--left {
+  background-image: $ICON_ARROW_LEFT;
+  background-position: calc(50% + 1px) calc(50%);
+}
+
 .button-arrow {
   background-color: transparent;
   background-image: $ICON_ARROW_RIGHT--WHITE;

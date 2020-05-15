@@ -1,0 +1,86 @@
+{% if swatchShow %}
+  {% assign colorCount = 0 %}
+  {% for value in option.values %}
+    {%- if optionName == 'color' or optionName == 'colour' -%}
+      {% assign colorCount = colorCount | plus: 1 %}
+    {%- endif -%}
+  {% endfor %}
+  {% assign optionCount = 'option-' | append: forloop.index %}
+
+  <h6 class="swatch__header {% if option.name == 'Size' or option.name == 'size' %} swatch__header--flex {% endif %}">
+    <span class="swatch__header__text">{% if optionName == 'color' or optionName == 'colour' %} Colorway {% else %} {{ option.name }} {% endif %}</span>
+    <span class="font-reset">
+      
+      {%- for value in option.values -%}  
+        {%- if optionName == 'color' or optionName == 'colour' -%}
+          {% if option.selected_value == value %}
+            <span js-swatch="color" class="swatch__header__color">{{ value }}</span>
+            <span class="swatch__header__color-count">{{colorCount}} {{colorCount | pluralize: 'colorway', 'colorways' }}</span>
+          {% endif %}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if option.name == 'Size' or option.name == 'size' -%}
+        <span class="swatch__header__size js--size-guide">{% include 'icons' with icon: 'ruler' %} What size am I?</span>
+      {%- endif -%}
+    </span>
+  </h6>
+
+  <div class="swatch__wrapper 
+    {{'option-' | append: forloop.index}} 
+    {% if option.name == 'Size' or option.name == 'size' %} swatch__wrapper--size {% endif %}">
+
+      {% if optionName == 'color' or optionName == 'colour' %}
+      {% for colr in with_similar_titles %}
+        {% if colr.handle == product.handle %}
+            {% for value in option.values %} 
+            {% assign swatchValue = value | handleize | downcase %}
+            {% assign swatchBackground = value | handleize | downcase %}
+              <button type="button" {% if option.selected_value == value %} autofocus {% endif %}
+                class="swatch swatch-product swatch-product--{{ value | handleize }}
+                {% if option.selected_value == value %}is-active{% endif %}
+                {% if optionName == 'color' or optionName == 'colour' %} swatch-product--color {% endif %}" 
+                js-product-swatches="container"
+                data-swatch-option="{{optionCount}}"
+                data-swatch-value="{{ value | escape }}"
+                style="background-size: {{swatchBackground}};"
+                name="{{value}}"
+                data-slider="product-images__container--{{swatchBackground}}"
+                data-swatch-color="{{value}}"
+                >
+              </button>
+            {% endfor %}
+        {% else %}
+              {% assign oth_colors = colr.options_with_values | where: 'name', 'Color' %}
+              {% for value in oth_colors[0].values %}
+              {% assign swatchbg = value | handleize | downcase %}
+              {% assign vari = colr.variants | where: 'option1', value | first %}
+              {% assign urlp = colr.url | within: collection %}
+              <a href="{{urlp}}?variant={{vari.id}}" class="swatch-product--color swatch swatch-product swatch-product--{{ value | handleize }}" style="background-size: {{swatchbg}};"></a>
+              {% endfor %}
+        {% endif %}
+      {% endfor %}
+      
+      {% else %}
+        {% for value in option.values %}  
+          <button type="button" {% if option.selected_value == value %} autofocus {% endif %}
+            class="swatch swatch-product swatch-product--{{ value | handleize }}
+            {% if option.selected_value == value %}is-active{% endif %}
+            {% if optionName == 'size' or optionName == 'Size' %} swatch-product--size {{specialClass}}{% endif %}
+            {% if optionName == 'width' or optionName == 'Width' %} swatch-product--width {{specialClass}}{% endif %}" 
+            js-product-swatches="container"
+            data-swatch-option="{{optionCount}}"
+            data-swatch-value="{{ value | escape }}"
+            style="background-size: {{swatchBackground}};"
+            name="{{value}}"
+            >
+            {{ value | escape }}
+          </button>
+        {% endfor %}
+      {% endif%}
+     
+      
+   
+  </div>
+
+
+{% endif %}
