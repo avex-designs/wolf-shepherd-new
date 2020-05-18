@@ -341,6 +341,9 @@
       .slick-list .slick-track .slick-slide.slick-active .collection-grid-item__text-wrapper .text_mobile{
         opacity: 1;
       }
+      .slick-disabled{
+        display: none !important;
+      }
       .slick-list .slick-track .slick-slide {
         .collection-grid-item__text-wrapper a {
           position: absolute;
@@ -348,9 +351,18 @@
           top: -2px;
           z-index: 2;
         }
+        
+        &:first-child{
+          .collection-grid-item__text-wrapper h5{
+            margin-left: 0;
+          }
+        }
         &:last-child{
           .collection-grid-item__text-wrapper a {
             right: 0;
+          }
+          .collection-grid-item__text-wrapper h5{
+            margin-left: 0;
           }
         }
       }
