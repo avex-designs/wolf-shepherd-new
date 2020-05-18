@@ -108,8 +108,9 @@
                       {%- assign sale_price = prod.price | money_without_trailing_zeros -%}
                       {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
                     {%- else -%}
-                      <span class="compare_at_price">{{ prod.compare_at_price | money_without_trailing_zeros }}</span>
                       {{ prod.price | money_without_trailing_zeros }}
+                      <span class="compare_at_price">{{ prod.compare_at_price | money_without_trailing_zeros }}</span>
+                      
                     {%- endif -%}
                   {%- else -%}
                     {%- if prod.price_varies -%}

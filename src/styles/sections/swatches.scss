@@ -205,7 +205,7 @@ Swatches Styles
     font-family: $FONT_BASE;
     font-size: $FONT_SIZE_XSMALL;
     height: 32px;
-    line-height: 32px;
+    line-height: 25px;
     margin: 0 8px 16px;
     min-width: 34px;
     padding: 0 5px;
@@ -240,11 +240,12 @@ Swatches Styles
       }
     }
     &.is-active{
-      background-color: #032540;
-      color:#fff;
+      background-color: #fff;
+      color:$COLOR_PRIMARY;
+
     }
     &:hover, &.is-active, &:focus {
-      border: 1px solid $COLOR_PRIMARY!important;
+      border: 2px solid $COLOR_PRIMARY !important;
     }
   }
 
@@ -259,7 +260,7 @@ Swatches Styles
 
     &.is-active, &:hover, &:focus {
       border: 0;
-      box-shadow: 0 0 0 1px $COLOR_BORDER, 0 0 0 1px $COLOR_WHITE, 0 0 0 3px $COLOR_BLACK;
+      box-shadow: 0 0 0 1px $COLOR_BORDER, 0 0 0 2px $COLOR_WHITE, 0 0 0 3px $COLOR_BLACK;
     }
   }
 

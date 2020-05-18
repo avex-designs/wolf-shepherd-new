@@ -11,14 +11,14 @@
     <span class="swatch__header__text">{% if optionName == 'color' or optionName == 'colour' %} Colorway {% else %} {{ option.name }} {% endif %}</span>
     <span class="font-reset">
       
-      {%- for value in option.values -%}  
+      {% comment %}{%- for value in option.values -%}  
         {%- if optionName == 'color' or optionName == 'colour' -%}
           {% if option.selected_value == value %}
             <span js-swatch="color" class="swatch__header__color">{{ value }}</span>
             <span class="swatch__header__color-count">{{colorCount}} {{colorCount | pluralize: 'colorway', 'colorways' }}</span>
           {% endif %}
         {%- endif -%}
-      {%- endfor -%}
+      {%- endfor -%}{% endcomment %}
       {%- if option.name == 'Size' or option.name == 'size' -%}
         <span class="swatch__header__size js--size-guide">{% include 'icons' with icon: 'ruler' %} What size am I?</span>
       {%- endif -%}
