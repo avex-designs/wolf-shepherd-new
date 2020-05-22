@@ -1,5 +1,6 @@
 function deferFilterjQuery() {
   if (window.jQuery) {
+    console.log('pt-nav-toggle')
       var $ = window.jQuery;
       $(function(){
         // On load/reload
@@ -169,9 +170,11 @@ function deferFilterjQuery() {
         pt_on_load();
 
         // Mobile filter button
+       
         {% if settings.pt_mobile_enable %}
 
         $(document).on('click', '.filter-menu .pt-mobile-header .pt-nav-toggle', function(e){
+          console.log('pt-nav-toggle')
           if(e.handled !== true) {
             $('.pt-nav-toggle-sort').removeClass('active');
             $('.pt-nav-toggle-sort').addClass('not-active');
@@ -223,7 +226,7 @@ function deferFilterjQuery() {
         // Accordion
         {% if settings.pt_accordion_enable %}
         $(document).on('click', '.filter-menu h4', function(e){
-            
+            console.log('2222')
           var target = $(this).closest('.filter-group');
           target.addClass('filter-group--target');
 

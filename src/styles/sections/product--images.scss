@@ -31,7 +31,7 @@
 
   &__mobile-container {
     @include media-query($tablet-down) {
-      background: #F6F6F6;
+      background: #fff;
       margin-bottom: 18px;
       width: calc(100% + 30px);
 

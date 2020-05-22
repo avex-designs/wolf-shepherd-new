@@ -15,7 +15,7 @@
         <div class="faqs-footer__link-wrapper">
           {% if section.settings.enable_1 %}
             <div class="faqs-footer__link">
-              <a href="{% if section.settings.link_1 != blank %}{{section.settings.link_1}}{%else%}#!{% endif %}" title="{{section.settings.link_title_1}}">
+              <a href="{% if section.settings.link_1 != blank %}{{section.settings.link_1}}{%else%}#{% endif %}" title="{{section.settings.link_title_1}}">
                 {%- if section.settings.link_image_1 -%}
                   <img src="{{section.settings.link_image_1 | img_url: '400x' }}" alt="{{section.settings.link_image_1.alt}}"/>
                 {%- endif -%}
@@ -28,7 +28,7 @@
 
           {% if section.settings.enable_2 %}
             <div class="faqs-footer__link">
-              <a href="{% if section.settings.link_2 != blank %}{{section.settings.link_2}}{%else%}#!{% endif %}" title="{{section.settings.link_title_2}}">
+              <a href="{% if section.settings.link_2 != blank %}{{section.settings.link_2}}{%else%}#{% endif %}" title="{{section.settings.link_title_2}}">
                 {%- if section.settings.link_image_2 -%}
                   <img src="{{section.settings.link_image_2 | img_url: '400x' }}" alt="{{section.settings.link_image_2.alt}}"/>
                 {%- endif -%}

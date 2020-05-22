@@ -71,6 +71,7 @@
     }
 
     [data-product-price] {
+      display: inline-block;
      // order: -1;
      // position: relative;
      // top: -27px;
@@ -86,7 +87,7 @@
       }
       [data-compare-price] {
         margin-right: auto;
-        margin-left: 10px;
+        //margin-left: 10px;
        }
        .seconds_compare{
          margin-right: 10px;

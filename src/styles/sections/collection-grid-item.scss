@@ -73,6 +73,10 @@
   &__title {
     font-size: $FONT_SIZE_XXSMALL !important;
     margin-bottom: 6px;
+    font-family: DMSerifDisplay-Regular,sans-serif;
+    text-transform: capitalize;
+    font-weight: 400 !important;
+    letter-spacing: -0.2px !important;
   }
 
   &__price {
@@ -254,9 +258,9 @@
     }
     .collection-grid-item__title{
       font-weight: 600;
-    font-size: 15px !important;
+    font-size: 20px !important;
     padding-left: 0;
-    letter-spacing: 3px;
+    letter-spacing: -0.2px;
     margin-bottom: 20px;
     }
   }
@@ -421,7 +425,7 @@
 @media screen and (max-width: 540px){
   .template-collection .grid__item.medium-up--three-quarters .collection-grid-item__title{
     max-width: 75%;
-    font-size: 11px !important;
+    font-size: 15px !important;
   }
   .template-collection .product-item-coll .only_mobile{
     font-size: 11px !important;

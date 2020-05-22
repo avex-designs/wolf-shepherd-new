@@ -36,7 +36,7 @@
       {%- elsif link.levels == 1 and meganav != true -%}
         <li class="site-nav__item site-nav__item--has-dropdown" data-meganav-parent="{{ link.title | handle }}" tab-index="1" aria-expanded="false" aria-haspopup="true">
           {%- if link.title contains 'ommunity' -%}
-            <a class="site-nav__link secret-a {% if link.active %}site-nav__link--active{% endif %}" js-meganav="trigger" href="#!" title="{{ link.title }}">
+            <a class="site-nav__link secret-a {% if link.active %}site-nav__link--active{% endif %}" js-meganav="trigger" href="#" title="{{ link.title }}">
               {{ link.title }}
             </a>
           {%- else -%}

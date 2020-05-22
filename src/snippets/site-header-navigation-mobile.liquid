@@ -33,7 +33,7 @@
           {%- if link.levels == 0 and meganav != true -%}
             <li class="site-nav__item" data-meganav-parent="{{ link.title | handle }}">
               {%- if link.title contains 'ommunity' -%}
-                <a class="site-nav__link secret-a {% if link.active %}site-nav__link--active{% endif %}" href="#!" title="{{ link.title }}">
+                <a class="site-nav__link secret-a {% if link.active %}site-nav__link--active{% endif %}" href="#" title="{{ link.title }}">
                   {{ link.title }}
                 </a>
               {%- else -%}
@@ -52,7 +52,7 @@
             <li class="site-nav__item site-nav__item--has-dropdown" data-meganav-parent="{{ link.title | handle }}">
 
               {%- if link.title contains 'ommunity' -%}
-                <a class="site-nav__link site-nav__link--hidden {% if link.active %}site-nav__link--active{% endif %}" href="#!" title="{{ link.title }}">
+                <a class="site-nav__link site-nav__link--hidden {% if link.active %}site-nav__link--active{% endif %}" href="#" title="{{ link.title }}">
                   {{ link.title }}
                   <span class="site-nav__link-toggle" js-open="dropdown" data-open=".site-nav__dropdown--{{forloop.index}}">open</span>
                 </a>
