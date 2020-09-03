@@ -41,7 +41,7 @@
     "jquery": "^3.4.1",
     "jquery-match-height": "^0.7.2",
     "jquery.cookie": "^1.4.1",
-    "lazysizes": "^4.1.1",
+    "lazysizes": "^5.2.1",
     "lodash-es": "^4.17.4",
     "mathsass": "^0.10.1",
     "modularscale-sass": "^3.0.8",
